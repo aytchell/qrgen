@@ -1,5 +1,13 @@
 package com.github.aytchell.qrgen;
 
+/**
+ * The error correction level for a QR code
+ * <p>
+ * The specification defines four values for error correction level.
+ * The levels describe a level of redundancy of the encoded information.
+ * Higher redundancy causes bigger QR codes but also better resilience
+ * against (physical) damage or occlusion of the displayed QR code
+ */
 public enum ErrorCorrectionLevel {
     /** L = ~7% correction */
     L(com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.L),

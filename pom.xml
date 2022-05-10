@@ -6,7 +6,7 @@
 
     <groupId>com.github.aytchell</groupId>
     <artifactId>qrgen</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.5</version>
     <packaging>jar</packaging>
 
     <name>QR code generator</name>
