@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 import static com.google.zxing.EncodeHintType.*;
 
-public class QRGenerator implements Cloneable {
+public class QrGenerator implements Cloneable {
     private ImageType imageType;
     private int width;
     private int height;
@@ -30,7 +30,7 @@ public class QRGenerator implements Cloneable {
     private MatrixToImageConfig colorConfig;
     private final QRCodeWriter writer;
 
-    public QRGenerator() {
+    public QrGenerator() {
         imageType = ImageType.PNG;
         width = 200;
         height = 200;
@@ -42,7 +42,7 @@ public class QRGenerator implements Cloneable {
         setDefaultHints();
     }
 
-    private QRGenerator(QRGenerator orig) {
+    private QrGenerator(QrGenerator orig) {
         // copy primitive types
         this.imageType = orig.imageType;
         this.width = orig.width;
@@ -66,10 +66,10 @@ public class QRGenerator implements Cloneable {
     }
 
     @Override
-    public QRGenerator clone() {
+    public QrGenerator clone() {
         try {
             super.clone();
-            return new QRGenerator(this);
+            return new QrGenerator(this);
         } catch (CloneNotSupportedException e) {
             // I'm quite sure that class Object supports 'clone()' so
             // instead of throwing we'll return null
@@ -77,33 +77,33 @@ public class QRGenerator implements Cloneable {
         }
     }
 
-    public QRGenerator as(ImageType imageType) {
+    public QrGenerator as(ImageType imageType) {
         this.imageType = imageType;
         return this;
     }
 
-    public QRGenerator withSize(int width, int height) {
+    public QrGenerator withSize(int width, int height) {
         this.width = width;
         this.height = height;
         return this;
     }
 
-    public QRGenerator withColors(ArgbValue onColor, ArgbValue offColor) {
+    public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor) {
         return withColors(
                 onColor.getRawValue(),
                 offColor.getRawValue());
     }
 
-    public QRGenerator withColors(int onColor, int offColor) {
+    public QrGenerator withColors(int onColor, int offColor) {
         this.colorConfig = new MatrixToImageConfig(onColor, offColor);
         return this;
     }
 
-    public QRGenerator withCharset(Charset charset) {
+    public QrGenerator withCharset(Charset charset) {
         return withHint(CHARACTER_SET, charset.name());
     }
 
-    public QRGenerator withErrorCorrection(ErrorCorrectionLevel level) {
+    public QrGenerator withErrorCorrection(ErrorCorrectionLevel level) {
         return withHint(ERROR_CORRECTION, level.getZxingLevel());
     }
 
@@ -119,7 +119,7 @@ public class QRGenerator implements Cloneable {
      *               on the size of the QR code
      * @return The same generator instance but now with a hint for the margin
      */
-    public QRGenerator withMargin(int margin) {
+    public QrGenerator withMargin(int margin) {
         if (margin < 0) {
             return withHint(MARGIN, null);
         } else {
@@ -127,29 +127,29 @@ public class QRGenerator implements Cloneable {
         }
     }
 
-    public QRGenerator withLogo(Path logoFile) throws IOException {
+    public QrGenerator withLogo(Path logoFile) throws IOException {
         this.logo = readLogo(logoFile);
         return this;
     }
 
-    public QRGenerator withLogo(InputStream logoStream) throws IOException {
+    public QrGenerator withLogo(InputStream logoStream) throws IOException {
         this.logo = readLogo(logoStream);
         return this;
     }
 
     public Path writeToTmpFile(String payload)
-            throws IOException, QRGenerationException {
+            throws IOException, QrGenerationException {
         return writeToTmpFile(payload, null);
     }
 
     public Path writeToTmpFile(String payload, String tmpFilePrefix)
-            throws IOException, QRGenerationException {
+            throws IOException, QrGenerationException {
         try {
             final Path tmpFile = createTempFile(tmpFilePrefix);
             writeQrCodeToFile(tmpFile, payload);
             return tmpFile;
         } catch (WriterException e) {
-            throw new QRGenerationException(e);
+            throw new QrGenerationException(e);
         }
     }
 
@@ -172,7 +172,7 @@ public class QRGenerator implements Cloneable {
         return ImageIO.read(logoStream);
     }
 
-    private QRGenerator withHint(EncodeHintType hintType, Object value) {
+    private QrGenerator withHint(EncodeHintType hintType, Object value) {
         if (value == null) {
             hints.remove(hintType);
         } else {

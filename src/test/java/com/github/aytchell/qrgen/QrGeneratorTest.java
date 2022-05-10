@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class QRGeneratorTest {
+public class QrGeneratorTest {
     private static Stream<Integer> imageSizesForSizeTest() {
         final List<Integer> sizes = new ArrayList<>();
         sizes.add(100);
@@ -28,15 +28,15 @@ public class QRGeneratorTest {
     @Test
     void cloneIsPossible() {
         // we only check that a clone is produced (not Exception, no null return value)
-        final QRGenerator gen = new QRGenerator();
-        final QRGenerator clone = gen.clone();
+        final QrGenerator gen = new QrGenerator();
+        final QrGenerator clone = gen.clone();
         assertNotNull(clone);
     }
 
     @ParameterizedTest
     @MethodSource("imageSizesForSizeTest")
-    void sizeIsRespected(Integer size) throws IOException, QRGenerationException {
-        final QRGenerator gen = new QRGenerator()
+    void sizeIsRespected(Integer size) throws IOException, QrGenerationException {
+        final QrGenerator gen = new QrGenerator()
                 .withSize(size, size);
         final Path path = gen.writeToTmpFile("Hello, World!");
         try {
@@ -50,8 +50,8 @@ public class QRGeneratorTest {
     }
 
     @Test
-    void generatorCanCreatePngFiles() throws IOException, QRGenerationException {
-        final QRGenerator gen = new QRGenerator().as(ImageType.PNG);
+    void generatorCanCreatePngFiles() throws IOException, QrGenerationException {
+        final QrGenerator gen = new QrGenerator().as(ImageType.PNG);
         final Path path = gen.writeToTmpFile("Hello PNG file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
@@ -62,8 +62,8 @@ public class QRGeneratorTest {
     }
 
     @Test
-    void generatorCanCreateBmpFiles() throws IOException, QRGenerationException {
-        final QRGenerator gen = new QRGenerator().as(ImageType.BMP);
+    void generatorCanCreateBmpFiles() throws IOException, QrGenerationException {
+        final QrGenerator gen = new QrGenerator().as(ImageType.BMP);
         final Path path = gen.writeToTmpFile("Hello BMP file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
@@ -74,8 +74,8 @@ public class QRGeneratorTest {
     }
 
     @Test
-    void generatorCanCreateGifFiles() throws IOException, QRGenerationException {
-        final QRGenerator gen = new QRGenerator().as(ImageType.GIF);
+    void generatorCanCreateGifFiles() throws IOException, QrGenerationException {
+        final QrGenerator gen = new QrGenerator().as(ImageType.GIF);
         final Path path = gen.writeToTmpFile("Hello GIF file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
@@ -86,8 +86,8 @@ public class QRGeneratorTest {
     }
 
     @Test
-    void generatorCanCreateJpgFiles() throws IOException, QRGenerationException {
-        final QRGenerator gen = new QRGenerator().as(ImageType.JPG);
+    void generatorCanCreateJpgFiles() throws IOException, QrGenerationException {
+        final QrGenerator gen = new QrGenerator().as(ImageType.JPG);
         final Path path = gen.writeToTmpFile("Hello JPG file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
