@@ -28,7 +28,7 @@ public class QRGenerator {
     private BufferedImage logo;
     private HashMap<EncodeHintType, Object> hints = new HashMap<>();
     private MatrixToImageConfig colorConfig;
-    private QRCodeWriter writer;
+    private final QRCodeWriter writer;
 
     public QRGenerator() {
         imageType = ImageType.PNG;
@@ -55,6 +55,7 @@ public class QRGenerator {
         // class QRCodeWriter doesn't hold state; we can simply reference it
         this.writer = orig.writer;
 
+        //noinspection unchecked
         this.hints = (HashMap<EncodeHintType, Object>) orig.hints.clone();
     }
 
