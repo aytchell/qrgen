@@ -6,11 +6,79 @@
 
     <groupId>com.github.aytchell</groupId>
     <artifactId>qrgen</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.7-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>QR code generator</name>
+    <description>
+        This package contains a class QRGenerator which is able to generate QR codes.
+        It is only a thin layer on top of ZXing but reliefs you from creating the
+        actual image files.
+    </description>
+    <url>https://github.com/aytchell/qrgen</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Hannes Lerchl</name>
+            <email>hannes.lerchl@googlemail.com</email>
+            <timezone>Europe/Berlin</timezone>
+            <roles>
+                <role>developer</role>
+                <role>maintainer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Ken Gullaksen</name>
+            <email>ken@glxn.net</email>
+            <roles>
+                <role>author of QRGen which inspired this lib</role>
+            </roles>
+            <url>http://kenglxn.github.io/QRGen/</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/aytchell/qrgen.git</connection>
+        <developerConnection>scm:git:https://github.com/aytchell/qrgen.git</developerConnection>
+        <url>http://github.com/aytchell/qrgen/tree/master</url>
+        <tag>releases/0.7.0</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <zxing.version>3.5.0</zxing.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+    </dependencies>
 </project>
