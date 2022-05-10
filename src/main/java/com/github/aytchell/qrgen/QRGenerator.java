@@ -137,12 +137,12 @@ public class QRGenerator implements Cloneable {
         return this;
     }
 
-    public Path generate(String payload)
+    public Path writeToTmpFile(String payload)
             throws IOException, QRGenerationException {
-        return generate(payload, null);
+        return writeToTmpFile(payload, null);
     }
 
-    public Path generate(String payload, String tmpFilePrefix)
+    public Path writeToTmpFile(String payload, String tmpFilePrefix)
             throws IOException, QRGenerationException {
         try {
             final Path tmpFile = createTempFile(tmpFilePrefix);

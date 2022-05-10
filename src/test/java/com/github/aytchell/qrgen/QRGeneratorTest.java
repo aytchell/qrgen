@@ -38,7 +38,7 @@ public class QRGeneratorTest {
     void sizeIsRespected(Integer size) throws IOException, QRGenerationException {
         final QRGenerator gen = new QRGenerator()
                 .withSize(size, size);
-        final Path path = gen.generate("Hello, World!");
+        final Path path = gen.writeToTmpFile("Hello, World!");
         try {
             TestUtilities.assertFileExistsAndNotEmpty(path);
             final BufferedImage img = TestUtilities.readProducedFile(path);
@@ -52,7 +52,7 @@ public class QRGeneratorTest {
     @Test
     void generatorCanCreatePngFiles() throws IOException, QRGenerationException {
         final QRGenerator gen = new QRGenerator().as(ImageType.PNG);
-        final Path path = gen.generate("Hello PNG file");
+        final Path path = gen.writeToTmpFile("Hello PNG file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
             assertEquals(ImageType.PNG, type);
@@ -64,7 +64,7 @@ public class QRGeneratorTest {
     @Test
     void generatorCanCreateBmpFiles() throws IOException, QRGenerationException {
         final QRGenerator gen = new QRGenerator().as(ImageType.BMP);
-        final Path path = gen.generate("Hello BMP file");
+        final Path path = gen.writeToTmpFile("Hello BMP file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
             assertEquals(ImageType.BMP, type);
@@ -76,7 +76,7 @@ public class QRGeneratorTest {
     @Test
     void generatorCanCreateGifFiles() throws IOException, QRGenerationException {
         final QRGenerator gen = new QRGenerator().as(ImageType.GIF);
-        final Path path = gen.generate("Hello GIF file");
+        final Path path = gen.writeToTmpFile("Hello GIF file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
             assertEquals(ImageType.GIF, type);
@@ -88,7 +88,7 @@ public class QRGeneratorTest {
     @Test
     void generatorCanCreateJpgFiles() throws IOException, QRGenerationException {
         final QRGenerator gen = new QRGenerator().as(ImageType.JPG);
-        final Path path = gen.generate("Hello JPG file");
+        final Path path = gen.writeToTmpFile("Hello JPG file");
         try {
             final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
             assertEquals(ImageType.JPG, type);
