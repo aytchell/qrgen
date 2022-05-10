@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 import static com.google.zxing.EncodeHintType.*;
 
-public class QRGenerator {
+public class QRGenerator implements Cloneable {
     private ImageType imageType;
     private int width;
     private int height;
@@ -69,11 +69,12 @@ public class QRGenerator {
     public QRGenerator clone() {
         try {
             super.clone();
+            return new QRGenerator(this);
         } catch (CloneNotSupportedException e) {
             // I'm quite sure that class Object supports 'clone()' so
-            // I simply swallow this exception
+            // instead of throwing we'll return null
+            return null;
         }
-        return new QRGenerator(this);
     }
 
     public QRGenerator as(ImageType imageType) {
