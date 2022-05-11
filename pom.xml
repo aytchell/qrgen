@@ -11,9 +11,9 @@
 
     <name>QR code generator</name>
     <description>
-        This package contains a class QRGenerator which is able to generate QR codes.
-        It is only a thin layer on top of ZXing but reliefs you from creating the
-        actual image files.
+        This package contains a class QrGenerator which is able to generate
+        QR codes. It is only a thin layer on top of ZXing but reliefs you
+        from creating the actual image files.
     </description>
     <url>https://github.com/aytchell/qrgen</url>
 
