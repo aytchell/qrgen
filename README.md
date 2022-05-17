@@ -1,7 +1,7 @@
 # QR code generator
 
 This library provides a class which is capable of generating QR codes. It is 
-a thin layer on top the [ZXing](https://github.com/zxing/zxing) generator
+a thin layer on top of the [ZXing](https://github.com/zxing/zxing) generator
 which does the heavily lifting of actually computing the dot matrix. This
 lib then adds the functionality to make image files.
 
@@ -13,8 +13,23 @@ differences to QRGen are:
     it instead of repeating the configuration for each QR code
   - this lib can overlay a logo over the QR code
   - no leaking of ZXing provided types
-  - no support for Android
+  - no support for Android thus only one lib (instead of "core + javase + android")
 
+## Table of contents
+
+* [Introduction](#introduction)
+* [Maven](#maven)
+* [Configuration](#configration)
+    * [Output file type](#conf_filetype)
+    * [Size and margin of the code](#conf_size)
+    * [Used colors](#conf_colors)
+    * [Error correction level](#conf_error)
+    * [Logo overlay](#conf_logo)
+    * [Character set of the encoded message](#conf_charset)
+* [Actually write the QR code](#write)
+* [License](#license)
+
+<a name="introduction"></a>
 ## Introduction
 
 When starting with class `QrGenerator` usage of this lib is quite
@@ -31,6 +46,7 @@ self-explanatory (there's also javadoc available):
                 .writeToTmpFile("Hello, World!");
 ```
 
+<a name="maven"></a>
 ## Maven
 
 ```xml
@@ -41,6 +57,7 @@ self-explanatory (there's also javadoc available):
     </dependency>
 ```
 
+<a name="configration"></a>
 ## Configuration
 
 This section lists the possible configurations for the created QR codes. The
@@ -52,6 +69,7 @@ examples build on the same instance of `QrGenerator`.
         final QrGenerator generator = new QrGenerator();
 ```
 
+<a name="conf_filetype"></a>
 ### Output file type
 
 The file format of the resulting QR code image can be selected to be
@@ -61,6 +79,7 @@ The file format of the resulting QR code image can be selected to be
         generator.as(ImageType.PNG);
 ```
 
+<a name="conf_size"></a>
 ### Size and margin of the code
 
 The size of the resulting image (in pixels) can be configured as well
@@ -77,6 +96,7 @@ of the complete image as well as on the complexity of the QR code.
                 .withMargin(3);
 ```
 
+<a name="conf_colors"></a>
 ### Used colors
 
 Usually QR codes are displayed in black and white as this gives the best
@@ -92,7 +112,7 @@ the "space between the dots".
         generator.withColors(daffodil, oxfordBlue);
 ```
 
-If this is too verbose for you it's also possible to directly use integers
+If this is too verbose for you, it's also possible to directly use integers
 denoting the argb values. The `QrGenerator` will store both variants in the
 same way.
 
@@ -102,16 +122,33 @@ same way.
 
         generator.withColors(daffodil, oxfordBlue);
 ```
+
+<a name="conf_error"></a>
 ### Error correction level
 
-// TODO: describe
+If you plan to put a logo onto your generated QR code or you're printing it
+and the code gets dirty or damaged then information is lost and scanners
+might not be able to correctly scan the code.
+
+To circumvent this kind of problem the information encoded into the QR code
+can be stored with different degrees of redundancy. The higher the level of
+redundancy the better a scanner will be able to read a damaged or covered QR
+code but this also means that the QR code becomes more dense ("more pixels").
+
+In the end there is no simple algorithm which level to take but it depends on
+the scenario how you want to use the QR code.
+
+The specified levels are
+  - L - error correction rate of approximately 7%
+  - M - error correction rate of approximately 15%
+  - Q - error correction rate of approximately 25%
+  - H - error correction rate of approximately 30%
 
 ```java
-        generator
-                .withErrorCorrection(ErrorCorrectionLevel.Q)
+        generator.withErrorCorrection(ErrorCorrectionLevel.Q)
 ```
 
-
+<a name="conf_logo"></a>
 ### Logo overlay
 
 The generator is able to overlay the QR code with a centered logo. The file
@@ -136,19 +173,46 @@ logo above it.
                 .writeToTmpFile("Hello, Github!");
 ```
 
+<a name="conf_charset"></a>
 ### Character set of the encoded message
 
-// TODO: describe
+A QR code encodes strings and to be more precise: a series of bytes. And at
+this point we're entering the wide area of character encodings. You can
+configure the character encoding which should be used when converting the
+given payload to bytes.
+
+In most cases UTF-8 (which is the default when not setting any character set)
+will be perfectly OK.
 
 ```java
-        generator
-                .withCharset(StandardCharsets.UTF_8);
+        generator.withCharset(StandardCharsets.UTF_8);
 ```
 
+<a name="write"></a>
 ## Actually write the QR code
 
-// TODO: describe
+Once you've configured the QR code generator you can use it to write QR
+codes. The method to write a payload to a QR code image file does not change
+the state of the generator instance. So you can reuse the same generator
+instance to write as many QR Code as you like (with different payloads).
 
+```java
+        final Path img_1 = generator
+                .writeToTmpFile("Hello, World!");
+
+        final Path img_2 = generator
+                .writeToTmpFile("Hello again");
+
+        final Path img_3 = generator
+                .writeToTmpFile("Anybody out there?");
+```
+
+Note that the returned file will be created in the system's tmp folder with
+the "delete on exit" flag set. The method does not change access permissions
+of the created file so most probably (depending on the JRE and the OS) it will
+be readable to anyone with access to the system.
+
+<a name="license"></a>
 ## License
 
 Apache 2.0 License
