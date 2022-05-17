@@ -53,7 +53,7 @@ self-explanatory (there's also javadoc available):
     <dependency>
         <groupId>com.github.aytchell</groupId>
         <artifactId>qrgen</artifactId>
-        <version>0.9.0</version>
+        <version>1.0.0</version>
     </dependency>
 ```
 
