@@ -1,5 +1,6 @@
 package com.github.aytchell.qrgen;
 
+import com.google.zxing.WriterException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -51,11 +52,11 @@ public class QrGeneratorTest {
 
     @Test
     void generatorCanCreatePngFiles() throws IOException, QrGenerationException {
-        final QrGenerator gen = new QrGenerator().as(ImageType.PNG);
+        final QrGenerator gen = new QrGenerator().as(ImageFileType.PNG);
         final Path path = gen.writeToTmpFile("Hello PNG file");
         try {
-            final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
-            assertEquals(ImageType.PNG, type);
+            final ImageFileType type = TestUtilities.findOutImageTypeOfFile(path);
+            assertEquals(ImageFileType.PNG, type);
         } finally {
             path.toFile().delete();
         }
@@ -63,11 +64,11 @@ public class QrGeneratorTest {
 
     @Test
     void generatorCanCreateBmpFiles() throws IOException, QrGenerationException {
-        final QrGenerator gen = new QrGenerator().as(ImageType.BMP);
+        final QrGenerator gen = new QrGenerator().as(ImageFileType.BMP);
         final Path path = gen.writeToTmpFile("Hello BMP file");
         try {
-            final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
-            assertEquals(ImageType.BMP, type);
+            final ImageFileType type = TestUtilities.findOutImageTypeOfFile(path);
+            assertEquals(ImageFileType.BMP, type);
         } finally {
             path.toFile().delete();
         }
@@ -75,11 +76,11 @@ public class QrGeneratorTest {
 
     @Test
     void generatorCanCreateGifFiles() throws IOException, QrGenerationException {
-        final QrGenerator gen = new QrGenerator().as(ImageType.GIF);
+        final QrGenerator gen = new QrGenerator().as(ImageFileType.GIF);
         final Path path = gen.writeToTmpFile("Hello GIF file");
         try {
-            final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
-            assertEquals(ImageType.GIF, type);
+            final ImageFileType type = TestUtilities.findOutImageTypeOfFile(path);
+            assertEquals(ImageFileType.GIF, type);
         } finally {
             path.toFile().delete();
         }
@@ -87,13 +88,20 @@ public class QrGeneratorTest {
 
     @Test
     void generatorCanCreateJpgFiles() throws IOException, QrGenerationException {
-        final QrGenerator gen = new QrGenerator().as(ImageType.JPG);
+        final QrGenerator gen = new QrGenerator().as(ImageFileType.JPG);
         final Path path = gen.writeToTmpFile("Hello JPG file");
         try {
-            final ImageType type = TestUtilities.findOutImageTypeOfFile(path);
-            assertEquals(ImageType.JPG, type);
+            final ImageFileType type = TestUtilities.findOutImageTypeOfFile(path);
+            assertEquals(ImageFileType.JPG, type);
         } finally {
             path.toFile().delete();
         }
     }
+
+    /*
+    too big: payload len 7090; lvl L
+    too big: payload len 5597; lvl M
+    too big: payload len 3994; lvl Q
+    too big: payload len 3058; lvl H
+     */
 }

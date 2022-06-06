@@ -33,7 +33,7 @@ import static com.google.zxing.EncodeHintType.*;
  * configuration phase.
  */
 public class QrGenerator implements Cloneable {
-    private ImageType imageType;
+    private ImageFileType imageType;
     private int width;
     private int height;
     private BufferedImage logo;
@@ -51,7 +51,7 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#writeToTmpFile(String)
      */
     public QrGenerator() {
-        imageType = ImageType.PNG;
+        imageType = ImageFileType.PNG;
         width = 200;
         height = 200;
 
@@ -116,7 +116,7 @@ public class QrGenerator implements Cloneable {
      * @param imageType the image file to be produced by this instance
      * @return this instance so that config calls can be chained
      */
-    public QrGenerator as(ImageType imageType) {
+    public QrGenerator as(ImageFileType imageType) {
         this.imageType = imageType;
         return this;
     }

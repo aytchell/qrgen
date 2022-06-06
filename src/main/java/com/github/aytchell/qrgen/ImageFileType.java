@@ -1,5 +1,5 @@
 package com.github.aytchell.qrgen;
 
-public enum ImageType {
+public enum ImageFileType {
     JPG, GIF, PNG, BMP
 }

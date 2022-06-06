@@ -176,7 +176,7 @@ logo above it.
 <a name="conf_charset"></a>
 ### Character set of the encoded message
 
-A QR code encodes strings and to be more precise: a series of bytes. And at
+A QR code encode strings and to be more precise: a series of bytes. And at
 this point we're entering the wide area of character encodings. You can
 configure the character encoding which should be used when converting the
 given payload to bytes.

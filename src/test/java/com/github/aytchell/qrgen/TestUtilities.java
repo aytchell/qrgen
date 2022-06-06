@@ -52,7 +52,7 @@ public class TestUtilities {
         return img;
     }
 
-    public static ImageType findOutImageTypeOfFile(Path path) throws IOException {
+    public static ImageFileType findOutImageTypeOfFile(Path path) throws IOException {
         try (final InputStream input = Files.newInputStream(path)) {
             final int NUMBER_MAGIC_BYTES = MAGIC_BYTES_GIF.length;
 
@@ -67,13 +67,13 @@ public class TestUtilities {
             assertEquals(NUMBER_MAGIC_BYTES, MAGIC_BYTES_JPG.length);
 
             if (Arrays.equals(magic, MAGIC_BYTES_PNG)) {
-                return ImageType.PNG;
+                return ImageFileType.PNG;
             }
             if (Arrays.equals(magic, MAGIC_BYTES_JPG)) {
-                return ImageType.JPG;
+                return ImageFileType.JPG;
             }
             if (Arrays.equals(magic, MAGIC_BYTES_GIF)) {
-                return ImageType.GIF;
+                return ImageFileType.GIF;
             }
 
             // the magic byte sequence of BMP is shorter
@@ -82,7 +82,7 @@ public class TestUtilities {
             System.arraycopy(magic, 0, bmpMagic, 0, MAGIC_BYTES_BMP.length);
 
             if (Arrays.equals(bmpMagic, MAGIC_BYTES_BMP)) {
-                return ImageType.BMP;
+                return ImageFileType.BMP;
             }
 
             return null;
