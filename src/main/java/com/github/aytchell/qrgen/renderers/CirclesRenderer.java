@@ -91,6 +91,8 @@ public class CirclesRenderer implements QrCodeRenderer {
         int onColor = config.getPixelOnColor();
 
         final Graphics2D gfx = img.createGraphics();
+        gfx.setComposite(AlphaComposite.Src);
+        gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gfx.setColor(new Color(onColor, true));
         gfx.fillOval(0, 0, diameter, diameter);
         gfx.dispose();
