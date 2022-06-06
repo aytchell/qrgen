@@ -1,12 +1,12 @@
 package com.github.aytchell.qrgen;
 
-import com.google.zxing.BarcodeFormat;
+import com.github.aytchell.qrgen.renderers.CirclesRenderer;
+import com.github.aytchell.qrgen.renderers.DefaultRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class QrGenerator implements Cloneable {
     private BufferedImage logo;
     private HashMap<EncodeHintType, Object> hints = new HashMap<>();
     private MatrixToImageConfig colorConfig;
-    private final QRCodeWriter writer;
+    private QrCodeRenderer renderer;
 
     /**
      * Create a QR code generator with default values
@@ -57,7 +57,7 @@ public class QrGenerator implements Cloneable {
 
         logo = null;
         colorConfig = new MatrixToImageConfig();
-        writer = new QRCodeWriter();
+        renderer = new DefaultRenderer();
 
         setDefaultHints();
     }
@@ -72,8 +72,8 @@ public class QrGenerator implements Cloneable {
         this.logo = orig.logo;
         this.colorConfig = orig.colorConfig;
 
-        // class QRCodeWriter doesn't hold state; we can simply reference it
-        this.writer = orig.writer;
+        // QrCodeRenderer doesn't hold state so we can use the same instance
+        this.renderer = orig.renderer;
 
         //noinspection unchecked
         this.hints = (HashMap<EncodeHintType, Object>) orig.hints.clone();
@@ -249,6 +249,18 @@ public class QrGenerator implements Cloneable {
         }
     }
 
+    public QrGenerator withPixelStyle(PixelStyle style) {
+        switch (style) {
+            case RECTANGLES:
+                renderer = new DefaultRenderer();
+                break;
+            case DOTS:
+                renderer = new CirclesRenderer();
+                break;
+        }
+        return this;
+    }
+
     /**
      * Configure a logo to be added centered as overlay
      * <p>
@@ -401,10 +413,26 @@ public class QrGenerator implements Cloneable {
         return path;
     }
 
-    private BufferedImage generateImage(String payload) throws WriterException {
-        final BitMatrix matrix = writer.encode(payload, BarcodeFormat.QR_CODE, width, height, hints);
+    private int measurePositionMarker(BitMatrix matrix) {
+        final BitArray row = matrix.getRow(0, null);
+        for (int i = 0; i < row.getSize(); ++i) {
+            if (!row.get(i)) {
+                // this first bit not part of the position marker
+                return i;
+            }
+        }
 
-        final BufferedImage qrCodeImage = MatrixToImageWriter.toBufferedImage(matrix, colorConfig);
+        // ugh, the complete line is black??
+        return 0;
+    }
+
+    public static class Measurements {
+        int codeSize;
+        int positionMarkerSize;
+    }
+
+    private BufferedImage generateImage(String payload) throws WriterException {
+        final BufferedImage qrCodeImage = renderer.encodeAndRender(payload, colorConfig, width, height, hints);
         if (logo == null) {
             return qrCodeImage;
         } else {
