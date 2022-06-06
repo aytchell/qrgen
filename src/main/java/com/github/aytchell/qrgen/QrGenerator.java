@@ -33,6 +33,11 @@ import static com.google.zxing.EncodeHintType.*;
  * configuration phase.
  */
 public class QrGenerator implements Cloneable {
+    public static final int MAX_PAYLOAD_SIZE_FOR_L = 7089;
+    public static final int MAX_PAYLOAD_SIZE_FOR_M = 5596;
+    public static final int MAX_PAYLOAD_SIZE_FOR_Q = 3993;
+    public static final int MAX_PAYLOAD_SIZE_FOR_H = 3057;
+
     private ImageFileType imageType;
     private int width;
     private int height;

@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class QrGeneratorTest {
@@ -98,10 +97,47 @@ public class QrGeneratorTest {
         }
     }
 
-    /*
-    too big: payload len 7090; lvl L
-    too big: payload len 5597; lvl M
-    too big: payload len 3994; lvl Q
-    too big: payload len 3058; lvl H
-     */
+    private static Stream<SizeAndLevel> maxSizesForLevels() {
+        final List<SizeAndLevel> sizes = new ArrayList<>();
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_L, ErrorCorrectionLevel.L));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_M, ErrorCorrectionLevel.M));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_Q, ErrorCorrectionLevel.Q));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_H, ErrorCorrectionLevel.H));
+        return sizes.stream();
+    }
+
+    @ParameterizedTest
+    @MethodSource("maxSizesForLevels")
+    void maxPayloadsWork(SizeAndLevel sizeAndLevel) throws QrGenerationException, IOException {
+        generatePayloadWithLvl(sizeAndLevel.size, sizeAndLevel.lvl);
+    }
+
+    @ParameterizedTest
+    @MethodSource("maxSizesForLevels")
+    void toobIgPayloadsFail(SizeAndLevel sizeAndLevel) throws IOException {
+        try {
+            generatePayloadWithLvl(sizeAndLevel.size + 1, sizeAndLevel.lvl);
+            fail("QrGenerator should fail to generate code for too big payload");
+        } catch (QrGenerationException e) {
+            // as expected
+        }
+    }
+
+    void generatePayloadWithLvl(int payloadSize, ErrorCorrectionLevel lvl) throws QrGenerationException, IOException {
+        final QrGenerator gen = new QrGenerator()
+                .withErrorCorrection(lvl);
+        final String payload = Payload.getWithLength(payloadSize);
+        final Path path = gen.writeToTmpFile(payload);
+        assertNotNull(path);
+    }
+
+    private static class SizeAndLevel {
+        SizeAndLevel(int size, ErrorCorrectionLevel level) {
+            this.size = size;
+            this.lvl = level;
+        }
+
+        int size;
+        ErrorCorrectionLevel lvl;
+    }
 }
