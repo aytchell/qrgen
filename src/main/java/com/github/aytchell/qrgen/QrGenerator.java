@@ -256,6 +256,19 @@ public class QrGenerator implements Cloneable {
         }
     }
 
+    /**
+     * Select the styling of the rendered QR code
+     *
+     * The specification shows QR codes always in black/white with rectangles filling
+     * the individual pixels. In reality, it is possible to render QR codes with a
+     * different styling and most scanners still recognize them. This method can be
+     * used to change the visual appearance of the "pixels" forming the QR code.
+     *
+     * @param style the styling to use for rendering the QR code
+     * @return this instance so that config calls can be chained
+     * @see <a href="https://github.com/aytchell/qrgen#conf_styling">github.com/aytchell/qrgen</a>
+     *      for example outputs
+     */
     public QrGenerator withPixelStyle(PixelStyle style) {
         switch (style) {
             case RECTANGLES:
