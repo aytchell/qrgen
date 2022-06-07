@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.renderers;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

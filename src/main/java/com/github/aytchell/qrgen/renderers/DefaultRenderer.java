@@ -1,6 +1,5 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.QrCodeRenderer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

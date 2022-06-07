@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen;
 
 import com.github.aytchell.qrgen.renderers.CirclesRenderer;
 import com.github.aytchell.qrgen.renderers.DefaultRenderer;
+import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
