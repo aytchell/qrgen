@@ -11,6 +11,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+- ...
+
+## [1.1.0] - 2022-06-07
+
 ### Added
 
 - Added new configuration option for generated QR codes:

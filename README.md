@@ -25,6 +25,7 @@ differences to QRGen are:
     * [Used colors](#conf_colors)
     * [Error correction level](#conf_error)
     * [Logo overlay](#conf_logo)
+    * [Styling](#conf_styling)
     * [Character set of the encoded message](#conf_charset)
 * [Actually write the QR code](#write)
 * [License](#license)
@@ -53,7 +54,7 @@ self-explanatory (there's also javadoc available):
     <dependency>
         <groupId>com.github.aytchell</groupId>
         <artifactId>qrgen</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </dependency>
 ```
 
@@ -172,6 +173,27 @@ logo above it.
         final Path img = generator
                 .writeToTmpFile("Hello, Github!");
 ```
+
+<a name="conf_styling"></a>
+### Styling
+
+It is possible to change the style of the individual pixels used to render
+the QR code. Currently there are three different stylings available:
+
+  - The "standard" styling with rectangular pixels "touching" each other
+  - A styling with smaller pixels so that a white grid betwees them appears
+  - Dots instead of rectangles
+
+
+```java
+        final Path img = generator
+                .withPixelStyle(PixelStyle.DOTS)
+                .writeToTmpFile("Hello, Github!");
+```
+
+![QR code with style RECTANGLES](examples/rectangles.png "Style `RECTANGLES`")
+![QR code with style SMALL_RECTANGLES](examples/small_rectangles.png "Style `SMALL_RECTANGLES`")
+![QR code with style DOTS](examples/dots.png "Style `DOTS`")
 
 <a name="conf_charset"></a>
 ### Character set of the encoded message
