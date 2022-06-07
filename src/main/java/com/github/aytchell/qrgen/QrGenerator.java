@@ -3,6 +3,7 @@ package com.github.aytchell.qrgen;
 import com.github.aytchell.qrgen.renderers.CirclesRenderer;
 import com.github.aytchell.qrgen.renderers.DefaultRenderer;
 import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
+import com.github.aytchell.qrgen.renderers.SmallRectanglesRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
@@ -259,6 +260,9 @@ public class QrGenerator implements Cloneable {
         switch (style) {
             case RECTANGLES:
                 renderer = new DefaultRenderer();
+                break;
+            case SMALL_RECTANGLES:
+                renderer = new SmallRectanglesRenderer();
                 break;
             case DOTS:
                 renderer = new CirclesRenderer();

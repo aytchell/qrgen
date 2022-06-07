@@ -13,8 +13,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Added new configuration option for generated QR codes
-    - the "pixels" of the QR code can now also be dots
+- Added new configuration option for generated QR codes:
+  the "pixels" of the QR code can now also be dots
+- Added another option to draw "smaller (rectangular) pixels" so that a thin
+  grid appears in between
 
 ### Changed
 
