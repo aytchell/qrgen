@@ -1,8 +1,11 @@
 package com.github.aytchell.qrgen;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Class to convert color values into the integer format accepted by {@link QrGenerator#withColors(int, int)}
  */
+@EqualsAndHashCode
 public class ArgbValue {
     private final int rawValue;
 

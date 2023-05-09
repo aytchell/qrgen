@@ -25,7 +25,7 @@ import static com.google.zxing.EncodeHintType.*;
 
 /**
  * Class to generate image files containing QR codes for a given payload
- *
+ * <p>
  * Instances of this class can create QR codes in a variety of different
  * image file formats. The appearance and characteristics of the generated
  * QR code can be configured via chained method calls.
@@ -79,7 +79,7 @@ public class QrGenerator implements Cloneable {
         this.logo = orig.logo;
         this.colorConfig = orig.colorConfig;
 
-        // QrCodeRenderer doesn't hold state so we can use the same instance
+        // QrCodeRenderer doesn't hold state, so we can use the same instance
         this.renderer = orig.renderer;
 
         //noinspection unchecked
@@ -235,7 +235,7 @@ public class QrGenerator implements Cloneable {
 
     /**
      * The size of a white frame added around the generated QR code
-     *
+     * <p>
      * To improve readability for scanners a QR code usually has a white margin
      * surrounding it. The size of this margin can be set here. If a negative
      * value is given we'll fall back to the default.
@@ -258,7 +258,7 @@ public class QrGenerator implements Cloneable {
 
     /**
      * Select the styling of the rendered QR code
-     *
+     * <p>
      * The specification shows QR codes always in black/white with rectangles filling
      * the individual pixels. In reality, it is possible to render QR codes with a
      * different styling and most scanners still recognize them. This method can be

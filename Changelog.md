@@ -13,6 +13,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - ...
 
+## [1.1.1] - 2023-05-09
+
+### Fixed
+
+- Classes ArgbValue, RgbValue and ImgParameter had no real 'equals()'
+  method. Fixed this by introducing lombok
+
 ## [1.1.0] - 2022-06-07
 
 ### Added

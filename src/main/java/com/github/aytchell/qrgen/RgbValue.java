@@ -2,7 +2,7 @@ package com.github.aytchell.qrgen;
 
 /**
  * Class to encode color values
- *
+ * <p>
  * Basically an {@link ArgbValue} with an alpha channel set to "opaque"
  * @see ArgbValue
  */

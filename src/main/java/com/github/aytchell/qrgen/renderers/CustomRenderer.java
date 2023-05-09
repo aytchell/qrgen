@@ -33,8 +33,8 @@ public abstract class CustomRenderer implements QrCodeRenderer {
             Map<EncodeHintType, ?> encodingHints) throws WriterException {
         final int margin = getMargin(encodingHints);
         final Map<EncodeHintType, Object> hintsCopy = new HashMap<>(encodingHints);
-        // ZXing whould only computer the QRCode without any border (margin);
-        // the margin is then afterwars applied by this method
+        // ZXing would only compute the QRCode without any border (margin);
+        // the margin is then afterward applied by this method
         final Integer zero = 0;
         hintsCopy.put(EncodeHintType.MARGIN, zero);
 
@@ -76,7 +76,7 @@ public abstract class CustomRenderer implements QrCodeRenderer {
         double codeAndMarginSize = codeSize + 2 * margin;
 
         if (targetSize < codeAndMarginSize) {
-            // A rendered QR code will not fit into the rquested boundaries
+            // A rendered QR code will not fit into the requested boundaries
             throw new WriterException("Requested width/height is too small for generated QR Code");
         }
 

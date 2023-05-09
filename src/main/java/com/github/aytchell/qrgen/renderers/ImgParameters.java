@@ -1,5 +1,8 @@
 package com.github.aytchell.qrgen.renderers;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 class ImgParameters {
     int cellSize;
     int matrixWidthInCells;
