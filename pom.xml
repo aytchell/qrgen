@@ -20,7 +20,7 @@
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
@@ -40,14 +40,14 @@
             <roles>
                 <role>author of QRGen which inspired this lib</role>
             </roles>
-            <url>http://kenglxn.github.io/QRGen/</url>
+            <url>https://kenglxn.github.io/QRGen/</url>
         </developer>
     </developers>
 
     <scm>
         <connection>scm:git:git://github.com/aytchell/qrgen.git</connection>
         <developerConnection>scm:git:https://github.com/aytchell/qrgen.git</developerConnection>
-        <url>http://github.com/aytchell/qrgen/tree/master</url>
+        <url>https://github.com/aytchell/qrgen/tree/master</url>
         <tag>releases/1.1.0</tag>
     </scm>
 
