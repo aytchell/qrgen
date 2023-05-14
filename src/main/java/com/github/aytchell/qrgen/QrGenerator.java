@@ -1,12 +1,10 @@
 package com.github.aytchell.qrgen;
 
+import com.github.aytchell.qrgen.renderers.GenericQrMatrixRenderer;
 import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
-import com.github.aytchell.qrgen.renderers.RendererFactory;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
-import com.google.zxing.common.BitArray;
-import com.google.zxing.common.BitMatrix;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -62,7 +60,7 @@ public class QrGenerator implements Cloneable {
 
         logo = null;
         colorConfig = new MatrixToImageConfig();
-        renderer = RendererFactory.createRenderer(PixelStyle.RECTANGLES);
+        renderer = new GenericQrMatrixRenderer(PixelStyle.RECTANGLES);
 
         setDefaultHints();
     }
@@ -268,7 +266,7 @@ public class QrGenerator implements Cloneable {
      *      for example outputs
      */
     public QrGenerator withPixelStyle(PixelStyle style) {
-        renderer = RendererFactory.createRenderer(style);
+        renderer = new GenericQrMatrixRenderer(style);
         return this;
     }
 
