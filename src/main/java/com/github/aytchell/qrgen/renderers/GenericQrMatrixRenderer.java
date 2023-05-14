@@ -1,43 +1,30 @@
 package com.github.aytchell.qrgen.renderers;
 
+import com.github.aytchell.qrgen.PixelStyle;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
+import lombok.AllArgsConstructor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class IndependentPixelsRenderer extends CustomRenderer {
+@AllArgsConstructor
+public class GenericQrMatrixRenderer extends CustomRenderer {
     // regardless of the size of the payload or the error correction level
     // the position markers will always be seven pixels high and wide
     // (tested with ZXing 3.5.0)
     private static final int SIZE_OF_POSITION_MARKER = 7;
 
+    private final PixelStyle pixelStyle;
+
     @Override
     protected void renderMatrix(BitMatrix matrix, BufferedImage img, ImgParameters imgParams) {
-        final BufferedImage tpl = drawPixelTemplate(imgParams);
-        applyQrCodePixels(img, matrix, tpl, imgParams);
+        PixelRenderer renderer = PixelRendererFactory.generate(pixelStyle, imgParams);
+        applyQrCodePixels(img, matrix, renderer, imgParams);
     }
-
-    protected BufferedImage drawPixelTemplate(ImgParameters imgParams) {
-        BufferedImage img = new BufferedImage(
-                imgParams.getCellSize(), imgParams.getCellSize(), BufferedImage.TYPE_INT_ARGB);
-
-        int onColor = imgParams.getOnColor();
-
-        final Graphics2D gfx = img.createGraphics();
-        gfx.setComposite(AlphaComposite.Src);
-        gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        gfx.setColor(new Color(onColor, true));
-        drawActualShape(imgParams, gfx);
-        gfx.dispose();
-
-        return img;
-    }
-
-    protected abstract void drawActualShape(ImgParameters imgParams, Graphics2D gfx);
 
     private void applyQrCodePixels(
-            BufferedImage img, BitMatrix matrix, BufferedImage qrPixel, ImgParameters imgParams) {
+            BufferedImage img, BitMatrix matrix, PixelRenderer renderer, ImgParameters imgParams) {
         BitArray row = null;
         int posY = imgParams.getFirstCellY();
         final Graphics gfx = img.getGraphics();
@@ -50,6 +37,7 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
             for (int xCoord = 0; xCoord < matrix.getWidth(); ++xCoord) {
                 if (row.get(xCoord)) {
                     if (!detector.detected(xCoord, yCoord)) {
+                        Image qrPixel = renderer.renderPixel();
                         gfx.drawImage(qrPixel, posX, posY, null);
                     }
                 }
