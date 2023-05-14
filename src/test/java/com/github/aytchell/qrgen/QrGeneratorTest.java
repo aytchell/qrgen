@@ -97,6 +97,18 @@ public class QrGeneratorTest {
         }
     }
 
+    @Test
+    void renderRoundCorners() throws QrGenerationException, IOException {
+        final QrGenerator gen = new QrGenerator()
+                .as(ImageFileType.PNG)
+                .withSize(400, 400)
+                .withPixelStyle(PixelStyle.ROUND_CORNERS)
+                .withMargin(2)
+                .withErrorCorrection(ErrorCorrectionLevel.Q);
+        final Path path = gen.writeToTmpFile("https://github.com/aytchell/qrgen");
+        assertNotNull(path);
+    }
+
     private static Stream<SizeAndLevel> maxSizesForLevels() {
         final List<SizeAndLevel> sizes = new ArrayList<>();
         sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_L, ErrorCorrectionLevel.L));

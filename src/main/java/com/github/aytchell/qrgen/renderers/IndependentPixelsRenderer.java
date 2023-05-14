@@ -21,7 +21,7 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
     protected abstract BufferedImage drawPixelTemplate(ImgParameters imgParams);
 
     private void applyQrCodePixels(
-            BufferedImage img, BitMatrix matrix, BufferedImage circle, ImgParameters imgParams) {
+            BufferedImage img, BitMatrix matrix, BufferedImage qrPixel, ImgParameters imgParams) {
         BitArray row = null;
         int posY = imgParams.firstCellY;
         final Graphics gfx = img.getGraphics();
@@ -34,7 +34,7 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
             for (int xCoord = 0; xCoord < matrix.getWidth(); ++xCoord) {
                 if (row.get(xCoord)) {
                     if (!detector.detected(xCoord, yCoord)) {
-                        gfx.drawImage(circle, posX, posY, null);
+                        gfx.drawImage(qrPixel, posX, posY, null);
                     }
                 }
                 posX += imgParams.cellSize;
