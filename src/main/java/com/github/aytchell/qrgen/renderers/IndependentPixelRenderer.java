@@ -11,8 +11,12 @@ public abstract class IndependentPixelRenderer implements PixelRenderer {
     }
 
     @Override
-    public Image renderPixel() {
-        return qrPixel;
+    public Image renderPixel(PixelContext context) {
+        if (context.isSet()) {
+            return qrPixel;
+        } else {
+            return null;
+        }
     }
 
     protected abstract void drawActualShape(ImgParameters imgParams, Graphics2D gfx);

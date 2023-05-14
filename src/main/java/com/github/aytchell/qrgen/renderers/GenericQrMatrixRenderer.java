@@ -25,23 +25,30 @@ public class GenericQrMatrixRenderer extends CustomRenderer {
 
     private void applyQrCodePixels(
             BufferedImage img, BitMatrix matrix, PixelRenderer renderer, ImgParameters imgParams) {
-        BitArray row = null;
+        BitArray top = null;
+        BitArray mid = null;
+        BitArray bottom = matrix.getRow(0, null);
+
         int posY = imgParams.getFirstCellY();
         final Graphics gfx = img.getGraphics();
         final PositionMarkerDetector detector = new PositionMarkerDetector(matrix.getWidth());
 
         for (int yCoord = 0; yCoord < matrix.getHeight(); ++yCoord) {
-            row = matrix.getRow(yCoord, row);
             int posX = imgParams.getFirstCellX();
+            top = mid;
+            mid = bottom;
+            bottom = (yCoord >= (matrix.getHeight() - 1)) ? null : matrix.getRow(yCoord + 1, null);
+            PixelContext context = new PixelContext(matrix.getWidth(), top, mid, bottom);
 
             for (int xCoord = 0; xCoord < matrix.getWidth(); ++xCoord) {
-                if (row.get(xCoord)) {
-                    if (!detector.detected(xCoord, yCoord)) {
-                        Image qrPixel = renderer.renderPixel();
+                if (!detector.detected(xCoord, yCoord)) {
+                    final Image qrPixel = renderer.renderPixel(context);
+                    if (qrPixel != null) {
                         gfx.drawImage(qrPixel, posX, posY, null);
                     }
                 }
                 posX += imgParams.getCellSize();
+                context.shiftRight();
             }
 
             posY += imgParams.getCellSize();
