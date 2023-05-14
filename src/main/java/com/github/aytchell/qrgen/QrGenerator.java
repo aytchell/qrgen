@@ -42,7 +42,7 @@ public class QrGenerator implements Cloneable {
     private BufferedImage logo;
     private HashMap<EncodeHintType, Object> hints = new HashMap<>();
     private MatrixToImageConfig colorConfig;
-    private QrCodeRenderer renderer;
+    private GenericQrMatrixRenderer renderer;
 
     /**
      * Create a QR code generator with default values
@@ -60,7 +60,7 @@ public class QrGenerator implements Cloneable {
 
         logo = null;
         colorConfig = new MatrixToImageConfig();
-        renderer = new GenericQrMatrixRenderer(PixelStyle.RECTANGLES);
+        renderer = new GenericQrMatrixRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLE);
 
         setDefaultHints();
     }
@@ -253,20 +253,37 @@ public class QrGenerator implements Cloneable {
     }
 
     /**
-     * Select the styling of the rendered QR code
+     * Select the styling of the rendered QR code's pixels
      * <p>
      * The specification shows QR codes always in black/white with rectangles filling
      * the individual pixels. In reality, it is possible to render QR codes with a
      * different styling and most scanners still recognize them. This method can be
      * used to change the visual appearance of the "pixels" forming the QR code.
      *
-     * @param style the styling to use for rendering the QR code
+     * @param style the styling to use for rendering the QR code's pixels
      * @return this instance so that config calls can be chained
      * @see <a href="https://github.com/aytchell/qrgen#conf_styling">github.com/aytchell/qrgen</a>
      *      for example outputs
      */
     public QrGenerator withPixelStyle(PixelStyle style) {
-        renderer = new GenericQrMatrixRenderer(style);
+        renderer.setPixelStyle(style);
+        return this;
+    }
+
+    /**
+     * Select the styling of the three markers of the QR Code
+     * <p>
+     * The specification shows QR codes always in black/white with three big markers
+     * in (three of) the corners. The markers are made of a solid rectangle and another
+     * "rectangular border" around it. In reality, it is possible to render these markers
+     * with a different styling and most scanners still recognize them. This method can be
+     * used to change the visual appearance of these markers.
+     *
+     * @param style the styling to use for the markers of the QR code
+     * @return this instance so that config calls can be chained
+     */
+    public QrGenerator withMarkerStyle(MarkerStyle style) {
+        renderer.setMarkerStyle(style);
         return this;
     }
 

@@ -1,21 +1,28 @@
 package com.github.aytchell.qrgen.renderers;
 
+import com.github.aytchell.qrgen.MarkerStyle;
 import com.github.aytchell.qrgen.PixelStyle;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-@AllArgsConstructor
 public class GenericQrMatrixRenderer extends QrCodeRenderer {
     // regardless of the size of the payload or the error correction level
     // the position markers will always be seven pixels high and wide
     // (tested with ZXing 3.5.0)
     private static final int SIZE_OF_POSITION_MARKER = 7;
 
-    private final PixelStyle pixelStyle;
+    @Setter
+    private PixelStyle pixelStyle;
+
+    public GenericQrMatrixRenderer(PixelStyle pixelStyle, MarkerStyle markerStyle) {
+        super(markerStyle);
+        this.pixelStyle = pixelStyle;
+    }
 
     @Override
     protected void renderMatrix(BitMatrix matrix, BufferedImage img, ImgParameters imgParams) {
