@@ -5,5 +5,6 @@ public enum PixelStyle {
     SMALL_RECTANGLES,
     DOTS,
     ROUND_CORNERS,
-    ROWS
+    ROWS,
+    SNAKES
 }
