@@ -16,8 +16,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added three new configuration options for generated QR codes. The "pixels"
   of the QR code can now also be
     - rectangles with rounded corners or
-    - they can be merged in a way to form rows or
-    - they can be merged in a way to form snake-like structures
+    - they can be merged in a way
+        - to form rows or
+        - to form snake-like structures
+        - to form structures like water (with adhesion)
 
 ## [1.1.1] - 2023-05-09
 

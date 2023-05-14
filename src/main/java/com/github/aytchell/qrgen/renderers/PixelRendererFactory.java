@@ -10,6 +10,7 @@ public class PixelRendererFactory {
             case ROUND_CORNERS: return new RoundCornersRenderer(imgParams);
             case ROWS: return new RowsRenderer(imgParams);
             case SNAKES: return new SnakesRenderer(imgParams);
+            case WATER: return new WaterRenderer(imgParams);
         }
         throw new RuntimeException("case not handled");
     }
