@@ -44,7 +44,7 @@ public abstract class CustomRenderer implements QrCodeRenderer {
 
         renderMatrix(matrix, img, imgParams);
 
-        final BufferedImage marker = drawPositionMarkerTemplate(imgParams.cellSize, colorConfig);
+        final BufferedImage marker = drawPositionMarkerTemplate(imgParams.getCellSize(), colorConfig);
         applyMarkers(img, marker, imgParams);
 
         return img;
@@ -110,14 +110,14 @@ public abstract class CustomRenderer implements QrCodeRenderer {
     }
 
     private void applyMarkers(BufferedImage img, BufferedImage marker, ImgParameters imgParams) {
-        final int xCoordOfRightMarker = imgParams.firstCellX +
-                (imgParams.matrixWidthInCells - SIZE_OF_POSITION_MARKER) * imgParams.cellSize;
+        final int xCoordOfRightMarker = imgParams.getFirstCellX() +
+                (imgParams.getMatrixWidthInCells() - SIZE_OF_POSITION_MARKER) * imgParams.getCellSize();
         final int yCoordOfLowerMarker = xCoordOfRightMarker;
 
         final Graphics gfx = img.getGraphics();
-        gfx.drawImage(marker, imgParams.firstCellX, imgParams.firstCellY, null);
-        gfx.drawImage(marker, xCoordOfRightMarker, imgParams.firstCellY, null);
-        gfx.drawImage(marker, imgParams.firstCellX, yCoordOfLowerMarker, null);
+        gfx.drawImage(marker, imgParams.getFirstCellX(), imgParams.getFirstCellY(), null);
+        gfx.drawImage(marker, xCoordOfRightMarker, imgParams.getFirstCellY(), null);
+        gfx.drawImage(marker, imgParams.getFirstCellX(), yCoordOfLowerMarker, null);
         gfx.dispose();
     }
 }

@@ -19,9 +19,10 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
     }
 
     protected BufferedImage drawPixelTemplate(ImgParameters imgParams) {
-        BufferedImage img = new BufferedImage(imgParams.cellSize, imgParams.cellSize, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage img = new BufferedImage(
+                imgParams.getCellSize(), imgParams.getCellSize(), BufferedImage.TYPE_INT_ARGB);
 
-        int onColor = imgParams.onColor;
+        int onColor = imgParams.getOnColor();
 
         final Graphics2D gfx = img.createGraphics();
         gfx.setComposite(AlphaComposite.Src);
@@ -38,13 +39,13 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
     private void applyQrCodePixels(
             BufferedImage img, BitMatrix matrix, BufferedImage qrPixel, ImgParameters imgParams) {
         BitArray row = null;
-        int posY = imgParams.firstCellY;
+        int posY = imgParams.getFirstCellY();
         final Graphics gfx = img.getGraphics();
         final PositionMarkerDetector detector = new PositionMarkerDetector(matrix.getWidth());
 
         for (int yCoord = 0; yCoord < matrix.getHeight(); ++yCoord) {
             row = matrix.getRow(yCoord, row);
-            int posX = imgParams.firstCellX;
+            int posX = imgParams.getFirstCellX();
 
             for (int xCoord = 0; xCoord < matrix.getWidth(); ++xCoord) {
                 if (row.get(xCoord)) {
@@ -52,10 +53,10 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
                         gfx.drawImage(qrPixel, posX, posY, null);
                     }
                 }
-                posX += imgParams.cellSize;
+                posX += imgParams.getCellSize();
             }
 
-            posY += imgParams.cellSize;
+            posY += imgParams.getCellSize();
         }
         gfx.dispose();
     }
