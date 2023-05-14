@@ -1,6 +1,7 @@
 package com.github.aytchell.qrgen;
 
-import com.github.aytchell.qrgen.renderers.*;
+import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
+import com.github.aytchell.qrgen.renderers.RendererFactory;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
@@ -61,7 +62,7 @@ public class QrGenerator implements Cloneable {
 
         logo = null;
         colorConfig = new MatrixToImageConfig();
-        renderer = new DefaultRenderer();
+        renderer = RendererFactory.createRenderer(PixelStyle.RECTANGLES);
 
         setDefaultHints();
     }
@@ -267,20 +268,7 @@ public class QrGenerator implements Cloneable {
      *      for example outputs
      */
     public QrGenerator withPixelStyle(PixelStyle style) {
-        switch (style) {
-            case RECTANGLES:
-                renderer = new DefaultRenderer();
-                break;
-            case SMALL_RECTANGLES:
-                renderer = new SmallRectanglesRenderer();
-                break;
-            case DOTS:
-                renderer = new CirclesRenderer();
-                break;
-            case ROUND_CORNERS:
-                renderer = new RoundCornersRenderer();
-                break;
-        }
+        renderer = RendererFactory.createRenderer(style);
         return this;
     }
 
