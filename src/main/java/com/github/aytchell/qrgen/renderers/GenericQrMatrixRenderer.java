@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @AllArgsConstructor
-public class GenericQrMatrixRenderer extends CustomRenderer {
+public class GenericQrMatrixRenderer extends QrCodeRenderer {
     // regardless of the size of the payload or the error correction level
     // the position markers will always be seven pixels high and wide
     // (tested with ZXing 3.5.0)
