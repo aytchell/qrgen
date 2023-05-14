@@ -436,24 +436,6 @@ public class QrGenerator implements Cloneable {
         return path;
     }
 
-    private int measurePositionMarker(BitMatrix matrix) {
-        final BitArray row = matrix.getRow(0, null);
-        for (int i = 0; i < row.getSize(); ++i) {
-            if (!row.get(i)) {
-                // this first bit not part of the position marker
-                return i;
-            }
-        }
-
-        // ugh, the complete line is black??
-        return 0;
-    }
-
-    public static class Measurements {
-        int codeSize;
-        int positionMarkerSize;
-    }
-
     private BufferedImage generateImage(String payload) throws WriterException {
         final BufferedImage qrCodeImage = renderer.encodeAndRender(payload, colorConfig, width, height, hints);
         if (logo == null) {
