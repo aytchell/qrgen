@@ -18,7 +18,22 @@ public abstract class IndependentPixelsRenderer extends CustomRenderer {
         applyQrCodePixels(img, matrix, tpl, imgParams);
     }
 
-    protected abstract BufferedImage drawPixelTemplate(ImgParameters imgParams);
+    protected BufferedImage drawPixelTemplate(ImgParameters imgParams) {
+        BufferedImage img = new BufferedImage(imgParams.cellSize, imgParams.cellSize, BufferedImage.TYPE_INT_ARGB);
+
+        int onColor = imgParams.onColor;
+
+        final Graphics2D gfx = img.createGraphics();
+        gfx.setComposite(AlphaComposite.Src);
+        gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gfx.setColor(new Color(onColor, true));
+        drawActualShape(imgParams, gfx);
+        gfx.dispose();
+
+        return img;
+    }
+
+    protected abstract void drawActualShape(ImgParameters imgParams, Graphics2D gfx);
 
     private void applyQrCodePixels(
             BufferedImage img, BitMatrix matrix, BufferedImage qrPixel, ImgParameters imgParams) {
