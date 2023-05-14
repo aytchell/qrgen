@@ -8,6 +8,7 @@ public class PixelRendererFactory {
             case DOTS: return new CirclesRenderer(imgParams);
             case SMALL_RECTANGLES: return new SmallRectanglesRenderer(imgParams);
             case ROUND_CORNERS: return new RoundCornersRenderer(imgParams);
+            case ROWS: return new RowsRenderer(imgParams);
         }
         throw new RuntimeException("case not handled");
     }

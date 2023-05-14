@@ -25,7 +25,7 @@ public class GenericQrMatrixRenderer extends CustomRenderer {
 
     private void applyQrCodePixels(
             BufferedImage img, BitMatrix matrix, PixelRenderer renderer, ImgParameters imgParams) {
-        BitArray top = null;
+        BitArray top;
         BitArray mid = null;
         BitArray bottom = matrix.getRow(0, null);
 

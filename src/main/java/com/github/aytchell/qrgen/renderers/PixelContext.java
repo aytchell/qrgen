@@ -1,7 +1,9 @@
 package com.github.aytchell.qrgen.renderers;
 
 import com.google.zxing.common.BitArray;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class PixelContext {
     private final int rowWidth;
     private final BitArray top;
@@ -10,6 +12,12 @@ public class PixelContext {
 
     private int column = 0;
 
+    enum Direction {
+        NW, N, NE,
+        W, E,
+        SW, S, SE
+    }
+
     PixelContext(int rowWidth, BitArray top, BitArray mid, BitArray bottom) {
         this.rowWidth = rowWidth;
         this.top = top;
@@ -17,21 +25,15 @@ public class PixelContext {
         this.bottom = bottom;
     }
 
-    public enum Direction {
-        NW, N, NE,
-        W, E,
-        SW, S, SE
-    }
-
-    void shiftRight() {
+    public void shiftRight() {
         ++column;
     }
 
-    boolean isSet() {
+    public boolean isSet() {
         return mid.get(column);
     }
 
-    boolean isNeighbourSet(Direction direction) {
+    public boolean isNeighbourSet(Direction direction) {
         switch (direction) {
             case NW:
                 return top != null && (column != 0 && top.get(column - 1));
