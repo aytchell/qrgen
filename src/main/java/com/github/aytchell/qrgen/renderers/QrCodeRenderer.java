@@ -1,10 +1,10 @@
 package com.github.aytchell.qrgen.renderers;
 
+import com.github.aytchell.qrgen.ColorConfig;
 import com.github.aytchell.qrgen.MarkerStyle;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
@@ -30,7 +30,7 @@ public abstract class QrCodeRenderer {
     }
 
     public BufferedImage encodeAndRender(
-            String payload, MatrixToImageConfig colorConfig, int width, int height,
+            String payload, ColorConfig colorConfig, int width, int height,
             Map<EncodeHintType, ?> encodingHints) throws WriterException {
         final int margin = getMargin(encodingHints);
         final Map<EncodeHintType, Object> hintsCopy = new HashMap<>(encodingHints);
@@ -41,10 +41,10 @@ public abstract class QrCodeRenderer {
 
         final BitMatrix matrix = writer.encode(payload, BarcodeFormat.QR_CODE, 1, 1, hintsCopy);
         final ImgParameters imgParams = computeImageParameters(width, height, matrix, margin, colorConfig);
-        final BufferedImage img = drawCanvas(width, height, colorConfig.getPixelOffColor());
+        final BufferedImage img = drawCanvas(width, height, colorConfig.getOffColor());
 
         renderMatrix(matrix, img, imgParams);
-        markerRenderer.render(colorConfig, img, imgParams);
+        markerRenderer.render(img, imgParams);
 
         return img;
     }
@@ -68,7 +68,7 @@ public abstract class QrCodeRenderer {
     }
 
     private ImgParameters computeImageParameters(
-            int width, int height, BitMatrix matrix, int margin, MatrixToImageConfig colorConfig)
+            int width, int height, BitMatrix matrix, int margin, ColorConfig colorConfig)
             throws WriterException {
         double targetSize = Math.min(width, height);
         double codeSize = matrix.getWidth();
@@ -83,6 +83,6 @@ public abstract class QrCodeRenderer {
         int allCirclesSize = (int) (circleDiameter * codeSize);
         return new ImgParameters(circleDiameter, matrix.getWidth(),
                 (width - allCirclesSize) / 2, (height - allCirclesSize) / 2,
-                colorConfig.getPixelOnColor(), colorConfig.getPixelOffColor());
+                colorConfig.getOnColor(), colorConfig.getOffColor(), colorConfig.getMarkerColor());
     }
 }

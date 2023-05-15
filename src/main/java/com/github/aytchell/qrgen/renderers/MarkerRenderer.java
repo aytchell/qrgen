@@ -1,7 +1,5 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.google.zxing.client.j2se.MatrixToImageConfig;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -11,20 +9,20 @@ public class MarkerRenderer {
     // (tested with ZXing 3.5.0)
     protected static final int SIZE_OF_POSITION_MARKER = 7;
 
-    public void render(MatrixToImageConfig colorConfig, BufferedImage img, ImgParameters imgParams) {
-        final BufferedImage marker = drawPositionMarkerTemplate(imgParams.getCellSize(), colorConfig);
+    public void render(BufferedImage img, ImgParameters imgParams) {
+        final BufferedImage marker = drawPositionMarkerTemplate(imgParams.getCellSize(), imgParams);
         applyMarkers(img, marker, imgParams);
     }
 
-    private BufferedImage drawPositionMarkerTemplate(int diameter, MatrixToImageConfig config) {
+    private BufferedImage drawPositionMarkerTemplate(int diameter, ImgParameters imgParams) {
         final int markerSize = diameter * SIZE_OF_POSITION_MARKER;
         BufferedImage img = new BufferedImage(markerSize, markerSize, BufferedImage.TYPE_INT_ARGB);
 
         final int whiteSize = diameter * (SIZE_OF_POSITION_MARKER - 2);
         final int innerSize = diameter * (SIZE_OF_POSITION_MARKER - 4);
 
-        int onColor = config.getPixelOnColor();
-        int offColor = config.getPixelOffColor();
+        final int onColor = imgParams.getMarkerColor();
+        final int offColor = imgParams.getOffColor();
 
         final Graphics2D gfx = img.createGraphics();
         gfx.setColor(new Color(onColor, false));

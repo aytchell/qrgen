@@ -10,4 +10,5 @@ class ImgParameters {
     int firstCellY;
     int onColor;
     int offColor;
+    int markerColor;
 }

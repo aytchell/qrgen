@@ -4,7 +4,6 @@ import com.github.aytchell.qrgen.MarkerStyle;
 import com.github.aytchell.qrgen.PixelStyle;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;

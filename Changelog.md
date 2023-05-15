@@ -20,6 +20,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
         - to form rows or
         - to form snake-like structures
         - to form structures like water (with adhesion)
+- It is now possible to select an extra color for the QR code's markers. The
+  method `.withColors(x, y)` is still available and configures the `onColor`
+  to be used for the markers' color.
 
 ## [1.1.1] - 2023-05-09
 
