@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen.renderers;
 
 import com.github.aytchell.qrgen.ColorConfig;
 import com.github.aytchell.qrgen.MarkerStyle;
+import com.github.aytchell.qrgen.renderers.marker.MarkerRenderer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

@@ -1,4 +1,6 @@
-package com.github.aytchell.qrgen.renderers;
+package com.github.aytchell.qrgen.renderers.marker;
+
+import com.github.aytchell.qrgen.renderers.ImgParameters;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
