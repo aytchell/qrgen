@@ -135,6 +135,8 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withMargin(int)
      */
     public QrGenerator withSize(int width, int height) {
+        if (width <= 0 || height <= 0)
+            throw new IllegalArgumentException("width and height must be positive values");
         this.width = width;
         this.height = height;
         return this;
