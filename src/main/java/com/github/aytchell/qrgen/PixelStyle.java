@@ -6,6 +6,7 @@ public enum PixelStyle {
     DOTS,
     ROUND_CORNERS,
     ROWS,
+    COLUMNS,
     SNAKES,
     WATER
 }

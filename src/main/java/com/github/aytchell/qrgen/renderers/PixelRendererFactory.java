@@ -11,6 +11,7 @@ public class PixelRendererFactory {
             case DOTS: return new CirclesRenderer(imgParams);
             case ROUND_CORNERS: return new RoundCornersRenderer(imgParams);
             case ROWS: return new RowsRenderer(imgParams);
+            case COLUMNS: return new ColumnsRenderer(imgParams);
             case SNAKES: return new SnakesRenderer(imgParams);
             case WATER: return new WaterRenderer(imgParams);
         }

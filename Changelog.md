@@ -17,7 +17,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   of the QR code can now also be
     - rectangles with rounded corners or
     - they can be merged in a way
-        - to form rows or
+        - to form rows or columns
         - to form snake-like structures
         - to form structures like water (with adhesion)
 - It is now possible to select an extra color for the QR code's markers. The
