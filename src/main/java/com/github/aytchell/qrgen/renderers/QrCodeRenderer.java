@@ -22,11 +22,11 @@ public abstract class QrCodeRenderer {
 
     public QrCodeRenderer(MarkerStyle markerStyle) {
         this.writer = new QRCodeWriter();
-        this.markerRenderer = MarkerFactory.create(markerStyle);
+        this.markerRenderer = MarkerRendererFactory.create(markerStyle);
     }
 
     public void setMarkerStyle(MarkerStyle markerStyle) {
-        this.markerRenderer = MarkerFactory.create(markerStyle);
+        this.markerRenderer = MarkerRendererFactory.create(markerStyle);
     }
 
     public BufferedImage encodeAndRender(
