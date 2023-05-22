@@ -1,4 +1,7 @@
-package com.github.aytchell.qrgen.renderers;
+package com.github.aytchell.qrgen.renderers.pixel;
+
+import com.github.aytchell.qrgen.renderers.ImgParameters;
+import com.github.aytchell.qrgen.renderers.PixelContext;
 
 import java.awt.*;
 

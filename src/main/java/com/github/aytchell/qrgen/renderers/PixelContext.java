@@ -12,7 +12,7 @@ public class PixelContext {
 
     private int column = 0;
 
-    enum Direction {
+    public enum Direction {
         NW, N, NE,
         W, E,
         SW, S, SE

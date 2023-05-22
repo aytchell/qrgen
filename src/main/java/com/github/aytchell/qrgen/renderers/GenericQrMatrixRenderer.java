@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen.renderers;
 
 import com.github.aytchell.qrgen.MarkerStyle;
 import com.github.aytchell.qrgen.PixelStyle;
+import com.github.aytchell.qrgen.renderers.pixel.PixelRenderer;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
 import lombok.Setter;

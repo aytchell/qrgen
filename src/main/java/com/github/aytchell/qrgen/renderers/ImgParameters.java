@@ -3,7 +3,7 @@ package com.github.aytchell.qrgen.renderers;
 import lombok.Value;
 
 @Value
-class ImgParameters {
+public class ImgParameters {
     int cellSize;
     int matrixWidthInCells;
     int firstCellX;
