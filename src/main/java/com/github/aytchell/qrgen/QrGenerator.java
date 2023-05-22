@@ -1,6 +1,6 @@
 package com.github.aytchell.qrgen;
 
-import com.github.aytchell.qrgen.renderers.GenericQrMatrixRenderer;
+import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 
@@ -41,7 +41,7 @@ public class QrGenerator implements Cloneable {
     private BufferedImage logo;
     private HashMap<EncodeHintType, Object> hints = new HashMap<>();
     private ColorConfig colorConfig;
-    private final GenericQrMatrixRenderer renderer;
+    private final QrCodeRenderer renderer;
 
     /**
      * Create a QR code generator with default values
@@ -61,7 +61,7 @@ public class QrGenerator implements Cloneable {
         colorConfig = new ColorConfig(
                 new RgbValue(0, 0, 0),
                 new RgbValue(255, 255, 255));
-        renderer = new GenericQrMatrixRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLE);
+        renderer = new QrCodeRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLE);
 
         setDefaultHints();
     }
