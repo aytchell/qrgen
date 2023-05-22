@@ -26,8 +26,25 @@ public class ArgbValue {
     }
 
     /**
+     * Create an instance representing the given color/alpha value
+     * @param rawArgbValue the raw value for alpha (most significant byte), red, green
+     *                     and blue (least significant byte)
+     * @see ArgbValue#ArgbValue(int, int, int, int)
+     */
+    public ArgbValue(int rawArgbValue) {
+        rawValue = rawArgbValue;
+    }
+
+    /**
+     * Query whether the given color has an alpha channel or not
+     * @return true if the color has an alpha channel; false otherwise
+     */
+    public boolean hasAlpha() {
+        return (rawValue >>> 24) != 0xff;
+    }
+
+    /**
      * Get the raw integer representation of the given color value
-     * <p>
      * @return An integer where each byte represents one of the channels
      *      (from highest to lowest) "alpha", "red", "green" and "blue"
      */

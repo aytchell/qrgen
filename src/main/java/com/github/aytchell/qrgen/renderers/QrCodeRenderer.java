@@ -41,7 +41,7 @@ public abstract class QrCodeRenderer {
 
         final BitMatrix matrix = writer.encode(payload, BarcodeFormat.QR_CODE, 1, 1, hintsCopy);
         final ImgParameters imgParams = computeImageParameters(width, height, matrix, margin, colorConfig);
-        final BufferedImage img = drawCanvas(width, height, colorConfig.getOffColor());
+        final BufferedImage img = drawCanvas(width, height, colorConfig);
 
         renderMatrix(matrix, img, imgParams);
         markerRenderer.render(img, imgParams);
@@ -51,11 +51,11 @@ public abstract class QrCodeRenderer {
 
     protected abstract void renderMatrix(BitMatrix matrix, BufferedImage img, ImgParameters imgParams);
 
-    private BufferedImage drawCanvas(int width, int height, int offColor) {
-        final BufferedImage canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    private BufferedImage drawCanvas(int width, int height, ColorConfig colorConfig) {
+        final BufferedImage canvas = new BufferedImage(width, height, colorConfig.determineImageType());
 
         final Graphics2D gfx = canvas.createGraphics();
-        gfx.setColor(new Color(offColor, false));
+        gfx.setColor(new Color(colorConfig.getRawOffColor(), false));
         gfx.fillRect(0, 0, width, height);
         gfx.dispose();
 
@@ -83,6 +83,6 @@ public abstract class QrCodeRenderer {
         int allCirclesSize = (int) (circleDiameter * codeSize);
         return new ImgParameters(circleDiameter, matrix.getWidth(),
                 (width - allCirclesSize) / 2, (height - allCirclesSize) / 2,
-                colorConfig.getOnColor(), colorConfig.getOffColor(), colorConfig.getMarkerColor());
+                colorConfig.getRawOnColor(), colorConfig.getRawOffColor(), colorConfig.getRawMarkerColor());
     }
 }

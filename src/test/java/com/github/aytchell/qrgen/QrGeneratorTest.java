@@ -1,6 +1,7 @@
 package com.github.aytchell.qrgen;
 
 import com.google.zxing.WriterException;
+import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -143,12 +144,8 @@ public class QrGeneratorTest {
         assertNotNull(path);
     }
 
+    @Value
     private static class SizeAndLevel {
-        SizeAndLevel(int size, ErrorCorrectionLevel level) {
-            this.size = size;
-            this.lvl = level;
-        }
-
         int size;
         ErrorCorrectionLevel lvl;
     }

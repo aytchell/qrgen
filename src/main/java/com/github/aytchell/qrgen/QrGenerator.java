@@ -7,6 +7,7 @@ import com.google.zxing.WriterException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -58,8 +59,8 @@ public class QrGenerator implements Cloneable {
 
         logo = null;
         colorConfig = new ColorConfig(
-                new RgbValue(0, 0, 0).getRawValue(),
-                new RgbValue(255, 255, 255).getRawValue());
+                new RgbValue(0, 0, 0),
+                new RgbValue(255, 255, 255));
         renderer = new GenericQrMatrixRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLE);
 
         setDefaultHints();
@@ -208,7 +209,10 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withColors(ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(int onColor, int offColor, int markerColor) {
-        this.colorConfig = new ColorConfig(onColor, offColor, markerColor);
+        this.colorConfig = new ColorConfig(
+                new ArgbValue(onColor),
+                new ArgbValue(offColor),
+                new ArgbValue(markerColor));
         return this;
     }
 
@@ -226,7 +230,10 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withColors(ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(int onColor, int offColor) {
-        this.colorConfig = new ColorConfig(onColor, offColor, onColor);
+        this.colorConfig = new ColorConfig(
+                new ArgbValue(onColor),
+                new ArgbValue(offColor),
+                new ArgbValue(onColor));
         return this;
     }
 
