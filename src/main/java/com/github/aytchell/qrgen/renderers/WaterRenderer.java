@@ -36,7 +36,8 @@ public class WaterRenderer extends PixelRenderer {
     @Override
     protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
         int cellSize = imgParams.getCellSize();
-        double cornerRadius = (double)cellSize * 2 / 3;
+        double cornerRadius = Math.ceil((double)cellSize * 2 / 3);
+        int halfSize = (int) Math.ceil((double)cellSize / 2);
 
         final boolean hasLeft = hasLeftNeighbour(context);
         final boolean hasTop = hasTopNeighbour(context);
@@ -49,15 +50,15 @@ public class WaterRenderer extends PixelRenderer {
         gfx.clip(corners);
 
         if (hasLeft && hasTop && context.isNeighbourSet(PixelContext.Direction.NW)) {
-            gfx.fillRect(0, 0, cellSize / 2, cellSize / 2);
+            gfx.fillRect(0, 0, halfSize, halfSize);
         }
 
         if (hasTop && hasRight && context.isNeighbourSet(PixelContext.Direction.NE)) {
-            gfx.fillRect(cellSize / 2, 0, cellSize / 2, cellSize / 2);
+            gfx.fillRect(halfSize, 0, halfSize, halfSize);
         }
 
         if (hasRight && hasBottom && context.isNeighbourSet(PixelContext.Direction.SE)) {
-            gfx.fillRect(cellSize / 2, cellSize / 2, cellSize / 2, cellSize / 2);
+            gfx.fillRect(halfSize, halfSize, halfSize, halfSize);
         }
 
         if (hasBottom && hasLeft && context.isNeighbourSet(PixelContext.Direction.SW)) {
