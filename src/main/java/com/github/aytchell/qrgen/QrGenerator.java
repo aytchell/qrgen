@@ -7,7 +7,6 @@ import com.google.zxing.WriterException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -61,7 +60,7 @@ public class QrGenerator implements Cloneable {
         colorConfig = new ColorConfig(
                 new RgbValue(0, 0, 0),
                 new RgbValue(255, 255, 255));
-        renderer = new QrCodeRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLE);
+        renderer = new QrCodeRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLES);
 
         setDefaultHints();
     }

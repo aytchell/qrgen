@@ -1,6 +1,7 @@
 package com.github.aytchell.qrgen;
 
 public enum MarkerStyle {
-    RECTANGLE,
+    RECTANGLES,
+    ROUND_CORNERS,
     CIRCLES
 }
