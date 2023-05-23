@@ -13,13 +13,15 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Added three new configuration options for generated QR codes. The "pixels"
-  of the QR code can now also be
+- Added new style options for generated QR codes. The "pixels" of the QR code
+  can now also be
     - rectangles with rounded corners or
     - they can be merged in a way
         - to form rows or columns
         - to form snake-like structures
         - to form structures like water (with adhesion)
+- Added new style options for generated QR codes. The markers of the QR code
+  can now also be circles
 - It is now possible to select an extra color for the QR code's markers. The
   method `.withColors(x, y)` is still available and configures the `onColor`
   to be used for the markers' color.
