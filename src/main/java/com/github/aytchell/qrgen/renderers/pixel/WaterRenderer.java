@@ -9,7 +9,7 @@ import java.awt.geom.RoundRectangle2D;
 
 public class WaterRenderer extends PixelRenderer {
     public WaterRenderer(ImgParameters imgParams) {
-        super(imgParams, true, true);
+        super(imgParams);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class WaterRenderer extends PixelRenderer {
         final boolean hasTop = hasTopNeighbour(context);
         final boolean hasRight = hasRightNeighbour(context);
         final boolean hasBottom = hasBottomNeighbour(context);
+        final Shape globalClip = gfx.getClip();
 
         final Area corners = new Area(new Rectangle(0, 0, cellSize, cellSize));
         corners.subtract(
@@ -67,6 +68,8 @@ public class WaterRenderer extends PixelRenderer {
         if (hasBottom && hasLeft && context.isNeighbourSet(PixelContext.Direction.SW)) {
             gfx.fillRect(0, cellSize / 2, cellSize / 2, cellSize / 2);
         }
+
+        gfx.setClip(globalClip);
     }
 
     private static boolean hasLeftNeighbour(PixelContext context) {

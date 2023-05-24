@@ -11,7 +11,7 @@ public abstract class MarkerRenderer {
     // (tested with ZXing 3.5.0)
     protected static final int SIZE_OF_POSITION_MARKER = 7;
 
-    public void render(BufferedImage img, ImgParameters imgParams) {
+    public void render(BufferedImage img, Graphics2D gfx, ImgParameters imgParams) {
         final int markerOffset =
                 (imgParams.getMatrixWidthInCells() - SIZE_OF_POSITION_MARKER) * imgParams.getCellSize();
 
@@ -19,14 +19,11 @@ public abstract class MarkerRenderer {
         final int onColor = imgParams.getMarkerColor();
         final int offColor = imgParams.getOffColor();
 
-        final Graphics2D gfx = (Graphics2D) img.getGraphics();
-        gfx.translate(imgParams.getFirstCellX(), imgParams.getFirstCellY());
         renderTopLeftMarker(gfx, cellSize, onColor, offColor);
         gfx.translate(markerOffset, 0);
         renderTopRightMarker(gfx, cellSize, onColor, offColor);
         gfx.translate(-markerOffset, markerOffset);
         renderBottomLeftMarker(gfx, cellSize, onColor, offColor);
-        gfx.dispose();
     }
 
     protected abstract void renderTopLeftMarker(Graphics2D gfx, int cellSize, int onColor, int offColor);

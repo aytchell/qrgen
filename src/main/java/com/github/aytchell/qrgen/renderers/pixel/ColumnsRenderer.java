@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ColumnsRenderer extends PixelRenderer {
     public ColumnsRenderer(ImgParameters imgParams) {
-        super(imgParams, true, false);
+        super(imgParams);
     }
 
     @Override

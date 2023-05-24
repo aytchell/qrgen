@@ -1,5 +1,6 @@
 package com.github.aytchell.qrgen.renderers;
 
+import com.github.aytchell.qrgen.ArgbValue;
 import com.github.aytchell.qrgen.ColorConfig;
 import com.github.aytchell.qrgen.MarkerStyle;
 import com.github.aytchell.qrgen.PixelStyle;
@@ -14,6 +15,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,29 +59,36 @@ public class QrCodeRenderer {
         final ImgParameters imgParams = computeImageParameters(width, height, matrix, margin, colorConfig);
         final BufferedImage img = drawCanvas(width, height, colorConfig);
 
-        renderMatrix(matrix, img, imgParams);
-        markerRenderer.render(img, imgParams);
+        final Graphics2D gfx = img.createGraphics();
+        gfx.setComposite(AlphaComposite.Src);
+        gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gfx.translate(imgParams.getFirstCellX(), imgParams.getFirstCellY());
 
+        final AffineTransform transform = gfx.getTransform();
+        renderMatrix(matrix, gfx, imgParams);
+        gfx.setTransform(transform);
+        markerRenderer.render(img, gfx, imgParams);
+
+        gfx.dispose();
         return img;
     }
 
-    private void renderMatrix(BitMatrix matrix, BufferedImage img, ImgParameters imgParams) {
+    private void renderMatrix(BitMatrix matrix, Graphics2D gfx, ImgParameters imgParams) {
         PixelRenderer renderer = PixelRendererFactory.generate(pixelStyle, imgParams);
-        applyQrCodePixels(img, matrix, renderer, imgParams);
+        final int rawColorValue = imgParams.getOnColor();
+        final boolean hasAlpha = new ArgbValue(rawColorValue).hasAlpha();
+        gfx.setColor(new Color(rawColorValue, hasAlpha));
+        applyQrCodePixels(gfx, matrix, renderer, imgParams);
     }
 
-    private void applyQrCodePixels(
-            BufferedImage img, BitMatrix matrix, PixelRenderer renderer, ImgParameters imgParams) {
+    private void applyQrCodePixels(Graphics2D gfx, BitMatrix matrix, PixelRenderer renderer, ImgParameters imgParams) {
         BitArray top;
         BitArray mid = null;
         BitArray bottom = matrix.getRow(0, null);
 
-        int posY = imgParams.getFirstCellY();
-        final Graphics gfx = img.getGraphics();
         final PositionMarkerDetector detector = new PositionMarkerDetector(matrix.getWidth());
 
         for (int yCoord = 0; yCoord < matrix.getHeight(); ++yCoord) {
-            int posX = imgParams.getFirstCellX();
             top = mid;
             mid = bottom;
             bottom = (yCoord >= (matrix.getHeight() - 1)) ? null : matrix.getRow(yCoord + 1, null);
@@ -87,18 +96,14 @@ public class QrCodeRenderer {
 
             for (int xCoord = 0; xCoord < matrix.getWidth(); ++xCoord) {
                 if (!detector.detected(xCoord, yCoord)) {
-                    final Image qrPixel = renderer.renderPixel(context);
-                    if (qrPixel != null) {
-                        gfx.drawImage(qrPixel, posX, posY, null);
-                    }
+                    renderer.renderPixel(context, gfx);
                 }
-                posX += imgParams.getCellSize();
+                gfx.translate(imgParams.getCellSize(), 0);
                 context.shiftRight();
             }
 
-            posY += imgParams.getCellSize();
+            gfx.translate(-1 * imgParams.getMatrixWidthInCells() * imgParams.getCellSize(), imgParams.getCellSize());
         }
-        gfx.dispose();
     }
 
     private BufferedImage drawCanvas(int width, int height, ColorConfig colorConfig) {

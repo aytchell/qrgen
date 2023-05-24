@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class SnakesRenderer extends PixelRenderer {
     public SnakesRenderer(ImgParameters imgParams) {
-        super(imgParams, true, false);
+        super(imgParams);
     }
 
     @Override
