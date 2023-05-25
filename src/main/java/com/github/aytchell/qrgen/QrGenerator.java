@@ -28,6 +28,8 @@ import static com.google.zxing.EncodeHintType.*;
  * for creation of QR codes. No need for a new instance or another
  * configuration phase.
  */
+// this is the API of a library so of course some things are unused ... at least here
+@SuppressWarnings("unused")
 public class QrGenerator implements Cloneable {
     public static final int MAX_PAYLOAD_SIZE_FOR_L = 7089;
     public static final int MAX_PAYLOAD_SIZE_FOR_M = 5596;
@@ -145,18 +147,45 @@ public class QrGenerator implements Cloneable {
     /**
      * Select the colors to be used for drawing the QR code
      * <p>
-     * This is a convenience wrapper for {@link QrGenerator#withColors(int, int, int)} to
-     * have "more readable" color values in the code. You can use {@link ArgbValue}
-     * for colors with an alpha channel or {@link RgbValue} for opaque colors.
+     * Set the colors to be used when rendering the QR code. It is possible to set four different colors:
+     * <ul>
+     *     <li>The color of the background</li>
+     *     <li>The color of the 'pixels' in the QR code's dot matrix</li>
+     *     <li>The outer parts of the three marker symbols</li>
+     *     <li>The inner parts of the three marker symbols</li>
+     * </ul>
+     * There are also versions of this method which take only two or three colors.
+     * In these cases one of the colors is used for multiple things.
      * <p>
-     * The default colors if a fresh QrGenerator is used are black and white.
+     * The default colors of the generated QR code (if a fresh QrGenerator is used)
+     * are black for the markers and the 'pixels' and white for the background.
      *
      * @param onColor the color of "the pixels" (usually black)
      * @param offColor the color of "the empty space" (usually white)
-     * @param markerColor the color of the markers (usually black)
+     * @param outerMarkerColor the color of the outer marker structure (usually black)
+     * @param innerMarkerColor the color of the inner marker structure (usually black)
      * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(int, int)
      * @see QrGenerator#withColors(ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
+     */
+    public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor,
+                                  ArgbValue outerMarkerColor, ArgbValue innerMarkerColor) {
+        this.colorConfig = new ColorConfig(onColor, offColor, outerMarkerColor, innerMarkerColor);
+        return this;
+    }
+
+    /**
+     * Select the colors to be used for drawing the QR code
+     * <p>
+     * This is a convenience wrapper for {@link QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)}
+     * where the {@code markerColor} is used for the inner and outer structures of the markers.
+     *
+     * @param onColor the color of "the pixels" and the three marker structures (usually black)
+     * @param offColor the color of "the empty space" (usually white)
+     * @param markerColor the color of the three marker structures (usually black)
+     * @return this instance so that config calls can be chained
+     * @see QrGenerator#withColors(ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor, ArgbValue markerColor) {
         this.colorConfig = new ColorConfig(onColor, offColor, markerColor);
@@ -166,70 +195,18 @@ public class QrGenerator implements Cloneable {
     /**
      * Select the colors to be used for drawing the QR code
      * <p>
-     * This is a convenience wrapper for {@link QrGenerator#withColors(int, int)} to
-     * have "more readable" color values in the code. You can use {@link ArgbValue}
-     * for colors with an alpha channel or {@link RgbValue} for opaque colors.
-     * <p>
-     * The default colors if a fresh QrGenerator is used are black and white.
+     * This is a convenience wrapper for {@link QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)}
+     * where the {@code onColor} is used for the 'pixels', and the complete marker structures.
      *
-     * @param onColor the color of "the pixels" (usually black)
+     * @param onColor the color of "the pixels" and the three marker structures (usually black)
      * @param offColor the color of "the empty space" (usually white)
      * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(int, int)
      * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor) {
         this.colorConfig = new ColorConfig(onColor, offColor);
         return this;
-    }
-
-    /**
-     * Select the colors to be used for drawing the QR code
-     * <p>
-     * The given parameters are integers with the highest value byte contains
-     * the alpha channel, followed by bytes for red, green and blue. Each
-     * byte can have values from 0 to 255 (0xff). So these colors are very
-     * similar to those used in HTML or image processing tools - just packed
-     * into an int.
-     * <p>
-     * There's also a convenience wrapper to have "more readable" color
-     * values in the code.
-     * <p>
-     * The default colors if a fresh QrGenerator is used are black and white.
-     *
-     * @param onColor the color of "the pixels" (usually black)
-     * @param offColor the color of "the empty space" (usually white)
-     * @param markerColor the color of the markers (usually black)
-     * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue)
-     */
-    public QrGenerator withColors(int onColor, int offColor, int markerColor) {
-        this.colorConfig = new ColorConfig(
-                new ArgbValue(onColor),
-                new ArgbValue(offColor),
-                new ArgbValue(markerColor));
-        return this;
-    }
-
-    /**
-     * Select the colors to be used for drawing the QR code
-     * <p>
-     * This is a convenience wrapper in case you want to use the onColor also
-     * for the markers (which is usually the case).
-     *
-     * @param onColor the color of "the pixels" (usually black)
-     * @param offColor the color of "the empty space" (usually white)
-     * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(int, int)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue)
-     */
-    public QrGenerator withColors(int onColor, int offColor) {
-        return withColors(
-                new ArgbValue(onColor),
-                new ArgbValue(offColor),
-                new ArgbValue(onColor));
     }
 
     /**

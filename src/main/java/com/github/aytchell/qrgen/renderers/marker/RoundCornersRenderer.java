@@ -13,13 +13,13 @@ public class RoundCornersRenderer extends MarkerRenderer {
         final int innerSize = cellSize * (SIZE_OF_POSITION_MARKER - 4);
         final double arc = 2 * cellSize;
 
-        gfx.setColor(imgParams.getMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());
         gfx.fill(new RoundRectangle2D.Double(0, 0, markerSize, markerSize, 2 * arc, 2 * arc));
 
         gfx.setColor(imgParams.getOffColor().asAwtColor());
         gfx.fill(new RoundRectangle2D.Double(cellSize, cellSize, whiteSize, whiteSize, arc, arc));
 
-        gfx.setColor(imgParams.getMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getInnerMarkerColor().asAwtColor());
         gfx.fill(new RoundRectangle2D.Double(2 * cellSize, 2 * cellSize, innerSize, innerSize, arc, arc));
     }
 }

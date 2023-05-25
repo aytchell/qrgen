@@ -29,6 +29,22 @@ public class ArgbValueTest {
         assertEquals(expectation, data.getColor().hasAlpha());
     }
 
+    @Test
+    void scaleToHalfWorks() {
+        assertEquals(
+                new ArgbValue(255, 120, 80, 60),
+                new ArgbValue(255, 240, 160, 120).scale(0.5)
+        );
+    }
+
+    @Test
+    void scaleToDoubleWorks() {
+        assertEquals(
+                new ArgbValue(255, 60, 255, 180),
+                new ArgbValue(255, 30, 180, 90).scale(2)
+        );
+    }
+
     @Value
     private static class ColorsAndAlpha {
         ArgbValue color;

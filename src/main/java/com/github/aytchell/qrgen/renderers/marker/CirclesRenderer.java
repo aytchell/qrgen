@@ -11,13 +11,13 @@ public class CirclesRenderer extends MarkerRenderer {
         final int whiteSize = cellSize * (SIZE_OF_POSITION_MARKER - 2);
         final int innerBlackSize = cellSize * (SIZE_OF_POSITION_MARKER - 4);
 
-        gfx.setColor(imgParams.getMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());
         gfx.fillOval(0, 0, outerBlackSize, outerBlackSize);
 
         gfx.setColor(imgParams.getOffColor().asAwtColor());
         gfx.fillOval(cellSize, cellSize, whiteSize, whiteSize);
 
-        gfx.setColor(imgParams.getMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getInnerMarkerColor().asAwtColor());
         gfx.fillOval(cellSize * 2, cellSize * 2, innerBlackSize, innerBlackSize);
     }
 }

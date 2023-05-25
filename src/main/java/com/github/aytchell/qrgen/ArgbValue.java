@@ -57,4 +57,24 @@ public class ArgbValue {
         if (value < 0) return 0;
         return Math.min(value, 255);
     }
+
+    public ArgbValue scale(double factor) {
+        final int newRed = scaleByte(2, factor);
+        final int newGreen = scaleByte(1, factor);
+        final int newBlue = scaleByte(0, factor);
+        return new ArgbValue((rawValue & 0xff000000) | newRed | newGreen | newBlue);
+    }
+
+    private int scaleByte(int num, double factor) {
+        double value = (rawValue >>> (num * 8)) & 0xff;
+        value *= factor;
+
+        if (value > 255.0) return 255 << (num * 8);
+        return (int)value << (num * 8);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("#%08X", rawValue);
+    }
 }

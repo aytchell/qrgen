@@ -20,7 +20,11 @@ public class ImgParameters {
         return colorConfig.getOffColor();
     }
 
-    public ArgbValue getMarkerColor() {
-        return colorConfig.getMarkerColor();
+    public ArgbValue getOuterMarkerColor() {
+        return colorConfig.getOuterMarkerColor();
+    }
+
+    public ArgbValue getInnerMarkerColor() {
+        return colorConfig.getInnerMarkerColor();
     }
 }

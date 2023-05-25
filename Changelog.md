@@ -22,9 +22,15 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
         - to form structures like water (with adhesion)
 - Added new style options for generated QR codes. The markers of the QR code
   can now also be circles or rectangles with rounded corners
-- It is now possible to select an extra color for the QR code's markers. The
-  method `.withColors(x, y)` is still available and configures the `onColor`
-  to be used for the markers' color.
+- It is now possible to select extra color for the three QR code's markers.
+  The inner and the outer parts of the markers can be rendered with different
+  colors (if requested).
+
+### Removed
+
+- the colors to be used can no longer be given as raw integer values. Instead
+  you have to feed the `withColors(...)` methods whith instances of
+  `ArgbValue`
 
 ## [1.1.1] - 2023-05-09
 
