@@ -2,6 +2,8 @@ package com.github.aytchell.qrgen;
 
 import lombok.EqualsAndHashCode;
 
+import java.awt.*;
+
 /**
  * Class to convert color values into the integer format accepted by {@link QrGenerator#withColors(int, int)}
  */
@@ -44,12 +46,11 @@ public class ArgbValue {
     }
 
     /**
-     * Get the raw integer representation of the given color value
-     * @return An integer where each byte represents one of the channels
-     *      (from highest to lowest) "alpha", "red", "green" and "blue"
+     * Return a java.awt.Color instance that corresponds to this argb instance
+     * @return An awt Color instance which resembles this instance
      */
-    public int getRawValue() {
-        return rawValue;
+    public Color asAwtColor() {
+        return new Color(rawValue, hasAlpha());
     }
 
     private int toUnsignedByte(int value) {

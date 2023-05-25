@@ -22,18 +22,6 @@ public class ColorConfig {
         this.markerColor = markerColor;
     }
 
-    public int getRawOnColor() {
-        return onColor.getRawValue();
-    }
-
-    public int getRawOffColor() {
-        return offColor.getRawValue();
-    }
-
-    public int getRawMarkerColor() {
-        return markerColor.getRawValue();
-    }
-
     public int determineImageType() {
         if (onColor.hasAlpha() || offColor.hasAlpha() || markerColor.hasAlpha()) {
             return BufferedImage.TYPE_INT_ARGB;

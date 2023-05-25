@@ -159,10 +159,8 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withColors(ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor, ArgbValue markerColor) {
-        return withColors(
-                onColor.getRawValue(),
-                offColor.getRawValue(),
-                markerColor.getRawValue());
+        this.colorConfig = new ColorConfig(onColor, offColor, markerColor);
+        return this;
     }
 
     /**
@@ -181,9 +179,8 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor) {
-        return withColors(
-                onColor.getRawValue(),
-                offColor.getRawValue());
+        this.colorConfig = new ColorConfig(onColor, offColor);
+        return this;
     }
 
     /**
@@ -229,11 +226,10 @@ public class QrGenerator implements Cloneable {
      * @see QrGenerator#withColors(ArgbValue, ArgbValue)
      */
     public QrGenerator withColors(int onColor, int offColor) {
-        this.colorConfig = new ColorConfig(
+        return withColors(
                 new ArgbValue(onColor),
                 new ArgbValue(offColor),
                 new ArgbValue(onColor));
-        return this;
     }
 
     /**

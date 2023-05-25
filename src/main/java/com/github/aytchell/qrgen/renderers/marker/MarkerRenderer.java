@@ -16,23 +16,21 @@ public abstract class MarkerRenderer {
                 (imgParams.getMatrixWidthInCells() - SIZE_OF_POSITION_MARKER) * imgParams.getCellSize();
 
         final int cellSize = imgParams.getCellSize();
-        final int onColor = imgParams.getMarkerColor();
-        final int offColor = imgParams.getOffColor();
 
-        renderTopLeftMarker(gfx, cellSize, onColor, offColor);
+        renderTopLeftMarker(gfx, cellSize, imgParams);
         gfx.translate(markerOffset, 0);
-        renderTopRightMarker(gfx, cellSize, onColor, offColor);
+        renderTopRightMarker(gfx, cellSize, imgParams);
         gfx.translate(-markerOffset, markerOffset);
-        renderBottomLeftMarker(gfx, cellSize, onColor, offColor);
+        renderBottomLeftMarker(gfx, cellSize, imgParams);
     }
 
-    protected abstract void renderTopLeftMarker(Graphics2D gfx, int cellSize, int onColor, int offColor);
+    protected abstract void renderTopLeftMarker(Graphics2D gfx, int cellSize, ImgParameters imgParams);
 
-    protected void renderTopRightMarker(Graphics2D gfx, int cellSize, int onColor, int offColor) {
-        renderTopLeftMarker(gfx, cellSize, onColor, offColor);
+    protected void renderTopRightMarker(Graphics2D gfx, int cellSize, ImgParameters imgParams) {
+        renderTopLeftMarker(gfx, cellSize, imgParams);
     }
 
-    protected void renderBottomLeftMarker(Graphics2D gfx, int cellSize, int onColor, int offColor) {
-        renderTopLeftMarker(gfx, cellSize, onColor, offColor);
+    protected void renderBottomLeftMarker(Graphics2D gfx, int cellSize, ImgParameters imgParams) {
+        renderTopLeftMarker(gfx, cellSize, imgParams);
     }
 }

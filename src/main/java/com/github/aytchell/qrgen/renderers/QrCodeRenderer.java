@@ -1,6 +1,5 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.ArgbValue;
 import com.github.aytchell.qrgen.ColorConfig;
 import com.github.aytchell.qrgen.MarkerStyle;
 import com.github.aytchell.qrgen.PixelStyle;
@@ -75,9 +74,7 @@ public class QrCodeRenderer {
 
     private void renderMatrix(BitMatrix matrix, Graphics2D gfx, ImgParameters imgParams) {
         PixelRenderer renderer = PixelRendererFactory.generate(pixelStyle, imgParams);
-        final int rawColorValue = imgParams.getOnColor();
-        final boolean hasAlpha = new ArgbValue(rawColorValue).hasAlpha();
-        gfx.setColor(new Color(rawColorValue, hasAlpha));
+        gfx.setColor(imgParams.getOnColor().asAwtColor());
         applyQrCodePixels(gfx, matrix, renderer, imgParams);
     }
 
@@ -110,7 +107,7 @@ public class QrCodeRenderer {
         final BufferedImage canvas = new BufferedImage(width, height, colorConfig.determineImageType());
 
         final Graphics2D gfx = canvas.createGraphics();
-        gfx.setColor(new Color(colorConfig.getRawOffColor(), false));
+        gfx.setColor(colorConfig.getOffColor().asAwtColor());
         gfx.fillRect(0, 0, width, height);
         gfx.dispose();
 
@@ -137,8 +134,7 @@ public class QrCodeRenderer {
         int circleDiameter = (int) Math.floor(targetSize / codeAndMarginSize);
         int allCirclesSize = (int) (circleDiameter * codeSize);
         return new ImgParameters(circleDiameter, matrix.getWidth(),
-                (width - allCirclesSize) / 2, (height - allCirclesSize) / 2,
-                colorConfig.getRawOnColor(), colorConfig.getRawOffColor(), colorConfig.getRawMarkerColor());
+                (width - allCirclesSize) / 2, (height - allCirclesSize) / 2, colorConfig);
     }
 
     private static class PositionMarkerDetector {
