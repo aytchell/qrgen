@@ -1,6 +1,6 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.MarkerStyle;
+import com.github.aytchell.qrgen.config.MarkerStyle;
 import com.github.aytchell.qrgen.renderers.marker.*;
 
 public class MarkerRendererFactory {

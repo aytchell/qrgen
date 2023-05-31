@@ -1,7 +1,7 @@
 package com.github.aytchell.qrgen.renderers;
 
 import com.github.aytchell.qrgen.colors.QrColor;
-import com.github.aytchell.qrgen.ColorConfig;
+import com.github.aytchell.qrgen.config.ColorConfig;
 import lombok.Value;
 
 @Value

@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.config;
 
 import com.github.aytchell.qrgen.colors.QrColor;
 import lombok.Value;

@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen;
 
 import com.github.aytchell.qrgen.colors.QrColor;
 import com.github.aytchell.qrgen.colors.RgbValue;
+import com.github.aytchell.qrgen.config.*;
 import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.config;
 
 /**
  * The error correction level for a QR code

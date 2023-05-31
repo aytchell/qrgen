@@ -1,8 +1,8 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.ColorConfig;
-import com.github.aytchell.qrgen.MarkerStyle;
-import com.github.aytchell.qrgen.PixelStyle;
+import com.github.aytchell.qrgen.config.ColorConfig;
+import com.github.aytchell.qrgen.config.MarkerStyle;
+import com.github.aytchell.qrgen.config.PixelStyle;
 import com.github.aytchell.qrgen.renderers.marker.MarkerRenderer;
 import com.github.aytchell.qrgen.renderers.pixel.PixelRenderer;
 import com.google.zxing.BarcodeFormat;

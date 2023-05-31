@@ -1,5 +1,6 @@
 package com.github.aytchell.qrgen;
 
+import com.github.aytchell.qrgen.config.ImageFileType;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;

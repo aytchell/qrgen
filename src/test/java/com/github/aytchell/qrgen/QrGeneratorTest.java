@@ -1,5 +1,8 @@
 package com.github.aytchell.qrgen;
 
+import com.github.aytchell.qrgen.config.ErrorCorrectionLevel;
+import com.github.aytchell.qrgen.config.ImageFileType;
+import com.github.aytchell.qrgen.config.PixelStyle;
 import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
