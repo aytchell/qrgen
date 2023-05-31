@@ -1,4 +1,6 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.colors;
+
+import com.github.aytchell.qrgen.QrConfigurationException;
 
 /**
  * Class to encode color values

@@ -1,5 +1,7 @@
 package com.github.aytchell.qrgen;
 
+import com.github.aytchell.qrgen.colors.QrColor;
+import com.github.aytchell.qrgen.colors.RgbValue;
 import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -172,11 +174,11 @@ public class QrGenerator implements Cloneable {
      * @param outerMarkerColor the color of the outer marker structure (usually black)
      * @param innerMarkerColor the color of the inner marker structure (usually black)
      * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(QrColor, QrColor)
+     * @see QrGenerator#withColors(QrColor, QrColor, QrColor)
      */
-    public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor,
-                                  ArgbValue outerMarkerColor, ArgbValue innerMarkerColor) {
+    public QrGenerator withColors(QrColor onColor, QrColor offColor,
+                                  QrColor outerMarkerColor, QrColor innerMarkerColor) {
         this.colorConfig = new ColorConfig(onColor, offColor, outerMarkerColor, innerMarkerColor);
         return this;
     }
@@ -184,17 +186,17 @@ public class QrGenerator implements Cloneable {
     /**
      * Select the colors to be used for drawing the QR code
      * <p>
-     * This is a convenience wrapper for {@link QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)}
+     * This is a convenience wrapper for {@link QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)}
      * where the {@code markerColor} is used for the inner and outer structures of the markers.
      *
      * @param onColor the color of "the pixels" and the three marker structures (usually black)
      * @param offColor the color of "the empty space" (usually white)
      * @param markerColor the color of the three marker structures (usually black)
      * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(QrColor, QrColor)
+     * @see QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)
      */
-    public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor, ArgbValue markerColor) {
+    public QrGenerator withColors(QrColor onColor, QrColor offColor, QrColor markerColor) {
         this.colorConfig = new ColorConfig(onColor, offColor, markerColor);
         return this;
     }
@@ -202,16 +204,16 @@ public class QrGenerator implements Cloneable {
     /**
      * Select the colors to be used for drawing the QR code
      * <p>
-     * This is a convenience wrapper for {@link QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)}
+     * This is a convenience wrapper for {@link QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)}
      * where the {@code onColor} is used for the 'pixels', and the complete marker structures.
      *
      * @param onColor the color of "the pixels" and the three marker structures (usually black)
      * @param offColor the color of "the empty space" (usually white)
      * @return this instance so that config calls can be chained
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue)
-     * @see QrGenerator#withColors(ArgbValue, ArgbValue, ArgbValue, ArgbValue)
+     * @see QrGenerator#withColors(QrColor, QrColor, QrColor)
+     * @see QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)
      */
-    public QrGenerator withColors(ArgbValue onColor, ArgbValue offColor) {
+    public QrGenerator withColors(QrColor onColor, QrColor offColor) {
         this.colorConfig = new ColorConfig(onColor, offColor);
         return this;
     }

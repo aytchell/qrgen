@@ -1,6 +1,6 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.ArgbValue;
+import com.github.aytchell.qrgen.colors.QrColor;
 import com.github.aytchell.qrgen.ColorConfig;
 import lombok.Value;
 
@@ -12,19 +12,19 @@ public class ImgParameters {
     int firstCellY;
     ColorConfig colorConfig;
 
-    ArgbValue getOnColor() {
+    QrColor getOnColor() {
         return colorConfig.getOnColor();
     }
 
-    public ArgbValue getOffColor() {
+    public QrColor getOffColor() {
         return colorConfig.getOffColor();
     }
 
-    public ArgbValue getOuterMarkerColor() {
+    public QrColor getOuterMarkerColor() {
         return colorConfig.getOuterMarkerColor();
     }
 
-    public ArgbValue getInnerMarkerColor() {
+    public QrColor getInnerMarkerColor() {
         return colorConfig.getInnerMarkerColor();
     }
 }

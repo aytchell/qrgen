@@ -1,5 +1,6 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.colors;
 
+import com.github.aytchell.qrgen.QrConfigurationException;
 import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,10 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgbValueTest {
+
+    @Test
+    public void constructorWorksAsExpected() throws QrConfigurationException {
+        final ArgbValue actual = new ArgbValue(0x10, 0x20, 0x30, 0x40);
+        assertTrue(actual.hasAlpha());
+        assertEquals(0x10, actual.asAwtColor().getAlpha());
+        assertEquals(0x20, actual.asAwtColor().getRed());
+        assertEquals(0x30, actual.asAwtColor().getGreen());
+        assertEquals(0x40, actual.asAwtColor().getBlue());
+    }
 
     private static Stream<ColorsAndAlpha> alphaTestColors() throws QrConfigurationException {
         final List<ColorsAndAlpha> data = new ArrayList<>();
