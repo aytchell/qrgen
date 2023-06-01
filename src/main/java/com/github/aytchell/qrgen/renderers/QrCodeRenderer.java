@@ -61,12 +61,16 @@ public class QrCodeRenderer {
         final Graphics2D gfx = img.createGraphics();
         gfx.setComposite(AlphaComposite.Src);
         gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gfx.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        gfx.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+        gfx.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        gfx.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         gfx.translate(imgParams.getFirstCellX(), imgParams.getFirstCellY());
 
         final AffineTransform transform = gfx.getTransform();
         renderMatrix(matrix, gfx, imgParams);
         gfx.setTransform(transform);
-        markerRenderer.render(img, gfx, imgParams);
+        markerRenderer.render(gfx, imgParams);
 
         gfx.dispose();
         return img;
@@ -123,18 +127,22 @@ public class QrCodeRenderer {
             int width, int height, BitMatrix matrix, int margin, ColorConfig colorConfig)
             throws WriterException {
         double targetSize = Math.min(width, height);
-        double codeSize = matrix.getWidth();
-        double codeAndMarginSize = codeSize + 2 * margin;
+        double numCellsOfCode = matrix.getWidth();
+        double numCellsOfCodeAndMargin = numCellsOfCode + (2 * margin);
 
-        if (targetSize < codeAndMarginSize) {
+        if (targetSize < numCellsOfCodeAndMargin) {
             // A rendered QR code will not fit into the requested boundaries
             throw new WriterException("Requested width/height is too small for generated QR Code");
         }
 
-        int circleDiameter = (int) Math.floor(targetSize / codeAndMarginSize);
-        int allCirclesSize = (int) (circleDiameter * codeSize);
-        return new ImgParameters(circleDiameter, matrix.getWidth(),
-                (width - allCirclesSize) / 2, (height - allCirclesSize) / 2, colorConfig);
+        int pixelPerCell = (int) Math.floor(targetSize / numCellsOfCodeAndMargin);
+        int sizeOfCodeInPixels = (int) (pixelPerCell * numCellsOfCode);
+        return new ImgParameters(
+                pixelPerCell,
+                matrix.getWidth(),
+                (width - sizeOfCodeInPixels) / 2,
+                (height - sizeOfCodeInPixels) / 2,
+                colorConfig);
     }
 
     private static class PositionMarkerDetector {

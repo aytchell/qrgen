@@ -3,7 +3,6 @@ package com.github.aytchell.qrgen.renderers.marker;
 import com.github.aytchell.qrgen.renderers.ImgParameters;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class MarkerRenderer {
     // regardless of the size of the payload or the error correction level
@@ -11,7 +10,7 @@ public abstract class MarkerRenderer {
     // (tested with ZXing 3.5.0)
     protected static final int SIZE_OF_POSITION_MARKER = 7;
 
-    public void render(BufferedImage img, Graphics2D gfx, ImgParameters imgParams) {
+    public void render(Graphics2D gfx, ImgParameters imgParams) {
         final int markerOffset =
                 (imgParams.getMatrixWidthInCells() - SIZE_OF_POSITION_MARKER) * imgParams.getCellSize();
 
