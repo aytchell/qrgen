@@ -59,9 +59,15 @@ public class QrGenerator implements Cloneable {
         height = 200;
 
         logo = null;
-        colorConfig = new ColorConfig(
-                new RgbValue(0, 0, 0),
-                new RgbValue(255, 255, 255));
+        try {
+            colorConfig = new ColorConfig(
+                    new RgbValue(0, 0, 0),
+                    new RgbValue(255, 255, 255));
+        } catch (QrConfigurationException ex) {
+            // don't propagate this exception to the constructor's signature
+            // this is nothing a client could solve
+            throw new RuntimeException("Hand chosen values are somehow broken");
+        }
         renderer = new QrCodeRenderer(PixelStyle.RECTANGLES, MarkerStyle.RECTANGLES);
 
         setDefaultHints();
@@ -135,10 +141,11 @@ public class QrGenerator implements Cloneable {
      * @param height requested image height in pixel
      * @return this instance so that config calls can be chained
      * @see QrGenerator#withMargin(int)
+     * @throws QrConfigurationException  is thrown in case one of the values is negative
      */
-    public QrGenerator withSize(int width, int height) {
+    public QrGenerator withSize(int width, int height) throws QrConfigurationException {
         if (width <= 0 || height <= 0)
-            throw new IllegalArgumentException("width and height must be positive values");
+            throw new QrConfigurationException("width and height must be positive values");
         this.width = width;
         this.height = height;
         return this;
@@ -417,7 +424,7 @@ public class QrGenerator implements Cloneable {
             writeQrCodeToFile(tmpFile, payload);
             return tmpFile;
         } catch (WriterException e) {
-            throw new QrGenerationException(e);
+            throw new QrGenerationException("Failed to write QR code to tmp file", e);
         }
     }
 

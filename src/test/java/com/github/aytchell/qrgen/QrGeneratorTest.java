@@ -1,6 +1,5 @@
 package com.github.aytchell.qrgen;
 
-import com.google.zxing.WriterException;
 import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +35,7 @@ public class QrGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("imageSizesForSizeTest")
-    void sizeIsRespected(Integer size) throws IOException, QrGenerationException {
+    void sizeIsRespected(Integer size) throws IOException, QrGenerationException, QrConfigurationException {
         final QrGenerator gen = new QrGenerator()
                 .withSize(size, size);
         final Path path = gen.writeToTmpFile("Hello, World!");
@@ -99,7 +98,7 @@ public class QrGeneratorTest {
     }
 
     @Test
-    void renderRoundCorners() throws QrGenerationException, IOException {
+    void renderRoundCorners() throws QrGenerationException, IOException, QrConfigurationException {
         final QrGenerator gen = new QrGenerator()
                 .as(ImageFileType.PNG)
                 .withSize(400, 400)

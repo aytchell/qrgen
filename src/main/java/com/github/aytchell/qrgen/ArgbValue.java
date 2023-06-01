@@ -18,8 +18,15 @@ public class ArgbValue {
      * @param red value for red; from 0 (no red) to 255 (0xff) (red as can be)
      * @param green value for green; from 0 (no green) to 255 (0xff) (green as can be)
      * @param blue value for blue; from 0 (no blue) to 255 (0xff) (blue as can be)
+     * @throws QrConfigurationException  is thrown in case one of the values is out of bounds
      */
-    public ArgbValue(int alpha, int red, int green, int blue) {
+    public ArgbValue(int alpha, int red, int green, int blue) throws QrConfigurationException {
+        if (alpha < 0 || alpha > 255 ||
+                red   < 0 || red   > 255 ||
+                green < 0 || green > 255 ||
+                blue  < 0 || blue  > 255)
+            throw new QrConfigurationException("Illegal color code given");
+
         rawValue =
                 (toUnsignedByte(alpha) << 24) |
                         (toUnsignedByte(red) << 16) |

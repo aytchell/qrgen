@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ArgbValueTest {
 
-    private static Stream<ColorsAndAlpha> alphaTestColors() {
+    private static Stream<ColorsAndAlpha> alphaTestColors() throws QrConfigurationException {
         final List<ColorsAndAlpha> data = new ArrayList<>();
         data.add(new ColorsAndAlpha(new ArgbValue(0, 255, 255, 255), true));
         data.add(new ColorsAndAlpha(new ArgbValue(100, 100, 100, 100), true));
@@ -30,7 +31,7 @@ public class ArgbValueTest {
     }
 
     @Test
-    void scaleToHalfWorks() {
+    void scaleToHalfWorks() throws QrConfigurationException {
         assertEquals(
                 new ArgbValue(255, 120, 80, 60),
                 new ArgbValue(255, 240, 160, 120).scale(0.5)
@@ -38,11 +39,26 @@ public class ArgbValueTest {
     }
 
     @Test
-    void scaleToDoubleWorks() {
+    void scaleToDoubleWorks() throws QrConfigurationException {
         assertEquals(
                 new ArgbValue(255, 60, 255, 180),
                 new ArgbValue(255, 30, 180, 90).scale(2)
         );
+    }
+
+    @Test
+    void creatingAnArgbValueFromIllegalValuesWillThrow() {
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(-12, 45, 37, 45));
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(276, 45, 37, 45));
+
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, -45, 37, 45));
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 341, 37, 45));
+
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 45, -37, 45));
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 45, 256, 45));
+
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 45, 37, -45));
+        assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 45, 37, 541));
     }
 
     @Value
