@@ -1,19 +1,54 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
+import lombok.Getter;
 import lombok.Value;
 
+@Getter
 public class HslaValue extends QrColor {
+    private final int hue;
+    private final int saturation;
+    private final int lightness;
+
     /**
      * Color value based on the Hue/Saturation/Lightness (HSL) model with an extra alpha channel
+     * <p>
+     * Not that there are two similar constructors which only differ in the type and valid range of the alpha value.
+     *
      * @param hue hue value in the range 0 <= hue <= 360
      * @param saturation saturation in percent in the range 0 <= saturation <= 100
      * @param lightness lightness in percent in the range 0 <= lightness <= 100
      * @param alpha transparency of this color 0 (completely transparent) <= alpha <= 255 (perfectly opaque)
+     * @see HslaValue(int, int, int, double)
      * @throws QrConfigurationException  is thrown in case one of the values is out of bounds
      */
     public HslaValue(int hue, int saturation, int lightness, int alpha) throws QrConfigurationException {
         super(convertHslaToRgba(hue, saturation, lightness, alpha));
+
+        this.hue = hue;
+        this.saturation = saturation;
+        this.lightness = lightness;
+    }
+
+    /**
+     * Color value based on the Hue/Saturation/Lightness (HSL) model with an extra alpha channel
+     * <p>
+     * Not that there are two similar constructors which only differ in the type and valid range of the alpha value.
+     *
+     * @param hue hue value in the range 0 <= hue <= 360
+     * @param saturation saturation in percent in the range 0 <= saturation <= 100
+     * @param lightness lightness in percent in the range 0 <= lightness <= 100
+     * @param alpha transparency of this color 0.0 (completely transparent) <= alpha <= 1.0 (perfectly opaque)
+     * @see HslaValue(int, int, int, int)
+     * @throws QrConfigurationException  is thrown in case one of the values is out of bounds
+     */
+    public HslaValue(int hue, int saturation, int lightness, double alpha) throws QrConfigurationException {
+        this(hue, saturation, lightness, (int)Math.round(alpha * 255.0));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%d°, %d%%, %d%%, %d)", hue, saturation, lightness, getAlpha());
     }
 
     private static int convertHslaToRgba(int hue, int saturation, int lightness, int alpha)
@@ -58,5 +93,4 @@ public class HslaValue extends QrColor {
         double green;
         double blue;
     }
-
 }

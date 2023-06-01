@@ -13,7 +13,7 @@ import java.awt.*;
 @EqualsAndHashCode
 public class QrColor {
     @Getter(value = AccessLevel.PROTECTED)
-    private final int rawValue;
+    private final int rawArgbValue;
 
     /**
      * Create an instance representing the given color/alpha value
@@ -21,7 +21,7 @@ public class QrColor {
      *                     and blue (least significant byte)
      */
     protected QrColor(int rawArgbValue) {
-        this.rawValue = rawArgbValue;
+        this.rawArgbValue = rawArgbValue;
     }
 
     /**
@@ -29,7 +29,11 @@ public class QrColor {
      * @return true if the color has an alpha channel; false otherwise
      */
     public boolean hasAlpha() {
-        return (rawValue >>> 24) != 0xff;
+        return (rawArgbValue >>> 24) != 0xff;
+    }
+
+    public int getAlpha() {
+        return (rawArgbValue >>> 24);
     }
 
     /**
@@ -37,12 +41,7 @@ public class QrColor {
      * @return An awt Color instance which resembles this instance
      */
     public Color asAwtColor() {
-        return new Color(rawValue, hasAlpha());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("#%08X", rawValue);
+        return new Color(rawArgbValue, hasAlpha());
     }
 
     protected static int computeRawArgbVale(int alpha, int red, int green, int blue) throws QrConfigurationException {
@@ -62,18 +61,18 @@ public class QrColor {
         final int newRed = scaleByte(2, factor);
         final int newGreen = scaleByte(1, factor);
         final int newBlue = scaleByte(0, factor);
-        return ((getRawValue() & 0xff000000) | newRed | newGreen | newBlue);
+        return ((getRawArgbValue() & 0xff000000) | newRed | newGreen | newBlue);
     }
 
     protected int getScaledRawRgbaValue(double factor) {
         final int newRed = scaleByte(2, factor);
         final int newGreen = scaleByte(1, factor);
         final int newBlue = scaleByte(0, factor);
-        return (newRed | newGreen | newBlue | (getRawValue() & 0xff000000));
+        return (newRed | newGreen | newBlue | (getRawArgbValue() & 0xff000000));
     }
 
     private int scaleByte(int num, double factor) {
-        double value = (getRawValue() >>> (num * 8)) & 0xff;
+        double value = (getRawArgbValue() >>> (num * 8)) & 0xff;
         value *= factor;
 
         if (value > 255.0) return 255 << (num * 8);

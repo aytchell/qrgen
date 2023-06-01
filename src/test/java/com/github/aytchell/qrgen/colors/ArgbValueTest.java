@@ -71,6 +71,18 @@ public class ArgbValueTest {
         assertThrows(QrConfigurationException.class, () -> new ArgbValue(12, 45, 37, 541));
     }
 
+    @Test
+    public void rawArgbValueCanBeComputed() throws QrConfigurationException {
+        assertEquals(0x12345678, new ArgbValue(0x12, 0x34, 0x56, 0x78).getRawArgbValue());
+        assertEquals(0xf0345678, new ArgbValue(0xf0, 0x34, 0x56, 0x78).getRawArgbValue());
+    }
+
+    @Test
+    public void toStringReturnsHexRepresentation() throws QrConfigurationException {
+        assertEquals("#12345678", new ArgbValue(0x12, 0x34, 0x56, 0x78).toString());
+        assertEquals("#ABCDEF00", new ArgbValue(0xab, 0xcd, 0xef, 0x00).toString());
+    }
+
     @Value
     private static class ColorsAndAlpha {
         ArgbValue color;

@@ -23,12 +23,27 @@ public class RgbaValue extends QrColor {
         super(convertToArgb(rawRgbaValue));
     }
 
+    public RgbaValue scale(double factor) {
+        return new RgbaValue(getScaledRawRgbaValue(factor));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("#%08X", getRawRgbaValue());
+    }
+
+    public int getRawRgbaValue() {
+        int rawArgb = getRawArgbValue();
+        return convertToRgba(rawArgb);
+    }
+
+    private static int convertToRgba(int rawArgb) {
+        final int alpha = (rawArgb >>> 24);
+        return (rawArgb << 8) | alpha;
+    }
+
     private static int convertToArgb(int rawRgbaValue) {
         final int alpha = (rawRgbaValue & 0xff);
         return (alpha << 24) | (rawRgbaValue >>> 8);
-    }
-
-    public RgbaValue scale(double factor) {
-        return new RgbaValue(getScaledRawRgbaValue(factor));
     }
 }

@@ -26,4 +26,14 @@ public class ArgbValue extends QrColor {
     public ArgbValue scale(double factor) {
         return new ArgbValue(getScaledRawArgbValue(factor));
     }
+
+    @Override
+    public int getRawArgbValue() {
+        return super.getRawArgbValue();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("#%08X", super.getRawArgbValue());
+    }
 }

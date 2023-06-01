@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
 import lombok.Value;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -20,7 +21,7 @@ public class HslaValueTest {
 
                 new HslaToRgba(
                         new HslaValue(135, 42, 46, 0xd1), true,
-                        0xd1, 0x44, 0xa7, 0x5d),
+                        0x44, 0xa7, 0x5d, 0xd1),
 
                 new HslaToRgba(
                         new HslaValue (326, 30, 74,0x54), true,
@@ -32,7 +33,11 @@ public class HslaValueTest {
 
                 new HslaToRgba(
                         new HslaValue(360, 100, 100, 255), false,
-                        0xff, 0xff, 0xff, 0xff)
+                        0xff, 0xff, 0xff, 0xff),
+
+                new HslaToRgba(
+                        new HslaValue(10, 10, 10, 0.5), true,
+                        0x1c, 0x18, 0x17, 128)
         );
     }
 
@@ -42,10 +47,10 @@ public class HslaValueTest {
         assertEquals(data.hasAlpha, data.hsla.hasAlpha());
 
         final Color awtColor = data.hsla.asAwtColor();
-        assertEquals(data.red, awtColor.getRed());
-        assertEquals(data.green, awtColor.getGreen());;
-        assertEquals(data.blue, awtColor.getBlue());;
-        assertEquals(data.alpha, awtColor.getAlpha());
+        assertEquals(data.red, awtColor.getRed(), "red value");
+        assertEquals(data.green, awtColor.getGreen(), "green value");
+        assertEquals(data.blue, awtColor.getBlue(), "blue value");
+        assertEquals(data.alpha, awtColor.getAlpha(), "alpha value");
     }
 
     public static Stream<RawHsla> getBrokenHslaValues() {
@@ -66,6 +71,12 @@ public class HslaValueTest {
     public void constructorWillThrowOnIllegalInput(RawHsla data) {
         assertThrows(QrConfigurationException.class,
                 () -> new HslaValue(data.hue, data.saturation, data.lightness, data.alpha));
+    }
+
+    @Test
+    public void toStringReturnsNiceRepresentation() throws QrConfigurationException {
+        assertEquals("(320°, 34%, 56%, 240)", new HslaValue(320, 34, 56, 240).toString());
+        assertEquals("(12°, 12%, 98%, 0)", new HslaValue(12, 12, 98, 0).toString());
     }
 
     @Value
