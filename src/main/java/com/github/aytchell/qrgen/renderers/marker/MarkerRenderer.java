@@ -9,7 +9,7 @@ public abstract class MarkerRenderer {
     // regardless of the size of the payload or the error correction level
     // the position markers will always be seven pixels high and wide
     // (tested with ZXing 3.5.0)
-    protected static final int SIZE_OF_POSITION_MARKER = 7;
+    public static final int SIZE_OF_POSITION_MARKER = 7;
 
     public void render(Graphics2D gfx, ImgParameters imgParams) {
         final int markerOffset =
