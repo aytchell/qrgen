@@ -4,5 +4,6 @@ public enum MarkerStyle {
     RECTANGLES,
     ROUND_CORNERS,
     CIRCLES,
+    DROP_IN,
     DROP_OUT
 }
