@@ -3,6 +3,7 @@ package com.github.aytchell.qrgen.renderers.marker;
 import com.github.aytchell.qrgen.renderers.ImgParameters;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public abstract class MarkerRenderer {
     // regardless of the size of the payload or the error correction level
@@ -31,5 +32,21 @@ public abstract class MarkerRenderer {
 
     protected void renderBottomLeftMarker(Graphics2D gfx, int cellSize, ImgParameters imgParams) {
         renderTopLeftMarker(gfx, cellSize, imgParams);
+    }
+
+    protected void renderRotated(
+            double angle, Graphics2D gfx, int cellSize, ImgParameters imgParams, SingleMarkerRenderer renderer) {
+        final AffineTransform transform = gfx.getTransform();
+        final int halfMarkerSize = (cellSize * SIZE_OF_POSITION_MARKER) / 2;
+        gfx.translate(halfMarkerSize, halfMarkerSize);
+        gfx.rotate(angle);
+        gfx.translate(-halfMarkerSize, -halfMarkerSize);
+        renderer.renderMarker(gfx, cellSize, imgParams);
+        gfx.setTransform(transform);
+    }
+
+    @FunctionalInterface
+    protected interface SingleMarkerRenderer {
+        void renderMarker(Graphics2D gfx, int cellSize, ImgParameters imgParams);
     }
 }
