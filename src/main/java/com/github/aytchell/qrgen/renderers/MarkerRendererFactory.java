@@ -11,6 +11,8 @@ public class MarkerRendererFactory {
             case CIRCLES: return new CirclesRenderer();
             case DROP_IN: return new DropInRenderer();
             case DROP_OUT: return new DropOutRenderer();
+            case ROUND_IN: return new RoundInRenderer();
+            case ROUND_OUT: return new RoundOutRenderer();
         }
         throw new RuntimeException("case not handled");
     }

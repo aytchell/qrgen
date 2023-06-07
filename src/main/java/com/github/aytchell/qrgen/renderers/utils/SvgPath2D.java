@@ -178,7 +178,7 @@ public class SvgPath2D {
 
         final Scanner scanner = new Scanner(string);
         scanner.useDelimiter("[, ]+");
-        final String token = scanner.next("^[+\\-]?[0-9]{1,13}(\\.[0-9]*)?");
+        final String token = scanner.next("^[+\\-]?[0-9]{1,13}(\\.[0-9]*)?(e[+\\\\-]?[0-9]{1,3})?");
         if (token == null || token.isEmpty()) {
             throw new IllegalArgumentException("Didn't find expected double value");
         }

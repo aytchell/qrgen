@@ -13,6 +13,11 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- When giving a color as parameter you can now choose between ARGB,
+  RGBA, RGB, HSLA and HSL
+- It is now possible to select extra color for the three QR code's markers.
+  The inner and the outer parts of the markers can be rendered with
+  different colors (if requested).
 - Added new style options for generated QR codes. The "pixels" of the QR code
   can now also be
     - rectangles with rounded corners or
@@ -20,17 +25,21 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
         - to form rows or columns
         - to form snake-like structures
         - to form structures like water (with adhesion)
-- Added new style options for generated QR codes. The markers of the QR code
-  can now also be circles or rectangles with rounded corners
-- It is now possible to select extra color for the three QR code's markers.
-  The inner and the outer parts of the markers can be rendered with different
-  colors (if requested).
+- Added new style options for generated QR codes. The markers of the
+  QR code can now chosen to be
+    - rectangles
+    - rectangles with rounded corners
+    - circles
+    - 'raindrops' appearing to fall inward
+    - 'raindrops' appearing to fall outward
+    - rectangles with one rounded edge at the outer corner
+    - rectangles with one rounded edge at the inner corner
 
 ### Removed
 
-- the colors to be used can no longer be given as raw integer values. Instead
-  you have to feed the `withColors(...)` methods whith instances of
-  `ArgbValue`
+- the colors to be used can no longer be given as raw integer values.
+  Instead you have to feed the `withColors(...)` methods whith instances
+  of `ArgbValue`, `RgbaValue`, `RgbValue`, `HslaValue` or `HslValue`
 
 ## [1.1.1] - 2023-05-09
 
