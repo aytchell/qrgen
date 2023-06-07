@@ -11,6 +11,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+- ...
+
+## [2.0.0] - 2023-06-11
+
 ### Added
 
 - It is now possible to render the three markers of the generated QR codes
