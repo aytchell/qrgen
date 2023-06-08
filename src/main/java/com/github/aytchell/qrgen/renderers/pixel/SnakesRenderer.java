@@ -17,19 +17,23 @@ public class SnakesRenderer extends PixelRenderer {
         gfx.fillOval(0, 0, cellSize, cellSize);
 
         if (context.isNeighbourSet(PixelContext.Direction.W)) {
-            gfx.fillRect(0, 0, cellSize / 2, cellSize);
+            final String path = "h 70 v 140 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (context.isNeighbourSet(PixelContext.Direction.N)) {
-            gfx.fillRect(0, 0, cellSize, cellSize / 2);
+            final String path = "h 140 v 70 h -140 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (context.isNeighbourSet(PixelContext.Direction.E)) {
-            gfx.fillRect(cellSize / 2, 0, cellSize / 2, cellSize);
+            final String path = "m 70,0 h 70 v 140 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (context.isNeighbourSet(PixelContext.Direction.S)) {
-            gfx.fillRect(0, cellSize / 2, cellSize, cellSize / 2);
+            final String path = "m 0,70 h 140 v 70 h -140 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
     }
 }
