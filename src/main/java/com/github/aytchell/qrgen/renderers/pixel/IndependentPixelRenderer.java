@@ -2,10 +2,8 @@ package com.github.aytchell.qrgen.renderers.pixel;
 
 import com.github.aytchell.qrgen.renderers.ImgParameters;
 import com.github.aytchell.qrgen.renderers.PixelContext;
-import com.github.aytchell.qrgen.renderers.utils.SvgPath2D;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public abstract class IndependentPixelRenderer extends PixelRenderer {
     public IndependentPixelRenderer(ImgParameters imgParams) {
@@ -18,13 +16,7 @@ public abstract class IndependentPixelRenderer extends PixelRenderer {
     }
 
     protected void drawActualShape(ImgParameters imgParams, Graphics2D gfx) {
-        double cellSize = imgParams.getCellSize();
-        double factor = cellSize / 140.0;
-
-        final AffineTransform transform = gfx.getTransform();
-        gfx.scale(factor, factor);
-        gfx.fill(SvgPath2D.drawSvgCommand(getSvgPath()));
-        gfx.setTransform(transform);
+        renderPixelFromSvgPath(imgParams, gfx, getSvgPath());
     }
 
     @Override

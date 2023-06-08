@@ -2,10 +2,11 @@ package com.github.aytchell.qrgen.renderers.pixel;
 
 import com.github.aytchell.qrgen.renderers.ImgParameters;
 import com.github.aytchell.qrgen.renderers.PixelContext;
+import com.github.aytchell.qrgen.renderers.utils.SvgPath2D;
 import lombok.AllArgsConstructor;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 
 @AllArgsConstructor
 public abstract class PixelRenderer {
@@ -22,4 +23,14 @@ public abstract class PixelRenderer {
     protected void renderActiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) { }
 
     protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) { }
+
+    protected void renderPixelFromSvgPath(ImgParameters imgParams, Graphics2D gfx, String path) {
+        double cellSize = imgParams.getCellSize();
+        double factor = cellSize / 140.0;
+
+        final AffineTransform transform = gfx.getTransform();
+        gfx.scale(factor, factor);
+        gfx.fill(SvgPath2D.drawSvgCommand(path));
+        gfx.setTransform(transform);
+    }
 }
