@@ -20,19 +20,23 @@ public class WaterRenderer extends PixelRenderer {
         gfx.fill(new RoundRectangle2D.Double(0, 0, cellSize, cellSize, cornerRadius, cornerRadius));
 
         if (hasLeftNeighbour(context)) {
-            gfx.fillRect(0, 0, cellSize / 2, cellSize);
+            final String path = "h 70 v 140 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasTopNeighbour(context)) {
-            gfx.fillRect(0, 0, cellSize, cellSize / 2);
+            final String path = "h 140 v 70 h -140 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasRightNeighbour(context)) {
-            gfx.fillRect(cellSize / 2, 0, cellSize / 2, cellSize);
+            final String path = "m 70,0 h 70 v 140 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasBottomNeighbour(context)) {
-            gfx.fillRect(0, cellSize / 2, cellSize, cellSize / 2);
+            final String path = "m 0,70 h 140 v 70 h -140 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
     }
 
@@ -40,7 +44,6 @@ public class WaterRenderer extends PixelRenderer {
     protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
         int cellSize = imgParams.getCellSize();
         double cornerRadius = Math.ceil((double)cellSize * 2 / 3);
-        int halfSize = (int) Math.ceil((double)cellSize / 2);
 
         final boolean hasLeft = hasLeftNeighbour(context);
         final boolean hasTop = hasTopNeighbour(context);
@@ -54,19 +57,23 @@ public class WaterRenderer extends PixelRenderer {
         gfx.clip(corners);
 
         if (hasLeft && hasTop && context.isNeighbourSet(PixelContext.Direction.NW)) {
-            gfx.fillRect(0, 0, halfSize, halfSize);
+            final String path = "h 70 v 70 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasTop && hasRight && context.isNeighbourSet(PixelContext.Direction.NE)) {
-            gfx.fillRect(halfSize, 0, halfSize, halfSize);
+            final String path = "m 70,0 h 70 v 70 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasRight && hasBottom && context.isNeighbourSet(PixelContext.Direction.SE)) {
-            gfx.fillRect(halfSize, halfSize, halfSize, halfSize);
+            final String path = "m 70,70 h 70 v 70 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         if (hasBottom && hasLeft && context.isNeighbourSet(PixelContext.Direction.SW)) {
-            gfx.fillRect(0, cellSize / 2, cellSize / 2, cellSize / 2);
+            final String path = "m 0,70 h 70 v 70 h -70 z";
+            renderPixelFromSvgPath(imgParams, gfx, path);
         }
 
         gfx.setClip(globalClip);
