@@ -7,5 +7,7 @@ public enum MarkerStyle {
     DROP_IN,
     DROP_OUT,
     ROUND_IN,
-    ROUND_OUT
+    ROUND_OUT,
+    EDGE_IN,
+    EDGE_OUT
 }

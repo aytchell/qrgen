@@ -13,6 +13,8 @@ public class MarkerRendererFactory {
             case DROP_OUT: return new DropOutRenderer();
             case ROUND_IN: return new RoundInRenderer();
             case ROUND_OUT: return new RoundOutRenderer();
+            case EDGE_IN: return new EdgeInRenderer();
+            case EDGE_OUT: return new EdgeOutRenderer();
         }
         throw new RuntimeException("case not handled");
     }

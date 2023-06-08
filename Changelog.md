@@ -22,6 +22,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     - 'raindrops' appearing to fall outward
     - rectangles with one rounded edge at the outer corner
     - rectangles with one rounded edge at the inner corner
+    - rectangles with rounded edge except one sharp edge at the outer corner
+    - rectangles with rounded edge except one sharp edge at the inner corner
 
 ### Changed
 
