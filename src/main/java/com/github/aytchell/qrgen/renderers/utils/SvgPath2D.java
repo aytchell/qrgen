@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,6 +19,8 @@ public class SvgPath2D {
     private final Path2D.Double path;
     private double xPos;
     private double yPos;
+    private double xStart;
+    private double yStart;
 
     public SvgPath2D() {
         this(0.0, 0.0);
@@ -24,9 +28,7 @@ public class SvgPath2D {
 
     public SvgPath2D(double xPos, double yPos) {
         this.path = new Path2D.Double();
-        this.xPos = xPos;
-        this.yPos = yPos;
-        path.moveTo(xPos, yPos);
+        M(xPos, yPos);
     }
 
     public static Shape drawSvgCommand(String svgCommand) {
@@ -37,15 +39,15 @@ public class SvgPath2D {
     }
 
     public void M(double x, double y) {
-        path.moveTo(x, y);
         xPos = x;
         yPos = y;
+        moveTo();
     }
 
     public void m(double dx, double dy) {
-        path.moveTo(xPos + dx, yPos + dy);
         xPos += dx;
         yPos += dy;
+        moveTo();
     }
 
     public void C(Double... coords) {
@@ -84,17 +86,56 @@ public class SvgPath2D {
         }
     }
 
-    public void h(double dx) {
-        path.lineTo(xPos + dx, yPos);
+    public void l(double dx, double dy) {
         xPos += dx;
+        yPos += dy;
+        lineTo();
+    }
+
+    public void L(double x, double y) {
+        xPos = x;
+        yPos = y;
+        lineTo();
+    }
+
+    public void H(double x) {
+        xPos = x;
+        lineTo();
+    }
+
+    public void h(double dx) {
+        xPos += dx;
+        lineTo();
+    }
+
+    private void V(double y) {
+        yPos = y;
+        lineTo();
+    }
+
+    private void v(double dy) {
+        yPos += dy;
+        lineTo();
+    }
+
+    private void lineTo() {
+        path.lineTo(xPos, yPos);
+    }
+
+    private void moveTo() {
+        path.moveTo(xPos, yPos);
+        xStart = xPos;
+        yStart = yPos;
+    }
+
+    public void closePath() {
+        z();
     }
 
     public void z() {
         path.closePath();
-    }
-
-    public void closePath() {
-        path.closePath();
+        xPos = xStart;
+        yPos = yStart;
     }
 
     public void d(String path) {
@@ -111,16 +152,10 @@ public class SvgPath2D {
         final String tail = svgTrimFront(path.substring(1));
 
         switch (cmd) {
-            case 'm': {
-                final Parameters params = extractDoubles(tail, 2);
-                m(params.p.get(0), params.p.get(1));
-                return params.tail;
-            }
-            case 'M': {
-                final Parameters params = extractDoubles(tail, 2);
-                M(params.p.get(0), params.p.get(1));
-                return params.tail;
-            }
+            case 'm': return commandWithTwoParams(tail, this::m);
+            case 'M': return commandWithTwoParams(tail, this::M);
+            case 'l': return commandWithTwoParams(tail, this::l);
+            case 'L': return commandWithTwoParams(tail, this::L);
             case 'c': {
                 final Parameters params = extractModuloSixDoubles(tail);
                 c(params.getP().toArray(new Double[0]));
@@ -135,14 +170,25 @@ public class SvgPath2D {
             case 'Z':
                 z();
                 return tail;
-            case 'h': {
-                final Parameters params = extractDoubles(tail, 1);
-                h(params.p.get(0));
-                return params.tail;
-            }
+            case 'V': return commandWithOneParam(tail, this::V);
+            case 'v': return commandWithOneParam(tail, this::v);
+            case 'H': return commandWithOneParam(tail, this::H);
+            case 'h': return commandWithOneParam(tail, this::h);
             default:
                 throw new IllegalArgumentException("Unknown svg command '" + cmd + "' found");
         }
+    }
+
+    private String commandWithOneParam(String tail, Consumer<Double> fct) {
+        final Parameters params = extractDoubles(tail, 1);
+        fct.accept(params.p.get(0));
+        return params.tail;
+    }
+
+    private String commandWithTwoParams(String tail, BiConsumer<Double, Double> fct) {
+        final Parameters params = extractDoubles(tail, 2);
+        fct.accept(params.p.get(0), params.p.get(1));
+        return params.tail;
     }
 
     private String svgTrimFront(String string) {
