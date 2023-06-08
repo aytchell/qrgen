@@ -11,7 +11,8 @@ public class SmallRectanglesRenderer extends IndependentPixelRenderer {
     }
 
     @Override
-    protected void drawActualShape(ImgParameters imgParams, Graphics2D gfx) {
-        gfx.fillRect(0, 0, imgParams.getCellSize() - 1, imgParams.getCellSize() - 1);
+    protected String getSvgPath() {
+        // a rectangle which is a bit smaller than the complete cell
+        return "m 10,10 h 120 v 120 h -120 z";
     }
 }
