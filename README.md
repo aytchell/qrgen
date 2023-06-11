@@ -32,7 +32,7 @@ differences to QRGen are:
       * [... the pixels](#conf_styling_pixels)
       * [... the markers](#conf_styling_markers)
     * [Character set of the encoded message](#conf_charset)
-* [Actually write the QR code](#write)
+* [Actually writing the QR code](#write)
 * [License](#license)
 
 <a name="introduction"></a>
@@ -107,11 +107,11 @@ of the complete image as well as on the complexity of the QR code.
 
 Usually QR codes are displayed in black and white as this gives the best
 contrast and thus help a scanner in reading it. But there might be times,
-when want to have different colors.
+when you want to have different colors.
 
-The trivial variant is to set no colors at all then the lib will fall back to
+The trivial variant is to set no colors at all. Then the lib will fall back to
 the usual black/white pattern. The next level is to choose a color for
-'the background' and another color for 'the pixles':
+'the background' and another color for 'the pixels':
 
 ```java
     final RgbValue daffodil = new RgbValue(0xff, 0xff, 0x31);
@@ -136,7 +136,7 @@ Finally, it is possible to use up to four different colors:
 </td></tr>
 </table>
 
-However, you should choose the colors, so they provide a sufficient contrast.
+However, you should choose such colors which provide a sufficient contrast.
 Otherwise, it might get difficult for QR code scanners to read the code.
   
 ```java
@@ -215,7 +215,7 @@ logo above it.
                 .writeToTmpFile("Hello, Github!");
 ```
 
-![QR code with gitbug logo](examples/github_logo.png "github logo overlay")
+![QR code with github logo](examples/github_logo.png "github logo overlay")
 ![QR code with mvn central logo](examples/mvn_logo.png "mvn central logo overlay")
 
 <a name="conf_styling"></a>
@@ -233,10 +233,10 @@ It is possible to change the style of the individual pixels used to render
 the QR code. Currently, there are eight different styles available:
 
   - `RECTANGLES` &mdash; The "standard" styling with rectangular pixels "touching" each other
-  - `SMALL_RECTANGLES` &mdash; A styling with smaller pixels so that a white grid betwees them appears
+  - `SMALL_RECTANGLES` &mdash; A styling with smaller pixels so that a white grid between them appears
   - `DOTS` &mdash; Dots instead of rectangles
   - `ROUND_CORNERS` &mdash; rectangular pixels but with rounded corners
-  - `ROWS` &mdash; a style that makes the pixels appear like rows with morse code like lines
+  - `ROWS` &mdash; a style that makes the pixels appear like rows with Morse-code-like lines
   - `COLUMNS` &mdash; a similar style but with columns instead of rows
   - `SNAKES` &mdash; connected pixels with 'snakes-like' heads when there's no neighbor
   - `WATER` &mdash; connected pixels which behave like adhesion of water surfaces
@@ -350,7 +350,7 @@ will be perfectly OK.
 ```
 
 <a name="write"></a>
-## Actually write the QR code
+## Actually writing the QR code
 
 Once you've configured the QR code generator you can use it to write QR
 codes. The method to write a payload to a QR code image file does not change
