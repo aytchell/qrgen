@@ -19,4 +19,15 @@ public class RgbValue extends ArgbValue {
     public RgbValue(int red, int green, int blue) throws QrConfigurationException {
         super(0xFF, red, green, blue);
     }
+
+    public RgbValue(int rawRgbValue) throws QrConfigurationException {
+        super(convertToRawArgbValue(rawRgbValue));
+    }
+
+    private static int convertToRawArgbValue(int rawRgbValue) throws QrConfigurationException {
+        if ((rawRgbValue & 0xff000000) != 0)
+            throw new QrConfigurationException("Given value is too big for a raw RGB value");
+
+        return (0xff << 24) | rawRgbValue;
+    }
 }
