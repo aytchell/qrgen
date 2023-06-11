@@ -43,15 +43,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
         - to form rows or columns
         - to form snake-like structures
         - to form structures like water (with adhesion)
-- Added new style options for generated QR codes. The markers of the
-  QR code can now chosen to be
-    - rectangles
-    - rectangles with rounded corners
-    - circles
-    - 'raindrops' appearing to fall inward
-    - 'raindrops' appearing to fall outward
-    - rectangles with one rounded edge at the outer corner
-    - rectangles with one rounded edge at the inner corner
 
 ### Removed
 
