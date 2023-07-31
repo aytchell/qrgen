@@ -33,4 +33,13 @@ public class ColorConfig {
         }
         return BufferedImage.TYPE_INT_RGB;
     }
+
+    public ColorConfig withoutAlpha() {
+        return new ColorConfig(
+                onColor.withoutAlpha(),
+                offColor.withoutAlpha(),
+                outerMarkerColor.withoutAlpha(),
+                innerMarkerColor.withoutAlpha()
+        );
+    }
 }

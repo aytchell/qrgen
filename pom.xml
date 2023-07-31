@@ -6,7 +6,7 @@
 
     <groupId>com.github.aytchell</groupId>
     <artifactId>qrgen</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <packaging>jar</packaging>
 
     <name>QR code generator</name>
@@ -48,7 +48,7 @@
         <connection>scm:git:git://github.com/aytchell/qrgen.git</connection>
         <developerConnection>scm:git:https://github.com/aytchell/qrgen.git</developerConnection>
         <url>https://github.com/aytchell/qrgen/tree/master</url>
-        <tag>releases/2.0.0</tag>
+        <tag>releases/2.0.1</tag>
     </scm>
 
     <distributionManagement>

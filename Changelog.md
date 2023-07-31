@@ -13,6 +13,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - ...
 
+## [2.0.1] - 2023-07-31
+
+### Added
+- `QrGenerator` has a new method `noAlpha()` which strips off the alpha
+  channel from all selected colors.
+
 ## [2.0.0] - 2023-06-11
 
 ### Added

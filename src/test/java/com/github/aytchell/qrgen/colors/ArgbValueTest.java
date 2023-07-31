@@ -83,6 +83,18 @@ public class ArgbValueTest {
         assertEquals("#ABCDEF00", new ArgbValue(0xab, 0xcd, 0xef, 0x00).toString());
     }
 
+    @Test
+    public void withoutAlphaReturnsCopyWithoutAlphaChannel() throws QrConfigurationException {
+        final ArgbValue value = new ArgbValue(23, 34, 45, 56);
+        final QrColor noAlpha = value.withoutAlpha();
+
+        assertTrue(value.hasAlpha());
+        assertFalse(noAlpha.hasAlpha());
+
+        final ArgbValue expectation = new RgbValue(34, 45, 56);
+        assertEquals(expectation.getRawArgbValue(), noAlpha.getRawArgbValue());
+    }
+
     @Value
     private static class ColorsAndAlpha {
         ArgbValue color;

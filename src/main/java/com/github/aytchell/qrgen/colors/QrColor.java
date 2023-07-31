@@ -78,4 +78,12 @@ public class QrColor {
         if (value > 255.0) return 255 << (num * 8);
         return (int)value << (num * 8);
     }
+
+    public QrColor withoutAlpha() {
+        if (!hasAlpha()) {
+            return this;
+        } else {
+            return new QrColor(rawArgbValue | 0xff000000);
+        }
+    }
 }

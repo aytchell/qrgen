@@ -220,6 +220,25 @@ public class QrGenerator implements Cloneable {
     }
 
     /**
+     * Removed the alpha channel from the selected colors
+     * <p>
+     * This methods might come handy if you don't have control over the selected color values
+     * but based on the chosen output file format you know that there shall be no alpha
+     * values (this affects jpeg and bmp).
+     * <p>
+     * Note that it is possible to select e.g. JPEG and colors with an alpha channel. The lib
+     * will not correct this because it might be possible that the next call from client's
+     * side will fix it. Nevertheless, if conflicting settings are chosen, the rendering process
+     * will throw an exception.
+     *
+     * @return this instance so that config calls can be chained
+     */
+    public QrGenerator noAlpha() {
+        this.colorConfig = colorConfig.withoutAlpha();
+        return this;
+    }
+
+    /**
      * Select the character set for encoding the payload in the QR code
      * <p>
      * Java strings are internally encoded with UTF-16. Since QR codes can
