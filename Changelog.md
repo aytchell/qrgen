@@ -13,6 +13,28 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - ...
 
+## [3.0.0] - 2025-04-04
+
+### Added
+
+- Added a `module-info.java` so that the lib can be used as a Java 9 module
+
+### Changed
+
+- Due to the new `module-info.java` the lib is now compiled with Java 9 and
+  this version can no longer be used with Java 8. Imho this shouldn't be a
+  problem in 2025.
+- Because of the shift towards modules I reordered the packages of the
+  library (firstly for having a clear API which can be exported from the
+  module and secondly I untangled some dependency cycles between packages).
+- This change actually causes a breaking API change (since the package of the
+  thrown exceptions changed) and alas ... we have a new major release.
+
+### Removed
+
+- Internally the library no longer uses lombok. This has no effect on its
+  clients
+
 ## [2.0.1] - 2023-07-31
 
 ### Added

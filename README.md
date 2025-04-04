@@ -22,7 +22,7 @@ differences to QRGen are:
 
 * [Introduction](#introduction)
 * [Maven](#maven)
-* [Configuration](#configration)
+* [Configuration](#configuration)
     * [Output file type](#conf_filetype)
     * [Size and margin of the code](#conf_size)
     * [Used colors](#conf_colors)
@@ -52,6 +52,9 @@ self-explanatory (there's also javadoc available):
             .writeToTmpFile("Hello, World!");
 ```
 
+This library has a `modules-info.java` so it can be used as a Java 9 (Jigsaw)
+module.
+
 <a name="maven"></a>
 ## Maven
 
@@ -59,11 +62,23 @@ self-explanatory (there's also javadoc available):
     <dependency>
         <groupId>com.github.aytchell</groupId>
         <artifactId>qrgen</artifactId>
-        <version>2.0.0</version>
+        <version>3.0.0</version>
     </dependency>
 ```
 
-<a name="configration"></a>
+## Gradle
+
+Groovy syntax:
+```groovy
+    implementation 'com.github.aytchell:qrgen:3.0.0'
+```
+
+Kotlin syntax
+```kotlin
+    implementation("com.github.aytchell:qrgen:3.0.0")
+```
+
+<a name="configuration"></a>
 ## Configuration
 
 This section lists the possible configurations for the created QR codes. The
