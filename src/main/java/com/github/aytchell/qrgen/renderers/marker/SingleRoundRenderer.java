@@ -26,7 +26,7 @@ public class SingleRoundRenderer {
 
         final double factor = markerSize / 82.0;
         gfx.scale(factor, factor);
-        gfx.transform(new AffineTransform(1.3333333,0,0,-1.3333333,0,81.866667));
+        gfx.transform(new AffineTransform(1.3333333, 0, 0, -1.3333333, 0, 81.866667));
 
         gfx.scale(0.1, 0.1);
         gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());

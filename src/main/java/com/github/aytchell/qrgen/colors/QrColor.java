@@ -17,6 +17,7 @@ public class QrColor {
 
     /**
      * Create an instance representing the given color/alpha value
+     *
      * @param rawArgbValue the raw value for alpha (most significant byte), red, green
      *                     and blue (least significant byte)
      */
@@ -24,8 +25,22 @@ public class QrColor {
         this.rawArgbValue = rawArgbValue;
     }
 
+    protected static int computeRawArgbVale(int alpha, int red, int green, int blue) throws QrConfigurationException {
+        if (alpha < 0 || alpha > 255)
+            throw new QrConfigurationException("Given value for alpha is out of range [0, 255]");
+        if (red < 0 || red > 255)
+            throw new QrConfigurationException("Given value for red is out of range [0, 255]");
+        if (green < 0 || green > 255)
+            throw new QrConfigurationException("Given value for green is out of range [0, 255]");
+        if (blue < 0 || blue > 255)
+            throw new QrConfigurationException("Given value for blue is out of range [0, 255]");
+
+        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+    }
+
     /**
      * Query whether the given color has an alpha channel or not
+     *
      * @return true if the color has an alpha channel; false otherwise
      */
     public boolean hasAlpha() {
@@ -38,23 +53,11 @@ public class QrColor {
 
     /**
      * Return a java.awt.Color instance that corresponds to this argb instance
+     *
      * @return An awt Color instance which resembles this instance
      */
     public Color asAwtColor() {
         return new Color(rawArgbValue, hasAlpha());
-    }
-
-    protected static int computeRawArgbVale(int alpha, int red, int green, int blue) throws QrConfigurationException {
-        if (alpha < 0 || alpha > 255)
-            throw new QrConfigurationException("Given value for alpha is out of range [0, 255]");
-        if (red   < 0 || red   > 255)
-            throw new QrConfigurationException("Given value for red is out of range [0, 255]");
-        if (green < 0 || green > 255)
-            throw new QrConfigurationException("Given value for green is out of range [0, 255]");
-        if (blue  < 0 || blue  > 255)
-            throw new QrConfigurationException("Given value for blue is out of range [0, 255]");
-
-        return (alpha << 24) | (red << 16) | (green <<  8) | blue;
     }
 
     protected int getScaledRawArgbValue(double factor) {
@@ -76,7 +79,7 @@ public class QrColor {
         value *= factor;
 
         if (value > 255.0) return 255 << (num * 8);
-        return (int)value << (num * 8);
+        return (int) value << (num * 8);
     }
 
     public QrColor withoutAlpha() {

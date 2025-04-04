@@ -18,8 +18,8 @@ public class HslValueTest {
 
         final Color awtColor = actual.asAwtColor();
         assertEquals(0xc9, awtColor.getRed());
-        assertEquals(0x4f, awtColor.getGreen());;
-        assertEquals(0x68, awtColor.getBlue());;
+        assertEquals(0x4f, awtColor.getGreen());
+        assertEquals(0x68, awtColor.getBlue());
         assertEquals(0xff, awtColor.getAlpha());
     }
 }

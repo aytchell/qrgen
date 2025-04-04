@@ -14,6 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgbValueTest {
 
+    private static Stream<ColorsAndAlpha> alphaTestColors() throws QrConfigurationException {
+        final List<ColorsAndAlpha> data = new ArrayList<>();
+        data.add(new ColorsAndAlpha(new ArgbValue(0, 255, 255, 255), true));
+        data.add(new ColorsAndAlpha(new ArgbValue(100, 100, 100, 100), true));
+        data.add(new ColorsAndAlpha(new ArgbValue(255, 0, 0, 255), false));
+        data.add(new ColorsAndAlpha(new ArgbValue(255, 255, 255, 255), false));
+        return data.stream();
+    }
+
     @Test
     public void constructorWorksAsExpected() throws QrConfigurationException {
         final ArgbValue actual = new ArgbValue(0x10, 0x20, 0x30, 0x40);
@@ -22,15 +31,6 @@ public class ArgbValueTest {
         assertEquals(0x20, actual.asAwtColor().getRed());
         assertEquals(0x30, actual.asAwtColor().getGreen());
         assertEquals(0x40, actual.asAwtColor().getBlue());
-    }
-
-    private static Stream<ColorsAndAlpha> alphaTestColors() throws QrConfigurationException {
-        final List<ColorsAndAlpha> data = new ArrayList<>();
-        data.add(new ColorsAndAlpha(new ArgbValue(0, 255, 255, 255), true));
-        data.add(new ColorsAndAlpha(new ArgbValue(100, 100, 100, 100), true));
-        data.add(new ColorsAndAlpha(new ArgbValue(255, 0, 0, 255), false));
-        data.add(new ColorsAndAlpha(new ArgbValue(255, 255, 255, 255), false));
-        return data.stream();
     }
 
     @ParameterizedTest

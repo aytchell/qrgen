@@ -119,7 +119,7 @@ public class QrCodeRenderer {
     }
 
     private int getMargin(Map<EncodeHintType, ?> encodingHints) {
-        final Integer margin = (Integer)encodingHints.get(EncodeHintType.MARGIN);
+        final Integer margin = (Integer) encodingHints.get(EncodeHintType.MARGIN);
         return (margin == null) ? DEFAULT_MARGIN_FROM_ZXING : margin;
     }
 

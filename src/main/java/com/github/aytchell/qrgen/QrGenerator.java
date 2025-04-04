@@ -38,14 +38,13 @@ public class QrGenerator implements Cloneable {
     public static final int MAX_PAYLOAD_SIZE_FOR_M = 5596;
     public static final int MAX_PAYLOAD_SIZE_FOR_Q = 3993;
     public static final int MAX_PAYLOAD_SIZE_FOR_H = 3057;
-
+    private final QrCodeRenderer renderer;
     private ImageFileType imageType;
     private int width;
     private int height;
     private BufferedImage logo;
     private HashMap<EncodeHintType, Object> hints = new HashMap<>();
     private ColorConfig colorConfig;
-    private final QrCodeRenderer renderer;
 
     /**
      * Create a QR code generator with default values
@@ -140,11 +139,11 @@ public class QrGenerator implements Cloneable {
      * <p>
      * The default size if a fresh QrGenerator is used is 200 x 200
      *
-     * @param width requested image width in pixel
+     * @param width  requested image width in pixel
      * @param height requested image height in pixel
      * @return this instance so that config calls can be chained
+     * @throws QrConfigurationException is thrown in case one of the values is negative
      * @see QrGenerator#withMargin(int)
-     * @throws QrConfigurationException  is thrown in case one of the values is negative
      */
     public QrGenerator withSize(int width, int height) throws QrConfigurationException {
         if (width <= 0 || height <= 0)
@@ -170,8 +169,8 @@ public class QrGenerator implements Cloneable {
      * The default colors of the generated QR code (if a fresh QrGenerator is used)
      * are black for the markers and the 'pixels' and white for the background.
      *
-     * @param onColor the color of "the pixels" (usually black)
-     * @param offColor the color of "the empty space" (usually white)
+     * @param onColor          the color of "the pixels" (usually black)
+     * @param offColor         the color of "the empty space" (usually white)
      * @param outerMarkerColor the color of the outer marker structure (usually black)
      * @param innerMarkerColor the color of the inner marker structure (usually black)
      * @return this instance so that config calls can be chained
@@ -190,8 +189,8 @@ public class QrGenerator implements Cloneable {
      * This is a convenience wrapper for {@link QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)}
      * where the {@code markerColor} is used for the inner and outer structures of the markers.
      *
-     * @param onColor the color of "the pixels" and the three marker structures (usually black)
-     * @param offColor the color of "the empty space" (usually white)
+     * @param onColor     the color of "the pixels" and the three marker structures (usually black)
+     * @param offColor    the color of "the empty space" (usually white)
      * @param markerColor the color of the three marker structures (usually black)
      * @return this instance so that config calls can be chained
      * @see QrGenerator#withColors(QrColor, QrColor)
@@ -208,7 +207,7 @@ public class QrGenerator implements Cloneable {
      * This is a convenience wrapper for {@link QrGenerator#withColors(QrColor, QrColor, QrColor, QrColor)}
      * where the {@code onColor} is used for the 'pixels', and the complete marker structures.
      *
-     * @param onColor the color of "the pixels" and the three marker structures (usually black)
+     * @param onColor  the color of "the pixels" and the three marker structures (usually black)
      * @param offColor the color of "the empty space" (usually white)
      * @return this instance so that config calls can be chained
      * @see QrGenerator#withColors(QrColor, QrColor, QrColor)
@@ -317,7 +316,7 @@ public class QrGenerator implements Cloneable {
      * @param style the styling to use for rendering the QR code's pixels
      * @return this instance so that config calls can be chained
      * @see <a href="https://github.com/aytchell/qrgen#conf_styling">github.com/aytchell/qrgen</a>
-     *      for example outputs
+     * for example outputs
      */
     public QrGenerator withPixelStyle(PixelStyle style) {
         renderer.setPixelStyle(style);
@@ -362,8 +361,8 @@ public class QrGenerator implements Cloneable {
      *                 overlayed onto the QR code
      * @return this instance so that config calls can be chained
      * @throws IOException in case the given logo file couldn't be read.
-     *      This might be due to a file not found or not readable as
-     *      well as an unknown image file type.
+     *                     This might be due to a file not found or not readable as
+     *                     well as an unknown image file type.
      */
     public QrGenerator withLogo(Path logoFile) throws IOException {
         this.logo = readLogo(logoFile);
@@ -379,8 +378,8 @@ public class QrGenerator implements Cloneable {
      * @param logoStream an InputStream with the content of an image file
      * @return this instance so that config calls can be chained
      * @throws IOException in case the given logo couldn't be read.
-     *      This might be due to a problem with the given InputStream as
-     *      well as an unknown image file type.
+     *                     This might be due to a problem with the given InputStream as
+     *                     well as an unknown image file type.
      */
     public QrGenerator withLogo(InputStream logoStream) throws IOException {
         this.logo = readLogo(logoStream);
@@ -407,13 +406,12 @@ public class QrGenerator implements Cloneable {
      * repeating the configuration steps.
      *
      * @param payload the string to be encoded into a QR code
-     *
      * @return an image file showing a QR code
-     * @throws IOException thrown in case something goes wrong while handling
-     *      the tmp file or producing the requested image format
+     * @throws IOException           thrown in case something goes wrong while handling
+     *                               the tmp file or producing the requested image format
      * @throws QrGenerationException thrown in case the computation of the
-     *      QR code goes wrong. This is independent of file operations or
-     *      image formats.
+     *                               QR code goes wrong. This is independent of file operations or
+     *                               image formats.
      * @see QrGenerator#writeToTmpFile(String, String)
      */
     public Path writeToTmpFile(String payload)
@@ -428,15 +426,14 @@ public class QrGenerator implements Cloneable {
      * The only difference is that you can give an additional prefix for the
      * name of the created tmp file.
      *
-     * @param payload the string to be encoded into a QR code
+     * @param payload       the string to be encoded into a QR code
      * @param tmpFilePrefix a prefix for the name of the created tmp file
-     *
      * @return an image file showing a QR code
-     * @throws IOException thrown in case something goes wrong while handling
-     *      the tmp file or producing the requested image format
+     * @throws IOException           thrown in case something goes wrong while handling
+     *                               the tmp file or producing the requested image format
      * @throws QrGenerationException thrown in case the computation of the
-     *      QR code goes wrong. This is independent of file operations or
-     *      image formats.
+     *                               QR code goes wrong. This is independent of file operations or
+     *                               image formats.
      * @see QrGenerator#writeToTmpFile(String)
      */
     public Path writeToTmpFile(String payload, String tmpFilePrefix)

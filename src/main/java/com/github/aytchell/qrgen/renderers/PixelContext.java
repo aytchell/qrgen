@@ -12,12 +12,6 @@ public class PixelContext {
 
     private int column = 0;
 
-    public enum Direction {
-        NW, N, NE,
-        W, E,
-        SW, S, SE
-    }
-
     PixelContext(int rowWidth, BitArray top, BitArray mid, BitArray bottom) {
         this.rowWidth = rowWidth;
         this.top = top;
@@ -53,5 +47,11 @@ public class PixelContext {
                 return bottom != null && (column < (rowWidth - 1) && bottom.get(column + 1));
         }
         throw new RuntimeException("case not handled");
+    }
+
+    public enum Direction {
+        NW, N, NE,
+        W, E,
+        SW, S, SE
     }
 }

@@ -16,7 +16,7 @@ public class RgbValueTest {
 
     @Test
     void constructFromTripleIsPossible() throws QrConfigurationException {
-        final RgbValue value = new RgbValue(0x34, 0x45,  0x56);
+        final RgbValue value = new RgbValue(0x34, 0x45, 0x56);
 
         assertFalse(value.hasAlpha());
         assertEquals(0xff344556, value.getRawArgbValue());

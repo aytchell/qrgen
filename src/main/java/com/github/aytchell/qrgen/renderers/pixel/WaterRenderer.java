@@ -12,10 +12,26 @@ public class WaterRenderer extends PixelRenderer {
         super(imgParams);
     }
 
+    private static boolean hasLeftNeighbour(PixelContext context) {
+        return context.isNeighbourSet(PixelContext.Direction.W);
+    }
+
+    private static boolean hasTopNeighbour(PixelContext context) {
+        return context.isNeighbourSet(PixelContext.Direction.N);
+    }
+
+    private static boolean hasRightNeighbour(PixelContext context) {
+        return context.isNeighbourSet(PixelContext.Direction.E);
+    }
+
+    private static boolean hasBottomNeighbour(PixelContext context) {
+        return context.isNeighbourSet(PixelContext.Direction.S);
+    }
+
     @Override
     protected void renderActiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
         int cellSize = imgParams.getCellSize();
-        double cornerRadius = (double)cellSize * 2 / 3;
+        double cornerRadius = (double) cellSize * 2 / 3;
 
         gfx.fill(new RoundRectangle2D.Double(0, 0, cellSize, cellSize, cornerRadius, cornerRadius));
 
@@ -43,7 +59,7 @@ public class WaterRenderer extends PixelRenderer {
     @Override
     protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
         int cellSize = imgParams.getCellSize();
-        double cornerRadius = Math.ceil((double)cellSize * 2 / 3);
+        double cornerRadius = Math.ceil((double) cellSize * 2 / 3);
 
         final boolean hasLeft = hasLeftNeighbour(context);
         final boolean hasTop = hasTopNeighbour(context);
@@ -77,21 +93,5 @@ public class WaterRenderer extends PixelRenderer {
         }
 
         gfx.setClip(globalClip);
-    }
-
-    private static boolean hasLeftNeighbour(PixelContext context) {
-        return context.isNeighbourSet(PixelContext.Direction.W);
-    }
-
-    private static boolean hasTopNeighbour(PixelContext context) {
-        return context.isNeighbourSet(PixelContext.Direction.N);
-    }
-
-    private static boolean hasRightNeighbour(PixelContext context) {
-        return context.isNeighbourSet(PixelContext.Direction.E);
-    }
-
-    private static boolean hasBottomNeighbour(PixelContext context) {
-        return context.isNeighbourSet(PixelContext.Direction.S);
     }
 }

@@ -24,7 +24,7 @@ public class HslaValueTest {
                         0x44, 0xa7, 0x5d, 0xd1),
 
                 new HslaToRgba(
-                        new HslaValue (326, 30, 74,0x54), true,
+                        new HslaValue(326, 30, 74, 0x54), true,
                         0xd1, 0xa9, 0xbf, 0x54),
 
                 new HslaToRgba(
@@ -41,18 +41,6 @@ public class HslaValueTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource(value = "getHslaToRgbaTestData")
-    public void createValidHslaValues(HslaToRgba data) {
-        assertEquals(data.hasAlpha, data.hsla.hasAlpha());
-
-        final Color awtColor = data.hsla.asAwtColor();
-        assertEquals(data.red, awtColor.getRed(), "red value");
-        assertEquals(data.green, awtColor.getGreen(), "green value");
-        assertEquals(data.blue, awtColor.getBlue(), "blue value");
-        assertEquals(data.alpha, awtColor.getAlpha(), "alpha value");
-    }
-
     public static Stream<RawHsla> getBrokenHslaValues() {
         return Stream.of(
                 new RawHsla(-123, 45, 65, 176),
@@ -64,6 +52,18 @@ public class HslaValueTest {
                 new RawHsla(123, 45, 65, -176),
                 new RawHsla(123, 45, 65, 256)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "getHslaToRgbaTestData")
+    public void createValidHslaValues(HslaToRgba data) {
+        assertEquals(data.hasAlpha, data.hsla.hasAlpha());
+
+        final Color awtColor = data.hsla.asAwtColor();
+        assertEquals(data.red, awtColor.getRed(), "red value");
+        assertEquals(data.green, awtColor.getGreen(), "green value");
+        assertEquals(data.blue, awtColor.getBlue(), "blue value");
+        assertEquals(data.alpha, awtColor.getAlpha(), "alpha value");
     }
 
     @ParameterizedTest

@@ -152,10 +152,14 @@ public class SvgPath2D {
         final String tail = svgTrimFront(path.substring(1));
 
         switch (cmd) {
-            case 'm': return commandWithTwoParams(tail, this::m);
-            case 'M': return commandWithTwoParams(tail, this::M);
-            case 'l': return commandWithTwoParams(tail, this::l);
-            case 'L': return commandWithTwoParams(tail, this::L);
+            case 'm':
+                return commandWithTwoParams(tail, this::m);
+            case 'M':
+                return commandWithTwoParams(tail, this::M);
+            case 'l':
+                return commandWithTwoParams(tail, this::l);
+            case 'L':
+                return commandWithTwoParams(tail, this::L);
             case 'c': {
                 final Parameters params = extractModuloSixDoubles(tail);
                 c(params.getP().toArray(new Double[0]));
@@ -170,10 +174,14 @@ public class SvgPath2D {
             case 'Z':
                 z();
                 return tail;
-            case 'V': return commandWithOneParam(tail, this::V);
-            case 'v': return commandWithOneParam(tail, this::v);
-            case 'H': return commandWithOneParam(tail, this::H);
-            case 'h': return commandWithOneParam(tail, this::h);
+            case 'V':
+                return commandWithOneParam(tail, this::V);
+            case 'v':
+                return commandWithOneParam(tail, this::v);
+            case 'H':
+                return commandWithOneParam(tail, this::H);
+            case 'h':
+                return commandWithOneParam(tail, this::h);
             default:
                 throw new IllegalArgumentException("Unknown svg command '" + cmd + "' found");
         }
@@ -206,8 +214,10 @@ public class SvgPath2D {
 
     private Parameters extractDoubles(String string, int numToExtract) {
         switch (numToExtract) {
-            case 0: return new Parameters(new ArrayList<>(), string);
-            case 1: return extractNextDouble(string);
+            case 0:
+                return new Parameters(new ArrayList<>(), string);
+            case 1:
+                return extractNextDouble(string);
             default:
                 final Parameters firstParam = extractNextDouble(string);
                 final Parameters others = extractDoubles(firstParam.tail, numToExtract - 1);

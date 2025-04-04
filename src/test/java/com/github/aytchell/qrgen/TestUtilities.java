@@ -20,14 +20,14 @@ public class TestUtilities {
     private static final byte bxd8 = toByte(0xd8);
     private static final byte bxe0 = toByte(0xe0);
 
-    private static final byte[] MAGIC_BYTES_BMP = { 0x42, 0x4d };               // ascii 'BM'
-    private static final byte[] MAGIC_BYTES_GIF = { 0x47, 0x49, 0x46, 0x38 };   // ascii 'GIF8'
-    private static final byte[] MAGIC_BYTES_PNG = { bx89, 0x50, 0x4e, 0x47 };   // ascii '.PNG'
-    private static final byte[] MAGIC_BYTES_JPG = { bxff, bxd8, bxff, bxe0 };   // ascii '....'
+    private static final byte[] MAGIC_BYTES_BMP = {0x42, 0x4d};               // ascii 'BM'
+    private static final byte[] MAGIC_BYTES_GIF = {0x47, 0x49, 0x46, 0x38};   // ascii 'GIF8'
+    private static final byte[] MAGIC_BYTES_PNG = {bx89, 0x50, 0x4e, 0x47};   // ascii '.PNG'
+    private static final byte[] MAGIC_BYTES_JPG = {bxff, bxd8, bxff, bxe0};   // ascii '....'
 
     private static byte toByte(int value) {
-        if (value <= 127) return (byte)value;
-        return (byte)(value - 256);
+        if (value <= 127) return (byte) value;
+        return (byte) (value - 256);
         // 128(int) = 0x80 = -128(byte) = 128 - 256
         // 129(int) = 0x81 = -127(byte) = 129 - 256
         // 130(int) = 0x82 = -126(byte) = 130 - 256
@@ -37,15 +37,6 @@ public class TestUtilities {
         // 134(int) = 0x86 = -122(byte) = 134 - 256
         // 135(int) = 0x87 = -121(byte) = 135 - 256
     }
-
-    @Test
-    void byteConversionsForMagicNumbersAreCorrect() {
-        assertEquals(0x89, ((int)toByte(0x89) & 0xff));
-        assertEquals(0xFF, ((int)toByte(0xFF) & 0xff));
-        assertEquals(0xd8, ((int)toByte(0xd8) & 0xff));
-        assertEquals(0xe0, ((int)toByte(0xe0) & 0xff));
-    }
-
 
     public static BufferedImage readProducedFile(Path path) throws IOException {
         final BufferedImage img = ImageIO.read(path.toFile());
@@ -96,5 +87,13 @@ public class TestUtilities {
         final BasicFileAttributes attrs = Files.readAttributes(file200, BasicFileAttributes.class);
         assertTrue(attrs.isRegularFile());
         assertTrue(attrs.size() > 0);
+    }
+
+    @Test
+    void byteConversionsForMagicNumbersAreCorrect() {
+        assertEquals(0x89, ((int) toByte(0x89) & 0xff));
+        assertEquals(0xFF, ((int) toByte(0xFF) & 0xff));
+        assertEquals(0xd8, ((int) toByte(0xd8) & 0xff));
+        assertEquals(0xe0, ((int) toByte(0xe0) & 0xff));
     }
 }

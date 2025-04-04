@@ -1,9 +1,6 @@
 package com.github.aytchell.qrgen.renderers.pixel;
 
 import com.github.aytchell.qrgen.renderers.ImgParameters;
-import com.github.aytchell.qrgen.renderers.pixel.IndependentPixelRenderer;
-
-import java.awt.*;
 
 public class SmallRectanglesRenderer extends IndependentPixelRenderer {
     public SmallRectanglesRenderer(ImgParameters imgParams) {

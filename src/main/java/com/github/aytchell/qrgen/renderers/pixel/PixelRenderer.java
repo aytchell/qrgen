@@ -20,9 +20,11 @@ public abstract class PixelRenderer {
         }
     }
 
-    protected void renderActiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) { }
+    protected void renderActiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
+    }
 
-    protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) { }
+    protected void renderInactiveShape(ImgParameters imgParams, PixelContext context, Graphics2D gfx) {
+    }
 
     protected void renderPixelFromSvgPath(ImgParameters imgParams, Graphics2D gfx, String path) {
         double cellSize = imgParams.getCellSize();

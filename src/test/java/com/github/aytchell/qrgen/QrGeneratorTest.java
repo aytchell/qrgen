@@ -28,6 +28,15 @@ public class QrGeneratorTest {
         return sizes.stream();
     }
 
+    private static Stream<SizeAndLevel> maxSizesForLevels() {
+        final List<SizeAndLevel> sizes = new ArrayList<>();
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_L, ErrorCorrectionLevel.L));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_M, ErrorCorrectionLevel.M));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_Q, ErrorCorrectionLevel.Q));
+        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_H, ErrorCorrectionLevel.H));
+        return sizes.stream();
+    }
+
     @Test
     void cloneIsPossible() {
         // we only check that a clone is produced (not Exception, no null return value)
@@ -110,15 +119,6 @@ public class QrGeneratorTest {
                 .withErrorCorrection(ErrorCorrectionLevel.Q);
         final Path path = gen.writeToTmpFile("https://github.com/aytchell/qrgen");
         assertNotNull(path);
-    }
-
-    private static Stream<SizeAndLevel> maxSizesForLevels() {
-        final List<SizeAndLevel> sizes = new ArrayList<>();
-        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_L, ErrorCorrectionLevel.L));
-        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_M, ErrorCorrectionLevel.M));
-        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_Q, ErrorCorrectionLevel.Q));
-        sizes.add(new SizeAndLevel(QrGenerator.MAX_PAYLOAD_SIZE_FOR_H, ErrorCorrectionLevel.H));
-        return sizes.stream();
     }
 
     @ParameterizedTest
