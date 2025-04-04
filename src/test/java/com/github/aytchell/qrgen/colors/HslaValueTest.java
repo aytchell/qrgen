@@ -1,7 +1,6 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
-import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -79,21 +78,35 @@ public class HslaValueTest {
         assertEquals("(12°, 12%, 98%, 0)", new HslaValue(12, 12, 98, 0).toString());
     }
 
-    @Value
     private static class HslaToRgba {
-        HslaValue hsla;
-        boolean hasAlpha;
-        int red;
-        int green;
-        int blue;
-        int alpha;
+        final HslaValue hsla;
+        final boolean hasAlpha;
+        final int red;
+        final int green;
+        final int blue;
+        final int alpha;
+
+        public HslaToRgba(HslaValue hsla, boolean hasAlpha, int red, int green, int blue, int alpha) {
+            this.hsla = hsla;
+            this.hasAlpha = hasAlpha;
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+            this.alpha = alpha;
+        }
     }
 
-    @Value
     private static class RawHsla {
-        int hue;
-        int saturation;
-        int lightness;
-        int alpha;
+        final int hue;
+        final int saturation;
+        final int lightness;
+        final int alpha;
+
+        public RawHsla(int hue, int saturation, int lightness, int alpha) {
+            this.hue = hue;
+            this.saturation = saturation;
+            this.lightness = lightness;
+            this.alpha = alpha;
+        }
     }
 }

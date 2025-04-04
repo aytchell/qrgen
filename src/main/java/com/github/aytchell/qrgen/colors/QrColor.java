@@ -1,18 +1,13 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.awt.*;
 
 /**
  * Base class for all color representations accepted by the QrGenerator
  */
-@EqualsAndHashCode
 public class QrColor {
-    @Getter(value = AccessLevel.PROTECTED)
     private final int rawArgbValue;
 
     /**
@@ -36,6 +31,10 @@ public class QrColor {
             throw new QrConfigurationException("Given value for blue is out of range [0, 255]");
 
         return (alpha << 24) | (red << 16) | (green << 8) | blue;
+    }
+
+    protected int getRawArgbValue() {
+        return rawArgbValue;
     }
 
     /**
@@ -88,5 +87,17 @@ public class QrColor {
         } else {
             return new QrColor(rawArgbValue | 0xff000000);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return rawArgbValue;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof QrColor)) return false;
+        final QrColor otherColor = (QrColor) other;
+        return rawArgbValue == otherColor.rawArgbValue;
     }
 }

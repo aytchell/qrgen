@@ -1,9 +1,7 @@
 package com.github.aytchell.qrgen.renderers;
 
 import com.google.zxing.common.BitArray;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class PixelContext {
     private final int rowWidth;
     private final BitArray top;

@@ -11,7 +11,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import lombok.Setter;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -31,7 +30,6 @@ public class QrCodeRenderer {
     private final QRCodeWriter writer;
     private MarkerRenderer markerRenderer;
 
-    @Setter
     private PixelStyle pixelStyle;
 
     public QrCodeRenderer(PixelStyle pixelStyle, MarkerStyle markerStyle) {
@@ -42,6 +40,10 @@ public class QrCodeRenderer {
 
     public void setMarkerStyle(MarkerStyle markerStyle) {
         this.markerRenderer = MarkerRendererFactory.create(markerStyle);
+    }
+
+    public void setPixelStyle(PixelStyle pixelStyle) {
+        this.pixelStyle = pixelStyle;
     }
 
     public BufferedImage encodeAndRender(

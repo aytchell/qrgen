@@ -1,10 +1,7 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
-import lombok.Getter;
-import lombok.Value;
 
-@Getter
 public class HslaValue extends QrColor {
     private final int hue;
     private final int saturation;
@@ -87,10 +84,14 @@ public class HslaValue extends QrColor {
         return String.format("(%d°, %d%%, %d%%, %d)", hue, saturation, lightness, getAlpha());
     }
 
-    @Value
     private static class RgbTriple {
-        double red;
-        double green;
-        double blue;
+        final double red;
+        final double green;
+        final double blue;
+        public RgbTriple(double red, double green, double blue) {
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+        }
     }
 }

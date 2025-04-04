@@ -1,16 +1,14 @@
 package com.github.aytchell.qrgen.config;
 
 import com.github.aytchell.qrgen.colors.QrColor;
-import lombok.Value;
 
 import java.awt.image.BufferedImage;
 
-@Value
 public class ColorConfig {
-    QrColor onColor;
-    QrColor offColor;
-    QrColor outerMarkerColor;
-    QrColor innerMarkerColor;
+    private final QrColor onColor;
+    private final QrColor offColor;
+    private final QrColor outerMarkerColor;
+    private final QrColor innerMarkerColor;
 
     public ColorConfig(QrColor onColor, QrColor offColor) {
         this(onColor, offColor, onColor);
@@ -25,6 +23,22 @@ public class ColorConfig {
         this.offColor = offColor;
         this.outerMarkerColor = outerMarkerColor;
         this.innerMarkerColor = innerMarkerColor;
+    }
+
+    public QrColor getOnColor() {
+        return onColor;
+    }
+
+    public QrColor getOffColor() {
+        return offColor;
+    }
+
+    public QrColor getOuterMarkerColor() {
+        return outerMarkerColor;
+    }
+
+    public QrColor getInnerMarkerColor() {
+        return innerMarkerColor;
     }
 
     public int determineImageType() {

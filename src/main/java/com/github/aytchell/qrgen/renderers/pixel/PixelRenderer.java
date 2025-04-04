@@ -3,14 +3,16 @@ package com.github.aytchell.qrgen.renderers.pixel;
 import com.github.aytchell.qrgen.renderers.ImgParameters;
 import com.github.aytchell.qrgen.renderers.PixelContext;
 import com.github.aytchell.qrgen.renderers.utils.SvgPath2D;
-import lombok.AllArgsConstructor;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-@AllArgsConstructor
 public abstract class PixelRenderer {
     private final ImgParameters imgParams;
+
+    public PixelRenderer(ImgParameters imgParams) {
+        this.imgParams = imgParams;
+    }
 
     public void renderPixel(PixelContext context, Graphics2D gfx) {
         if (context.isSet()) {

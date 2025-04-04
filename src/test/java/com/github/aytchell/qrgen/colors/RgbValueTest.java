@@ -29,4 +29,15 @@ public class RgbValueTest {
                 () -> new RgbValue(0x11223344)
         );
     }
+
+    @Test
+    void equalsCanCompareDifferentRgbTypes() throws QrConfigurationException {
+        final ArgbValue argbValue = new ArgbValue(0xff, 0x11, 0x22, 0x33);
+        final RgbaValue rgbaValue = new RgbaValue(0x11, 0x22, 0x33, 0xff);
+        final RgbValue rgbValue = new RgbValue(0x11, 0x22, 0x33);
+
+        assertEquals(argbValue, rgbaValue);
+        assertEquals(rgbaValue, rgbValue);
+        assertEquals(rgbValue, argbValue);
+    }
 }

@@ -1,9 +1,7 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 public class RgbaValue extends QrColor {
 
     /**

@@ -1,7 +1,6 @@
 package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.QrConfigurationException;
-import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,8 +35,8 @@ public class ArgbValueTest {
     @ParameterizedTest
     @MethodSource("alphaTestColors")
     void hasAlphaWorksAsExpected(ColorsAndAlpha data) {
-        final boolean expectation = data.isAlpha();
-        assertEquals(expectation, data.getColor().hasAlpha());
+        final boolean expectation = data.hasAlpha;
+        assertEquals(expectation, data.color.hasAlpha());
     }
 
     @Test
@@ -95,9 +94,13 @@ public class ArgbValueTest {
         assertEquals(expectation.getRawArgbValue(), noAlpha.getRawArgbValue());
     }
 
-    @Value
     private static class ColorsAndAlpha {
-        ArgbValue color;
-        boolean alpha;
+        final ArgbValue color;
+        final boolean hasAlpha;
+
+        public ColorsAndAlpha(ArgbValue color, boolean hasAlpha) {
+            this.color = color;
+            this.hasAlpha = hasAlpha;
+        }
     }
 }

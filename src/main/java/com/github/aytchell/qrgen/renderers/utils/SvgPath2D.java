@@ -1,8 +1,5 @@
 package com.github.aytchell.qrgen.renderers.utils;
 
-import lombok.Getter;
-import lombok.Value;
-
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
@@ -15,7 +12,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SvgPath2D {
-    @Getter
     private final Path2D.Double path;
     private double xPos;
     private double yPos;
@@ -36,6 +32,10 @@ public class SvgPath2D {
         svg.d(svgCommand);
         svg.closePath();
         return svg.getPath();
+    }
+
+    public Path2D.Double getPath() {
+        return path;
     }
 
     public void M(double x, double y) {
@@ -139,7 +139,7 @@ public class SvgPath2D {
     }
 
     public void d(String path) {
-        while (path.length() > 0) {
+        while (!path.isEmpty()) {
             path = extractAndProcessCommand(path);
         }
     }
@@ -162,12 +162,12 @@ public class SvgPath2D {
                 return commandWithTwoParams(tail, this::L);
             case 'c': {
                 final Parameters params = extractModuloSixDoubles(tail);
-                c(params.getP().toArray(new Double[0]));
+                c(params.p.toArray(new Double[0]));
                 return params.tail;
             }
             case 'C': {
                 final Parameters params = extractModuloSixDoubles(tail);
-                C(params.getP().toArray(new Double[0]));
+                C(params.p.toArray(new Double[0]));
                 return params.tail;
             }
             case 'z':
@@ -257,9 +257,13 @@ public class SvgPath2D {
                 others.tail);
     }
 
-    @Value
     private static class Parameters {
-        List<Double> p;
-        String tail;
+        final List<Double> p;
+        final String tail;
+
+        private Parameters(List<Double> p, String tail) {
+            this.p = p;
+            this.tail = tail;
+        }
     }
 }

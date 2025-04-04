@@ -3,7 +3,6 @@ package com.github.aytchell.qrgen;
 import com.github.aytchell.qrgen.config.ErrorCorrectionLevel;
 import com.github.aytchell.qrgen.config.ImageFileType;
 import com.github.aytchell.qrgen.config.PixelStyle;
-import lombok.Value;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -129,7 +128,7 @@ public class QrGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("maxSizesForLevels")
-    void toobIgPayloadsFail(SizeAndLevel sizeAndLevel) throws IOException {
+    void tooBigPayloadsFail(SizeAndLevel sizeAndLevel) throws IOException {
         try {
             generatePayloadWithLvl(sizeAndLevel.size + 1, sizeAndLevel.lvl);
             fail("QrGenerator should fail to generate code for too big payload");
@@ -146,9 +145,13 @@ public class QrGeneratorTest {
         assertNotNull(path);
     }
 
-    @Value
     private static class SizeAndLevel {
-        int size;
-        ErrorCorrectionLevel lvl;
+        final int size;
+        final ErrorCorrectionLevel lvl;
+
+        public SizeAndLevel(int size, ErrorCorrectionLevel lvl) {
+            this.size = size;
+            this.lvl = lvl;
+        }
     }
 }
