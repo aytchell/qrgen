@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen;
+package com.github.aytchell.qrgen.exceptions;
 
 public class QrGenerationException extends Exception {
     public QrGenerationException(String message) {

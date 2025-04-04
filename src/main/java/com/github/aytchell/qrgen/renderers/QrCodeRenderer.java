@@ -1,10 +1,14 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.config.ColorConfig;
 import com.github.aytchell.qrgen.config.MarkerStyle;
 import com.github.aytchell.qrgen.config.PixelStyle;
+import com.github.aytchell.qrgen.renderers.common.ImgParameters;
 import com.github.aytchell.qrgen.renderers.marker.MarkerRenderer;
+import com.github.aytchell.qrgen.renderers.marker.MarkerRendererFactory;
+import com.github.aytchell.qrgen.renderers.pixel.PixelContext;
 import com.github.aytchell.qrgen.renderers.pixel.PixelRenderer;
+import com.github.aytchell.qrgen.renderers.pixel.PixelRendererFactory;
+import com.github.aytchell.qrgen.utils.ColorConfig;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen.renderers;
+package com.github.aytchell.qrgen.renderers.pixel;
 
 import com.google.zxing.common.BitArray;
 
@@ -10,7 +10,7 @@ public class PixelContext {
 
     private int column = 0;
 
-    PixelContext(int rowWidth, BitArray top, BitArray mid, BitArray bottom) {
+    public PixelContext(int rowWidth, BitArray top, BitArray mid, BitArray bottom) {
         this.rowWidth = rowWidth;
         this.top = top;
         this.mid = mid;

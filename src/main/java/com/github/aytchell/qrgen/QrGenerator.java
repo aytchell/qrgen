@@ -2,8 +2,14 @@ package com.github.aytchell.qrgen;
 
 import com.github.aytchell.qrgen.colors.QrColor;
 import com.github.aytchell.qrgen.colors.RgbValue;
-import com.github.aytchell.qrgen.config.*;
+import com.github.aytchell.qrgen.config.ErrorCorrectionLevel;
+import com.github.aytchell.qrgen.config.ImageFileType;
+import com.github.aytchell.qrgen.config.MarkerStyle;
+import com.github.aytchell.qrgen.config.PixelStyle;
+import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
+import com.github.aytchell.qrgen.exceptions.QrGenerationException;
 import com.github.aytchell.qrgen.renderers.QrCodeRenderer;
+import com.github.aytchell.qrgen.utils.ColorConfig;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 

@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen.config;
+package com.github.aytchell.qrgen.utils;
 
 import com.github.aytchell.qrgen.colors.QrColor;
 

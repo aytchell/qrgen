@@ -1,6 +1,6 @@
 package com.github.aytchell.qrgen.renderers.pixel;
 
-import com.github.aytchell.qrgen.renderers.ImgParameters;
+import com.github.aytchell.qrgen.renderers.common.ImgParameters;
 
 import java.awt.*;
 

@@ -1,0 +1,31 @@
+@startuml
+
+[qrgen] <<com.github.aytchell.qrgen>>
+[qrgen_utils] <<com.github.aytchell.qrgen.utils>>
+[config] <<com.github.aytchell.qrgen.config>>
+[colors] <<com.github.aytchell.qrgen.colors>>
+[exceptions] <<com.github.aytchell.qrgen.exceptions>>
+[renderers] <<com.github.aytchell.qrgen.renderers>>
+[render_common] <<com.github.aytchell.qrgen.renderers.common>>
+[marker] <<com.github.aytchell.qrgen.renderers.marker>>
+[pixel] <<com.github.aytchell.qrgen.renderers.pixel>>
+
+qrgen --> config
+qrgen --> colors
+qrgen --> renderers
+qrgen --> exceptions
+qrgen --> qrgen_utils
+renderers --> marker
+renderers --> pixel
+renderers --> config
+renderers --> render_common
+renderers --> qrgen_utils
+marker --> render_common
+marker --> config
+pixel --> render_common
+pixel --> config
+render_common --> qrgen_utils
+qrgen_utils --> colors
+colors --> exceptions
+
+@enduml

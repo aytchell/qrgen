@@ -1,4 +1,4 @@
-package com.github.aytchell.qrgen.renderers.utils;
+package com.github.aytchell.qrgen.renderers.common;
 
 import java.awt.*;
 import java.awt.geom.Path2D;

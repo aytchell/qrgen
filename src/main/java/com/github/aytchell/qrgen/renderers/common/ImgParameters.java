@@ -1,6 +1,6 @@
-package com.github.aytchell.qrgen.renderers;
+package com.github.aytchell.qrgen.renderers.common;
 
-import com.github.aytchell.qrgen.config.ColorConfig;
+import com.github.aytchell.qrgen.utils.ColorConfig;
 
 import java.awt.*;
 
@@ -24,7 +24,7 @@ public class ImgParameters {
         this.colorConfig = colorConfig;
     }
 
-    Color getOnColorForAwt() {
+    public Color getOnColorForAwt() {
         return colorConfig.getOnColorForAwt();
     }
 

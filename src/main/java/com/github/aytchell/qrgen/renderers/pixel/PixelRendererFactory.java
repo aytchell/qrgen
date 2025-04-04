@@ -1,7 +1,7 @@
-package com.github.aytchell.qrgen.renderers;
+package com.github.aytchell.qrgen.renderers.pixel;
 
 import com.github.aytchell.qrgen.config.PixelStyle;
-import com.github.aytchell.qrgen.renderers.pixel.*;
+import com.github.aytchell.qrgen.renderers.common.ImgParameters;
 
 public class PixelRendererFactory {
     public static PixelRenderer generate(PixelStyle pixelStyle, ImgParameters imgParams) {

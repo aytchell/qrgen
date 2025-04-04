@@ -3,6 +3,8 @@ package com.github.aytchell.qrgen;
 import com.github.aytchell.qrgen.config.ErrorCorrectionLevel;
 import com.github.aytchell.qrgen.config.ImageFileType;
 import com.github.aytchell.qrgen.config.PixelStyle;
+import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
+import com.github.aytchell.qrgen.exceptions.QrGenerationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

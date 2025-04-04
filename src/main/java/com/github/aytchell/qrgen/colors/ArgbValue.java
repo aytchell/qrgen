@@ -1,6 +1,6 @@
 package com.github.aytchell.qrgen.colors;
 
-import com.github.aytchell.qrgen.QrConfigurationException;
+import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
 
 public class ArgbValue extends QrColor {
 

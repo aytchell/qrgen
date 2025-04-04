@@ -1,8 +1,7 @@
 package com.github.aytchell.qrgen.renderers.pixel;
 
-import com.github.aytchell.qrgen.renderers.ImgParameters;
-import com.github.aytchell.qrgen.renderers.PixelContext;
-import com.github.aytchell.qrgen.renderers.utils.SvgPath2D;
+import com.github.aytchell.qrgen.renderers.common.ImgParameters;
+import com.github.aytchell.qrgen.renderers.common.SvgPath2D;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
