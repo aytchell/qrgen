@@ -33,6 +33,14 @@ public class QrColor {
         return (alpha << 24) | (red << 16) | (green << 8) | blue;
     }
 
+    /**
+     * Get the raw 32bit integer with ARGB inside
+     * <p>
+     * The returned integer consists of four bytes where the most significant byte contains the alpha value
+     * followed by red and green and blue as the least significant byte.
+     *
+     * @return raw 32bit argb value
+     */
     protected int getRawArgbValue() {
         return rawArgbValue;
     }

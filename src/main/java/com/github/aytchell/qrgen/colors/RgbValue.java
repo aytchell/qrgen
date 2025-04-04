@@ -3,11 +3,12 @@ package com.github.aytchell.qrgen.colors;
 import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
 
 /**
- * Class to encode color values
+ * Class to encode color values via "red green blue"
  * <p>
  * Basically an {@link ArgbValue} with an alpha channel set to "opaque"
  *
  * @see ArgbValue
+ * @see RgbaValue
  */
 public class RgbValue extends ArgbValue {
     /**

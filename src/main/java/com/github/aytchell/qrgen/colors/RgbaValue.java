@@ -2,6 +2,14 @@ package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
 
+/**
+ * Class to encode color values via "red green blue alpha"
+ * <p>
+ * Each of the four parts is stored in a byte so the complete color value has 32 bit.
+ *
+ * @see ArgbValue
+ * @see RgbValue
+ */
 public class RgbaValue extends QrColor {
 
     /**

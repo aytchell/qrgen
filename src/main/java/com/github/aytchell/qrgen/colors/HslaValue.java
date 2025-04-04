@@ -2,6 +2,13 @@ package com.github.aytchell.qrgen.colors;
 
 import com.github.aytchell.qrgen.exceptions.QrConfigurationException;
 
+/**
+ * Class to encode color values via "hue saturation lightness alpha"
+ * <p>
+ * Each of the four parts is stored in a byte so the complete color value has 32 bit.
+ *
+ * @see HslValue
+ */
 public class HslaValue extends QrColor {
     private final int hue;
     private final int saturation;
@@ -12,10 +19,10 @@ public class HslaValue extends QrColor {
      * <p>
      * Not that there are two similar constructors which only differ in the type and valid range of the alpha value.
      *
-     * @param hue        hue value in the range 0 <= hue <= 360
-     * @param saturation saturation in percent in the range 0 <= saturation <= 100
-     * @param lightness  lightness in percent in the range 0 <= lightness <= 100
-     * @param alpha      transparency of this color 0 (completely transparent) <= alpha <= 255 (perfectly opaque)
+     * @param hue        hue value in the range 0 &lt;= hue &lt;= 360
+     * @param saturation saturation in percent in the range 0 &lt;= saturation &lt;= 100
+     * @param lightness  lightness in percent in the range 0 &lt;= lightness &lt;= 100
+     * @param alpha      transparency of this color 0 (completely transparent) &lt;= alpha &lt;= 255 (perfectly opaque)
      * @throws QrConfigurationException is thrown in case one of the values is out of bounds
      * @see HslaValue(int, int, int, double)
      */
@@ -32,10 +39,10 @@ public class HslaValue extends QrColor {
      * <p>
      * Not that there are two similar constructors which only differ in the type and valid range of the alpha value.
      *
-     * @param hue        hue value in the range 0 <= hue <= 360
-     * @param saturation saturation in percent in the range 0 <= saturation <= 100
-     * @param lightness  lightness in percent in the range 0 <= lightness <= 100
-     * @param alpha      transparency of this color 0.0 (completely transparent) <= alpha <= 1.0 (perfectly opaque)
+     * @param hue        hue value in the range 0 &lt;= hue &lt;= 360
+     * @param saturation saturation in percent in the range 0 &lt;= saturation &lt;= 100
+     * @param lightness  lightness in percent in the range 0 &lt;= lightness &lt;= 100
+     * @param alpha      transparency of this color 0.0 (completely transparent) &lt;= alpha &lt;= 1.0 (perfectly opaque)
      * @throws QrConfigurationException is thrown in case one of the values is out of bounds
      * @see HslaValue(int, int, int, int)
      */

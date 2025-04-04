@@ -35,6 +35,13 @@ public enum ErrorCorrectionLevel {
         this.zxingLevel = level;
     }
 
+    /**
+     * Returns the equivalent correction level to be given to ZXing
+     * <p>
+     * Used internally when calling ZXing for creating the bit matrix of the QR code
+     *
+     * @return Equivalent error correction value which is understood by ZXing
+     */
     public com.google.zxing.qrcode.decoder.ErrorCorrectionLevel getZxingLevel() {
         return zxingLevel;
     }

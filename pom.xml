@@ -141,6 +141,15 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludePackageNames>
+                        com.github.aytchell.qrgen.renderers,
+                        com.github.aytchell.qrgen.renderers.common,
+                        com.github.aytchell.qrgen.renderers.marker,
+                        com.github.aytchell.qrgen.renderers.pixel,
+                        com.github.aytchell.qrgen.utils
+                    </excludePackageNames>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
