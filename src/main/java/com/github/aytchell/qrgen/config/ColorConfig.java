@@ -2,6 +2,7 @@ package com.github.aytchell.qrgen.config;
 
 import com.github.aytchell.qrgen.colors.QrColor;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ColorConfig {
@@ -25,20 +26,20 @@ public class ColorConfig {
         this.innerMarkerColor = innerMarkerColor;
     }
 
-    public QrColor getOnColor() {
-        return onColor;
+    public Color getOnColorForAwt() {
+        return onColor.asAwtColor();
     }
 
-    public QrColor getOffColor() {
-        return offColor;
+    public Color getOffColorForAwt() {
+        return offColor.asAwtColor();
     }
 
-    public QrColor getOuterMarkerColor() {
-        return outerMarkerColor;
+    public Color getOuterMarkerColorForAwt() {
+        return outerMarkerColor.asAwtColor();
     }
 
-    public QrColor getInnerMarkerColor() {
-        return innerMarkerColor;
+    public Color getInnerMarkerColorForAwt() {
+        return innerMarkerColor.asAwtColor();
     }
 
     public int determineImageType() {

@@ -30,10 +30,10 @@ public class SingleEdgeRenderer {
         gfx.transform(new AffineTransform(1.3333333, 0, 0, -1.3333333, 0, 81.866667));
 
         gfx.scale(1, -1);
-        gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getOuterMarkerColorForAwt());
         gfx.fill(SvgPath2D.drawSvgCommand(OUTER_PATH));
 
-        gfx.setColor(imgParams.getInnerMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getInnerMarkerColorForAwt());
         gfx.fill(SvgPath2D.drawSvgCommand(INNER_PATH));
 
         gfx.setTransform(transform);

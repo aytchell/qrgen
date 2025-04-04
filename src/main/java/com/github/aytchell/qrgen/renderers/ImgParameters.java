@@ -1,7 +1,8 @@
 package com.github.aytchell.qrgen.renderers;
 
-import com.github.aytchell.qrgen.colors.QrColor;
 import com.github.aytchell.qrgen.config.ColorConfig;
+
+import java.awt.*;
 
 public class ImgParameters {
     private final int cellSize;
@@ -23,20 +24,20 @@ public class ImgParameters {
         this.colorConfig = colorConfig;
     }
 
-    QrColor getOnColor() {
-        return colorConfig.getOnColor();
+    Color getOnColorForAwt() {
+        return colorConfig.getOnColorForAwt();
     }
 
-    public QrColor getOffColor() {
-        return colorConfig.getOffColor();
+    public Color getOffColorForAwt() {
+        return colorConfig.getOffColorForAwt();
     }
 
-    public QrColor getOuterMarkerColor() {
-        return colorConfig.getOuterMarkerColor();
+    public Color getOuterMarkerColorForAwt() {
+        return colorConfig.getOuterMarkerColorForAwt();
     }
 
-    public QrColor getInnerMarkerColor() {
-        return colorConfig.getInnerMarkerColor();
+    public Color getInnerMarkerColorForAwt() {
+        return colorConfig.getInnerMarkerColorForAwt();
     }
 
     public int getCellSize() {

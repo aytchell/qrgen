@@ -11,13 +11,13 @@ public class RectangleRenderer extends MarkerRenderer {
         final int whiteSize = cellSize * (SIZE_OF_POSITION_MARKER - 2);
         final int innerSize = cellSize * (SIZE_OF_POSITION_MARKER - 4);
 
-        gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getOuterMarkerColorForAwt());
         gfx.fillRect(0, 0, markerSize, markerSize);
 
-        gfx.setColor(imgParams.getOffColor().asAwtColor());
+        gfx.setColor(imgParams.getOffColorForAwt());
         gfx.fillRect(cellSize, cellSize, whiteSize, whiteSize);
 
-        gfx.setColor(imgParams.getInnerMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getInnerMarkerColorForAwt());
         gfx.fillRect(2 * cellSize, 2 * cellSize, innerSize, innerSize);
     }
 }

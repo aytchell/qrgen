@@ -88,6 +88,7 @@ public class HslaValue extends QrColor {
         final double red;
         final double green;
         final double blue;
+
         public RgbTriple(double red, double green, double blue) {
             this.red = red;
             this.green = green;

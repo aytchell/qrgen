@@ -32,11 +32,11 @@ public class SingleDropRenderer {
         gfx.transform(new AffineTransform(1.3333333, 0, 0, -1.3333333, 0, 81.866667));
 
         gfx.scale(0.1, 0.1);
-        gfx.setColor(imgParams.getOuterMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getOuterMarkerColorForAwt());
         gfx.fill(SvgPath2D.drawSvgCommand(OUTER_PATH));
         gfx.setTransform(transform);
 
-        gfx.setColor(imgParams.getInnerMarkerColor().asAwtColor());
+        gfx.setColor(imgParams.getInnerMarkerColorForAwt());
         gfx.fillOval(cellSize * 2, cellSize * 2, innerMarkerSize, innerMarkerSize);
     }
 }

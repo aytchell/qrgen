@@ -80,7 +80,7 @@ public class QrCodeRenderer {
 
     private void renderMatrix(BitMatrix matrix, Graphics2D gfx, ImgParameters imgParams) {
         PixelRenderer renderer = PixelRendererFactory.generate(pixelStyle, imgParams);
-        gfx.setColor(imgParams.getOnColor().asAwtColor());
+        gfx.setColor(imgParams.getOnColorForAwt());
         applyQrCodePixels(gfx, matrix, renderer, imgParams);
     }
 
@@ -113,7 +113,7 @@ public class QrCodeRenderer {
         final BufferedImage canvas = new BufferedImage(width, height, colorConfig.determineImageType());
 
         final Graphics2D gfx = canvas.createGraphics();
-        gfx.setColor(colorConfig.getOffColor().asAwtColor());
+        gfx.setColor(colorConfig.getOffColorForAwt());
         gfx.fillRect(0, 0, width, height);
         gfx.dispose();
 
